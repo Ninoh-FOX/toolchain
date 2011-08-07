@@ -27,11 +27,17 @@ else
 SDL_MIXER_CONF_OPT += --disable-music-mp3-mad-gpl
 endif
 
+# prefer tremor over libvorbis
+ifeq ($(BR2_PACKAGE_TREMOR),y)
+SDL_MIXER_CONF_OPT += --enable-music-ogg-tremor
+SDL_MIXER_DEPENDENCIES += tremor
+else
 ifeq ($(BR2_PACKAGE_LIBVORBIS),y)
 SDL_MIXER_CONF_OPT += --enable-music-ogg
 SDL_MIXER_DEPENDENCIES += libvorbis
 else
 SDL_MIXER_CONF_OPT += --disable-music-ogg
+endif
 endif
 
 $(eval $(autotools-package))
