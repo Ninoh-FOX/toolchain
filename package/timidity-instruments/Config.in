@@ -1,0 +1,5 @@
+config BR2_PACKAGE_TIMIDITY_INSTRUMENTS
+	bool "Timidity instruments"
+	help
+	  Set of Gravis Ultrasound compatible instrument patches to use
+	  with timidity.
