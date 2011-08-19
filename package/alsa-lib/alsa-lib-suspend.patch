@@ -1,0 +1,12 @@
+diff --git a/src/pcm/pcm_hw.c b/src/pcm/pcm_hw.c
+index 9d243d5..a75d161 100644
+--- a/src/pcm/pcm_hw.c
++++ b/src/pcm/pcm_hw.c
+@@ -706,6 +706,7 @@ static int snd_pcm_hw_resume(snd_pcm_t *pcm)
+ 	int fd = hw->fd, err;
+ 	if (ioctl(fd, SNDRV_PCM_IOCTL_RESUME) < 0) {
+ 		err = -errno;
++		if (err == 0) err = -1;
+ 		SYSMSG("SNDRV_PCM_IOCTL_RESUME failed (%i)", err);
+ 		return err;
+ 	}
