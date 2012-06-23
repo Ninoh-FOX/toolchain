@@ -1,0 +1,2 @@
+# This ensures that gpio-keys is seen as a keyboard
+DRIVERS=="gpio-keys", ENV{ID_INPUT_KEYBOARD}="1"

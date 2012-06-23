@@ -240,7 +240,7 @@ def paintStatus():
 menuOptions = (
 	('Set random password', doSetRandomPassword),
 	('Allow login without password', doSetNoPassword),
-	('Disable login', doSetInvalidPassword),
+	('Disable password login', doSetInvalidPassword),
 	('Exit', doExit),
 	)
 
