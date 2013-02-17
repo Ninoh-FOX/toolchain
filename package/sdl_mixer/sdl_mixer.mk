@@ -57,4 +57,13 @@ SDL_MIXER_CONF_OPT += --disable-music-ogg
 endif
 endif
 
+ifeq ($(BR2_PACKAGE_FLUIDSYNTH),y)
+SDL_MIXER_CONF_OPT += \
+	--enable-music-fluidsynth-midi \
+	--enable-music-fluidsynth-shared
+SDL_MIXER_DEPENDENCIES += fluidsynth
+else
+SDL_MIXER_CONF_OPT += --disable-music-fluidsynth-midi
+endif
+
 $(eval $(autotools-package))
