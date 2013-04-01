@@ -1,0 +1,14 @@
+config BR2_PACKAGE_BENNUGD
+	bool "bennugd"
+        select BR2_PACKAGE_ZLIB
+	select BR2_PACKAGE_LIBPNG
+        select BR2_PACKAGE_SDL
+        select BR2_PACKAGE_SDL_MIXER
+        select BR2_PACKAGE_OPENSSL
+	help
+	  - Bennu Game Development -
+          Bennu is a high level open source game development suite
+          which focuses on modularity and portability,
+          making it a perfect choice for cross-platform game development.
+
+	  http://www.bennugd.org

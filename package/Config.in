@@ -187,6 +187,7 @@ comment "Graphic applications"
 
 comment "Graphic libraries"
 	source "package/allegro/Config.in"
+	source "package/bennugd/Config.in"
 	source "package/cegui06/Config.in"
 	source "package/directfb/Config.in"
 	source "package/directfb-examples/Config.in"
