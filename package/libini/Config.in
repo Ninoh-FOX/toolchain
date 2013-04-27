@@ -1,0 +1,4 @@
+config BR2_PACKAGE_LIBINI
+	bool "libini"
+	help
+	  Small library to read INI configuration files
