@@ -1,0 +1,24 @@
+--- a/bar
++++ b/bar
+@@ -396,6 +396,10 @@ bar_cat()
+                while test "${bar_total}" -lt "${bar_size1}"
+                do
+                    dd bs="${bar_bs}" count="${bar_count}${bar_numsuff}" <&5 >&6 2>/dev/null
++                   if test $? -ne 0
++                   then
++                       exit 1
++                   fi
+                    bar_total=`expr ${bar_total} + ${bar_bps}`
+                    if test "${bar_total}" -gt "${bar_size1}"
+                    then
+@@ -452,6 +456,10 @@ bar_cat()
+                    done
+                done
+            ) | eval "${BAR_CMD}"
++           if test $? -ne 0
++           then
++               exit 1
++           fi
+            bar_pos=`expr ${bar_pos} + ${bar_size1}`
+        done
+        # ${BAR_ECHO} "${BAR_E_C1}" "${BAR_R}${BAR_E_C2}" 1>&2
