@@ -608,6 +608,7 @@ endmenu
 menu "Graphics"
 	source "package/atk/Config.in"
 	source "package/cairo/Config.in"
+	source "package/devil/Config.in"
 	source "package/fltk/Config.in"
 	source "package/fontconfig/Config.in"
 	source "package/freetype/Config.in"
