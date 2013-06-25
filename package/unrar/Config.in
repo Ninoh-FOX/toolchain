@@ -1,0 +1,18 @@
+config BR2_PACKAGE_UNRAR
+	bool "unrar"
+	help
+	  Extractor for packages in RAR format.
+
+	  http://www.rarlabs.com/
+
+if BR2_PACKAGE_UNRAR
+
+config BR2_PACKAGE_UNRAR_SMP
+	bool "Use thread pool for extraction"
+	depends on !BR2_PTHREADS_NONE
+	default y
+	help
+	  Uncheck this option to disable the thread pool mechanism.
+	  This can save some space when you're building for a single core system.
+
+endif # BR2_PACKAGE_UNRAR
