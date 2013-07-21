@@ -4,10 +4,19 @@
 #
 ################################################################################
 
-SHARED_MIME_INFO_VERSION = 0.90
-SHARED_MIME_INFO_SOURCE = shared-mime-info-$(SHARED_MIME_INFO_VERSION).tar.bz2
-SHARED_MIME_INFO_SITE = http://freedesktop.org/~hadess
+SHARED_MIME_INFO_VERSION = master
+SHARED_MIME_INFO_SITE = $(call github,gcwnow,shared-mime-info,$(SHARED_MIME_INFO_VERSION))
 SHARED_MIME_INFO_INSTALL_STAGING = YES
+
+HOST_SHARED_MIME_INFO_AUTORECONF = YES
+SHARED_MIME_INFO_AUTORECONF = YES
+
+define SHARED_MIME_INFO_INTLTOOLIZE
+	cd $(@D) && $(HOST_DIR)/usr/bin/intltoolize --force
+endef
+SHARED_MIME_INFO_PRE_CONFIGURE_HOOKS += SHARED_MIME_INFO_INTLTOOLIZE
+HOST_SHARED_MIME_INFO_PRE_CONFIGURE_HOOKS += SHARED_MIME_INFO_INTLTOOLIZE
+
 SHARED_MIME_INFO_CONF_ENV = XMLLINT=$(HOST_DIR)/usr/bin/xmllint
 SHARED_MIME_INFO_DEPENDENCIES = host-pkgconf host-intltool host-libglib2 \
 		host-libxml2 host-shared-mime-info libxml2 libglib2 \
