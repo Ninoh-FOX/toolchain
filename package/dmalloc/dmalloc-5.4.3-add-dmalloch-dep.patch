@@ -1,0 +1,12 @@
+diff -ru dmalloc-5.4.3.org/Makefile.in dmalloc-5.4.3/Makefile.in
+--- dmalloc-5.4.3.org/Makefile.in	2005-10-15 16:44:59.000000000 +0200
++++ dmalloc-5.4.3/Makefile.in	2013-09-11 12:18:04.698362053 +0200
+@@ -361,7 +361,7 @@
+ # .cc.o auto-target doesn't work on some systems. 
+ # also, $? did not work on OSF for the -c, grrr
+ #
+-dmallocc.o : $(srcdir)/dmallocc.cc
++dmallocc.o : $(srcdir)/dmallocc.cc dmalloc.h
+ 	rm -f $@
+ 	$(CXX) $(CFLAGS) $(CPPFLAGS) $(DEFS) $(INCS) -c $(srcdir)/dmallocc.cc \
+ 		-o ./$@
