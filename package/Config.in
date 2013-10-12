@@ -339,6 +339,7 @@ endif
 	source "package/kbd/Config.in"
 	source "package/lcdproc/Config.in"
 	source "package/lm-sensors/Config.in"
+	source "package/lowpowd/Config.in"
 	source "package/lshw/Config.in"
 	source "package/lsuio/Config.in"
 	source "package/lvm2/Config.in"
