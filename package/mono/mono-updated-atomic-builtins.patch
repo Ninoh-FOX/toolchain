@@ -1,0 +1,91 @@
+diff --git a/mono/utils/atomic.h b/mono/utils/atomic.h
+index 56cfd18..d667fad 100755
+--- a/mono/utils/atomic.h
++++ b/mono/utils/atomic.h
+@@ -48,59 +48,80 @@ static inline gint64 InterlockedCompareExchange64(volatile gint64 *dest, gint64
+ static inline gint32 InterlockedCompareExchange(volatile gint32 *dest,
+ 						gint32 exch, gint32 comp)
+ {
+-	return __sync_val_compare_and_swap (dest, comp, exch);
++//	return __sync_val_compare_and_swap (dest, comp, exch);
++	gint32 val = *dest;
++	__atomic_compare_exchange_n (dest, &comp, exch, 0, 0, 0);
++	return val;
+ }
+ 
+ static inline gpointer InterlockedCompareExchangePointer(volatile gpointer *dest, gpointer exch, gpointer comp)
+ {
+-	return __sync_val_compare_and_swap (dest, comp, exch);
++//	return __sync_val_compare_and_swap (dest, comp, exch);
++	gpointer val = *dest;
++	__atomic_compare_exchange_n (dest, &comp, exch, 0, 0, 0);
++	return val;
+ }
+ 
+ static inline gint32 InterlockedIncrement(volatile gint32 *val)
+ {
+-	return __sync_add_and_fetch (val, 1);
++//	return __sync_add_and_fetch (val, 1);
++	return __atomic_add_fetch(val, 1, 0);
+ }
+ 
+ static inline gint32 InterlockedDecrement(volatile gint32 *val)
+ {
+-	return __sync_add_and_fetch (val, -1);
++//	return __sync_add_and_fetch (val, -1);
++	return __atomic_sub_fetch (val, 1, 0);
+ }
+ 
+ static inline gint32 InterlockedExchange(volatile gint32 *val, gint32 new_val)
+ {
++	return __atomic_exchange_n (val, new_val, 0);
++#if 0
+ 	gint32 old_val;
+ 	do {
+ 		old_val = *val;
+ 	} while (__sync_val_compare_and_swap (val, old_val, new_val) != old_val);
+ 	return old_val;
++#endif
+ }
+ 
+ static inline gpointer InterlockedExchangePointer(volatile gpointer *val,
+ 						  gpointer new_val)
+ {
++	return __atomic_exchange_n (val, new_val, 0);
++#if 0
+ 	gpointer old_val;
+ 	do {
+ 		old_val = *val;
+ 	} while (__sync_val_compare_and_swap (val, old_val, new_val) != old_val);
+ 	return old_val;
++#endif
+ }
+ 
+ static inline gint32 InterlockedExchangeAdd(volatile gint32 *val, gint32 add)
+ {
+-	return __sync_fetch_and_add (val, add);
++//	return __sync_fetch_and_add (val, add);
++	return __atomic_fetch_add (val, add, 0);
+ }
+ 
+ #if defined (TARGET_OSX)
+ #define BROKEN_64BIT_ATOMICS_INTRINSIC 1
+ #endif
+ 
++#if _MIPS_SIM == _ABIO32
++#define BROKEN_64BIT_ATOMICS_INTRINSIC 1
++#endif
+ 
+ #if !defined (BROKEN_64BIT_ATOMICS_INTRINSIC)
+ #define HAS_64BITS_ATOMICS 1
+ 
+ static inline gint64 InterlockedCompareExchange64(volatile gint64 *dest, gint64 exch, gint64 comp)
+ {
+-	return __sync_val_compare_and_swap (dest, comp, exch);
++//	return __sync_val_compare_and_swap (dest, comp, exch);
++	gint64 val = *dest;
++	__atomic_compare_exchange_n (dest, &comp, exch, 0, 0, 0);
++	return val;
+ }
+ 
+ #endif
