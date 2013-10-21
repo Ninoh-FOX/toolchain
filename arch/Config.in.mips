@@ -86,6 +86,16 @@ config BR2_GCC_TARGET_ARCH
 	default "mips64"	if BR2_mips_64
 	default "mips64r2"	if BR2_mips_64r2
 
+config BR2_GCC_TARGET_TUNE
+	default "mips1"		if BR2_mips_1
+	default "mips2"		if BR2_mips_2
+	default "mips3"		if BR2_mips_3
+	default "mips4"		if BR2_mips_4
+	default "mips32"	if BR2_mips_32
+	default "mips32r2"	if BR2_mips_32r2
+	default "mips64"	if BR2_mips_64
+	default "mips64r2"	if BR2_mips_64r2
+
 config BR2_MIPS_OABI32
 	bool
 	default y		if BR2_mips || BR2_mipsel
