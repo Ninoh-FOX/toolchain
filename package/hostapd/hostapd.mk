@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-HOSTAPD_VERSION = 2.2
-HOSTAPD_SITE = http://hostap.epitest.fi/releases
+HOSTAPD_VERSION = 0.8_rtw_r7475.20130812
+HOSTAPD_SITE = http://crapouillou.net/~paul
 HOSTAPD_SUBDIR = hostapd
 HOSTAPD_CONFIG = $(HOSTAPD_DIR)/$(HOSTAPD_SUBDIR)/.config
 HOSTAPD_DEPENDENCIES = libnl
@@ -69,11 +69,18 @@ endif
 
 define HOSTAPD_CONFIGURE_CMDS
 	cp $(@D)/hostapd/defconfig $(HOSTAPD_CONFIG)
-	sed -i $(patsubst %,-e 's/^#\(%\)/\1/',$(HOSTAPD_CONFIG_ENABLE)) \
-		$(patsubst %,-e 's/^\(%\)/#\1/',$(HOSTAPD_CONFIG_DISABLE)) \
-		$(patsubst %,-e '1i%=y',$(HOSTAPD_CONFIG_SET)) \
-		$(patsubst %,-e %,$(HOSTAPD_CONFIG_EDITS)) \
-		$(HOSTAPD_CONFIG)
+# Misc
+	$(SED) 's/\(#\)\(CONFIG_HS20.*\)/\2/' $(HOSTAPD_CONFIG)
+	$(SED) 's/\(#\)\(CONFIG_IEEE80211N.*\)/\2/' $(HOSTAPD_CONFIG)
+	$(SED) 's/\(#\)\(CONFIG_IEEE80211W.*\)/\2/' $(HOSTAPD_CONFIG)
+	$(SED) 's/\(#\)\(CONFIG_INTERWORKING.*\)/\2/' $(HOSTAPD_CONFIG)
+	$(SED) 's/\(#\)\(CONFIG_FULL_DYNAMIC_VLAN.*\)/\2/' $(HOSTAPD_CONFIG)
+	$(HOSTAPD_LIBTOMMATH_CONFIG)
+	$(HOSTAPD_TLS_CONFIG)
+	$(HOSTAPD_RADIUS_IPV6_CONFIG)
+	$(HOSTAPD_EAP_CONFIG)
+	$(HOSTAPD_WPS_CONFIG)
+	$(HOSTAPD_LIBNL_CONFIG)
 endef
 
 define HOSTAPD_BUILD_CMDS
