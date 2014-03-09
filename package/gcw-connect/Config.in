@@ -1,0 +1,9 @@
+config BR2_PACKAGE_GCW_CONNECT
+	bool "GCW Connect"
+	depends on BR2_PACKAGE_PYTHON_PYGAME
+	select BR2_PACKAGE_PYTHON_PYGAME_FONT
+	help
+	  This application can be used to configure wireless networks
+	  on OpenDingux based systems.
+
+	  https://github.com/skipmeister123/gcwconnect/

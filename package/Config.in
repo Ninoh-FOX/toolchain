@@ -1192,6 +1192,7 @@ endif
 	source "package/dingux-commander/Config.in"
 	source "package/dsp-tools/Config.in"
 	source "package/ftop/Config.in"
+	source "package/gcw-connect/Config.in"
 	source "package/htop/Config.in"
 	source "package/iprutils/Config.in"
 	source "package/keyutils/Config.in"
