@@ -36,8 +36,10 @@ DIRECTFB_CONFIG_SCRIPTS = directfb-config
 DIRECTFB_DEPENDENCIES = freetype zlib
 
 ifeq ($(BR2_PACKAGE_DIRECTFB_MULTI),y)
-DIRECTFB_CONF_OPT += --enable-multi --enable-fusion
+DIRECTFB_CONF_OPT += --enable-multi --enable-fusion --enable-multi-kernel
 DIRECTFB_DEPENDENCIES += linux-fusion
+else
+DIRECTFB_CONF_OPT += --disable-multi --disable-fusion --disable-multi-kernel
 endif
 
 ifeq ($(BR2_PACKAGE_DIRECTFB_DEBUG),y)
