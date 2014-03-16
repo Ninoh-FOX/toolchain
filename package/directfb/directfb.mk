@@ -137,6 +137,13 @@ ifeq ($(BR2_PACKAGE_DIRECTFB_TESTS),y)
 DIRECTFB_CONF_OPT += --with-tests
 endif
 
+define DIRECTFB_DELETE_OBJS
+rm -rf $(TARGET_DIR)/usr/lib/directfb-$(DIRECTFB_VERSION_MAJOR)-0/*/*.o \
+	$(TARGET_DIR)/usr/lib/directfb-$(DIRECTFB_VERSION_MAJOR)-0/interfaces/*/*.o
+endef
+
+DIRECTFB_POST_INSTALL_TARGET_HOOKS += DIRECTFB_DELETE_OBJS
+
 HOST_DIRECTFB_DEPENDENCIES = host-pkgconf host-libpng
 HOST_DIRECTFB_CONF_OPT = \
 		--disable-debug \
