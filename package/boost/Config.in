@@ -16,6 +16,10 @@ config BR2_PACKAGE_BOOST
 
 if BR2_PACKAGE_BOOST
 
+config BR2_PACKAGE_BOOST_STATIC
+	bool "Build static libraries"
+	default y if BR2_PREFER_STATIC_LIB
+
 choice
 	prompt "Layout"
 	default BR2_PACKAGE_BOOST_LAYOUT_SYSTEM

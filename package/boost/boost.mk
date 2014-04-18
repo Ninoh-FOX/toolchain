@@ -83,8 +83,8 @@ HOST_BOOST_OPT += toolset=gcc threading=multi variant=release link=shared \
 BOOST_OPT += toolset=gcc \
 	     threading=multi \
 	     variant=$(if $(BR2_ENABLE_DEBUG),debug,release) \
-	     link=$(if $(BR2_PREFER_STATIC_LIB),static,shared) \
-	     runtime-link=$(if $(BR2_PREFER_STATIC_LIB),static,shared)
+	     link=$(if $(BR2_PACKAGE_BOOST_STATIC),static,shared) \
+	     runtime-link=$(if $(BR2_PACKAGE_BOOST_STATIC),static,shared)
 
 ifeq ($(BR2_PACKAGE_BOOST_LOCALE),y)
 ifeq ($(BR2_TOOLCHAIN_USES_UCLIBC),y)
