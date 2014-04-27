@@ -186,6 +186,7 @@ comment "Graphic applications"
 	source "package/fswebcam/Config.in"
 	source "package/gnuplot/Config.in"
 	source "package/jhead/Config.in"
+	source "package/o2xiv/Config.in"
 	source "package/rrdtool/Config.in"
 
 comment "Graphic libraries"
