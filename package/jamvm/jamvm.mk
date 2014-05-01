@@ -22,4 +22,10 @@ ifeq ($(BR2_arm),y)
 JAMVM_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -marm"
 endif
 
+define JAMVM_INSTALL_SYMLINK
+	ln -s /usr/bin/jamvm $(TARGET_DIR)/usr/bin/java
+endef
+
+JAMVM_POST_INSTALL_TARGET_HOOKS += JAMVM_INSTALL_SYMLINK
+
 $(eval $(autotools-package))
