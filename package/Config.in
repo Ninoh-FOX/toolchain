@@ -218,6 +218,7 @@ endif
 	source "package/sdl_sound/Config.in"
 	source "package/sdl_ttf/Config.in"
 	source "package/sdl2/Config.in"
+	source "package/sdl2_image/Config.in"
 	source "package/timidity-instruments/Config.in"
 
 comment "Other GUIs"
