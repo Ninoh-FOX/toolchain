@@ -220,6 +220,7 @@ endif
 	source "package/sdl2/Config.in"
 	source "package/sdl2_image/Config.in"
 	source "package/sdl2_mixer/Config.in"
+	source "package/sdl2_net/Config.in"
 	source "package/sdl2_ttf/Config.in"
 	source "package/timidity-instruments/Config.in"
 
