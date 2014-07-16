@@ -1,0 +1,58 @@
+diff --git a/src/modules/system/System.cpp b/src/modules/system/System.cpp
+index dd74c12..8d9b231 100755
+--- a/src/modules/system/System.cpp
++++ b/src/modules/system/System.cpp
+@@ -25,9 +25,7 @@
+ #if defined(LOVE_MACOSX)
+ #include <CoreServices/CoreServices.h>
+ #elif defined(LOVE_LINUX)
+-#include <spawn.h>
+-//#include <stdlib.h>
+-//#include <unistd.h>
++#include <unistd.h>
+ #include <sys/wait.h>
+ #elif defined(LOVE_WINDOWS)
+ #include "common/utf8.h"
+@@ -54,11 +52,6 @@ std::string System::getOS() const
+ #endif
+ }
+ 
+-extern "C"
+-{
+-	extern char **environ; // The environment, always available
+-}
+-
+ bool System::openURL(const std::string &url) const
+ {
+ 
+@@ -79,19 +72,20 @@ bool System::openURL(const std::string &url) const
+ #elif defined(LOVE_LINUX)
+ 
+ 	pid_t pid;
+-	const char *argv[] = {"xdg-open", url.c_str(), nullptr};
++	int status = 0;
+ 
+ 	// Note: at the moment this process inherits our file descriptors.
+ 	// Note: the below const_cast is really ugly as well.
+-	if (posix_spawnp(&pid, "xdg-open", nullptr, nullptr, const_cast<char **>(argv), environ) != 0)
+-		return false;
+-
+-	// Wait for xdg-open to complete (or fail.)
+-	int status = 0;
+-	if (waitpid(pid, &status, 0) == pid)
+-		return (status == 0);
+-	else
+-		return false;
++	pid = fork();
++	if (!pid) {
++		execlp("xdg-open", "xdg-open", url.c_str(), nullptr);
++	} else {
++		// Wait for xdg-open to complete (or fail.)
++		if (waitpid(pid, &status, 0) == pid)
++			return (status == 0);
++	}
++
++	return false;
+ 
+ #elif defined(LOVE_WINDOWS)
+ 

@@ -208,6 +208,7 @@ endif
 	source "package/imagemagick/Config.in"
 	source "package/linux-fusion/Config.in"
 	source "package/lite/Config.in"
+	source "package/love2d/Config.in"
 	source "package/mesa3d/Config.in"
 	source "package/ocrad/Config.in"
 	source "package/psplash/Config.in"
