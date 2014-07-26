@@ -75,9 +75,11 @@ HOST_BINUTILS_CONF_OPT = --disable-multilib --disable-werror \
 			$(BINUTILS_DISABLE_GDB_CONF_OPT) \
 			$(BINUTILS_EXTRA_CONFIG_OPTIONS)
 
-# We just want libbfd and libiberty, not the full-blown binutils in staging
+# We just want libbfd, libiberty and libopcodes,
+# not the full-blown binutils in staging
 define BINUTILS_INSTALL_STAGING_CMDS
 	$(MAKE) -C $(@D)/bfd DESTDIR=$(STAGING_DIR) install
+	$(MAKE) -C $(@D)/opcodes DESTDIR=$(STAGING_DIR) install
 	$(MAKE) -C $(@D)/libiberty DESTDIR=$(STAGING_DIR) install
 endef
 
