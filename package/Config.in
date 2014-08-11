@@ -49,6 +49,7 @@ endif
 	source "package/lz4/Config.in"
 	source "package/lzip/Config.in"
 	source "package/lzop/Config.in"
+	source "package/p7zip/Config.in"
 	source "package/unrar/Config.in"
 	source "package/xz/Config.in"
 endmenu
