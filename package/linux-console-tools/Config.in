@@ -1,0 +1,33 @@
+config BR2_PACKAGE_LINUX_CONSOLE_TOOLS
+	bool "linux-console-tools (for joysticks)"
+	help
+	  This package contains utilities to calibrate and test joysticks and
+	  joypads, to test force feedback and to connect legacy serial devices
+	  to the input layer.
+
+	  http://sourceforge.net/projects/linuxconsole/
+
+if BR2_PACKAGE_LINUX_CONSOLE_TOOLS
+
+config BR2_PACKAGE_LINUX_CONSOLE_TOOLS_JOY
+	bool "joystick/joypad tools"
+	help
+	  Install tools to calibrate and test joysticks and joypads.
+
+config BR2_PACKAGE_LINUX_CONSOLE_TOOLS_FF
+	bool "force feedback tools"
+	help
+	  Install tools to test force feedback.
+
+if BR2_PACKAGE_LINUX_CONSOLE_TOOLS_FF
+comment "ffmvforce will not be built since it requires SDL"
+	depends on !BR2_PACKAGE_SDL
+endif
+
+config BR2_PACKAGE_LINUX_CONSOLE_TOOLS_INPUTATTACH
+	bool "inputattach tool"
+	help
+	  Install inputattach, a tool to connect legacy serial devices to the
+	  input layer.
+
+endif

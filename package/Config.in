@@ -341,6 +341,7 @@ endif
 	source "package/iucode-tool/Config.in"
 	source "package/kbd/Config.in"
 	source "package/lcdproc/Config.in"
+	source "package/linux-console-tools/Config.in"
 	source "package/lm-sensors/Config.in"
 	source "package/lowpowd/Config.in"
 	source "package/lshw/Config.in"
