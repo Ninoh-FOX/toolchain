@@ -20,6 +20,7 @@ MESA3D_DEPENDENCIES = \
 	host-bison \
 	host-flex \
 	host-gettext \
+	host-libxml2 \
 	host-python \
 	host-xutil_makedepend \
 	libdrm
