@@ -4,14 +4,21 @@
 #
 ################################################################################
 
-APITRACE_VERSION = c181b7fbf4b1c3912424761fec8ac7124640543a
+APITRACE_VERSION = 5.0
 APITRACE_SITE = $(call github,apitrace,apitrace,$(APITRACE_VERSION))
 APITRACE_LICENSE = MIT
 APITRACE_LICENSE_FILES = LICENSE
 
-APITRACE_DEPENDENCIES = xlib_libX11 host-python
+APITRACE_DEPENDENCIES = popt binutils host-python
 
 # Gui was never tested, so we prefer to explicitly disable it
 APITRACE_CONF_OPT += -DENABLE_GUI=false
+
+APITRACE_CONF_OPT = -DPYTHON_EXECUTABLE:STRING="$(HOST_DIR)/usr/bin/python"
+
+ifneq ($(BR2_PACKAGE_XLIB_LIBX11),y)
+APITRACE_CONF_OPT += -DCMAKE_C_FLAGS:STRING="$(TARGET_CFLAGS) -DMESA_EGL_NO_X11_HEADERS"
+APITRACE_CONF_OPT += -DCMAKE_CXX_FLAGS:STRING="$(TARGET_CFLAGS) -DMESA_EGL_NO_X11_HEADERS"
+endif
 
 $(eval $(cmake-package))
