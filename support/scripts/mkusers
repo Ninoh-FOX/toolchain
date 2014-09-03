@@ -297,7 +297,9 @@ add_one_user() {
 
     # Remove any previous instance of this user
     for _f in "${PASSWD}" "${SHADOW}"; do
-        sed -r -i -e '/^'"${username}"':.*/d;' "${_f}"
+        if test -f "${_f}"; then
+            sed -r -i -e '/^'"${username}"':.*/d;' "${_f}"
+        fi
     done
 
     _gid="$( get_gid "${group}" )"
@@ -323,13 +325,17 @@ add_one_user() {
             ;;
     esac
 
-    printf "%s:x:%d:%d:%s:%s:%s\n"              \
-           "${username}" "${uid}" "${_gid}"     \
-           "${comment}" "${_home}" "${_shell}"  \
-           >>"${PASSWD}"
-    printf "%s:%s:::::::\n"      \
-           "${username}" "${_passwd}"   \
-           >>"${SHADOW}"
+    if test -f "${PASSWD}"; then
+        printf "%s:x:%d:%d:%s:%s:%s\n"              \
+               "${username}" "${uid}" "${_gid}"     \
+               "${comment}" "${_home}" "${_shell}"  \
+               >>"${PASSWD}"
+    fi
+    if test -f "${SHADOW}"; then
+        printf "%s:%s:::::::\n"      \
+               "${username}" "${_passwd}"   \
+               >>"${SHADOW}"
+    fi
 
     # Add the user to its additional groups
     if [ "${groups}" != "-" ]; then
