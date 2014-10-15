@@ -1,2 +1,2 @@
 #!/bin/sh
-echo 1 > /sys/class/graphics/fb0/blank
+echo 4 > /sys/class/graphics/fb0/blank
