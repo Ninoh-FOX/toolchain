@@ -29,6 +29,14 @@ else
 SDL_MIXER_CONF_OPT += --disable-music-midi
 endif
 
+ifeq ($(BR2_PACKAGE_LIBMODPLUG),y)
+SDL_MIXER_CONF_OPT += \
+	--enable-music-mod-modplug
+SDL_MIXER_DEPENDENCIES += libmodplug
+else
+SDL_MIXER_CONF_OPT += --disable-music-mod-modplug
+endif
+
 ifeq ($(BR2_PACKAGE_SDL_MIXER_LIBMAD),y)
 SDL_MIXER_CONF_OPT += --enable-music-mp3-mad-gpl
 SDL_MIXER_DEPENDENCIES += libmad
