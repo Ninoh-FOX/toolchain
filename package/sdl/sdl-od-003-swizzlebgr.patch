@@ -1,0 +1,58 @@
+diff --git a/include/SDL_video.h b/include/SDL_video.h
+index f9c4e07..7608219 100644
+--- a/include/SDL_video.h
++++ b/include/SDL_video.h
+@@ -143,6 +143,7 @@ typedef struct SDL_Surface {
+ #define SDL_OPENGLBLIT	0x0000000A	/**< Create an OpenGL rendering context and use it for blitting */
+ #define SDL_RESIZABLE	0x00000010	/**< This video mode may be resized */
+ #define SDL_NOFRAME	0x00000020	/**< No window caption or edge frame */
++#define SDL_SWIZZLEBGR	0x00000040	/**< Video mode has BGR subpixel ordering (not RGB) */
+ /*@}*/
+ 
+ /** Used internally (read-only) */
+diff --git a/src/video/fbcon/SDL_fbvideo.c b/src/video/fbcon/SDL_fbvideo.c
+index 5e58809..0a3b7d1 100644
+--- a/src/video/fbcon/SDL_fbvideo.c
++++ b/src/video/fbcon/SDL_fbvideo.c
+@@ -1030,7 +1030,10 @@ static SDL_Surface *FB_SetVideoMode(_THIS, SDL_Surface *current,
+ 	}
+ 
+ 	if ( (vinfo.xres != width) || (vinfo.yres != height) ||
+-	     (vinfo.bits_per_pixel != bpp) || (flags & SDL_DOUBLEBUF) ) {
++	     (vinfo.bits_per_pixel != bpp) ||
++	     (flags & SDL_DOUBLEBUF) ||
++	     ((flags & SDL_SWIZZLEBGR) != 0 && (vinfo.blue.offset <= vinfo.green.offset)) ||
++	     ((flags & SDL_SWIZZLEBGR) == 0 && (vinfo.blue.offset >= vinfo.green.offset)) ) {
+ 		vinfo.activate = FB_ACTIVATE_NOW;
+ 		vinfo.accel_flags = 0;
+ 		vinfo.bits_per_pixel = bpp;
+@@ -1048,6 +1051,29 @@ static SDL_Surface *FB_SetVideoMode(_THIS, SDL_Surface *current,
+ 		vinfo.green.length = vinfo.green.offset = 0;
+ 		vinfo.blue.length = vinfo.blue.offset = 0;
+ 		vinfo.transp.length = vinfo.transp.offset = 0;
++
++		/*
++		 * Some framebuffer drivers support BGR->RGB swizzling, like
++		 * jz4770_fb. This is useful for some emulators.
++		 */
++		if (flags & SDL_SWIZZLEBGR) {
++			switch (bpp) {
++				case 15:
++					vinfo.blue.offset = 10;
++					vinfo.green.offset = 5;
++					break;
++				case 16:
++					vinfo.blue.offset = 11;
++					vinfo.green.offset = 5;
++					break;
++				case 24:
++				case 32:
++					vinfo.blue.offset = 16;
++					vinfo.green.offset = 8;
++					break;
++			}
++		}
++
+ 		if ( ! choose_fbmodes_mode(&vinfo) ) {
+ 			choose_vesa_mode(&vinfo);
+ 		}
