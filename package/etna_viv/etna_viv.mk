@@ -19,7 +19,7 @@ $(error No ABI version selected)
 endif
 
 define ETNA_VIV_BUILD_CMDS
-	$(MAKE) -C $(@D)/src/etnaviv \
+	$(MAKE) -C $(@D)/attic \
 		GCCPREFIX="$(TARGET_CROSS)" \
 		PLATFORM_CFLAGS="-D_POSIX_C_SOURCE=200809 -D_GNU_SOURCE -DLINUX" \
 		PLATFORM_CXXFLAGS="-D_POSIX_C_SOURCE=200809 -D_GNU_SOURCE -DLINUX" \
@@ -29,9 +29,9 @@ define ETNA_VIV_BUILD_CMDS
 endef
 
 define ETNA_VIV_INSTALL_STAGING_CMDS
-	cp $(@D)/src/etnaviv/libetnaviv.a $(STAGING_DIR)/usr/lib
+	cp $(@D)/attic/etnaviv/libetnaviv.a $(STAGING_DIR)/usr/lib
 	mkdir -p $(STAGING_DIR)/usr/include/etnaviv
-	cp $(@D)/src/etnaviv/*.h $(STAGING_DIR)/usr/include/etnaviv
+	cp $(@D)/attic/etnaviv/*.h $(STAGING_DIR)/usr/include/etnaviv
 endef
 
 $(eval $(generic-package))
