@@ -13,10 +13,10 @@ LIBOPK_MAKE_ENV = CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)" \
 				  CROSS_COMPILE="$(TARGET_CROSS)" PREFIX=/usr
 
 define LIBOPK_BUILD_PYTHON
-	(cd $(@D)/bindings/python ; $(HOST_DIR)/usr/bin/python setup.py build)
+	(cd $(@D)/python ; $(HOST_DIR)/usr/bin/python setup.py build)
 endef
 define LIBOPK_INSTALL_PYTHON
-	(cd $(@D)/bindings/python ; $(HOST_DIR)/usr/bin/python setup.py install --prefix=$(TARGET_DIR)/usr)
+	(cd $(@D)/python ; $(HOST_DIR)/usr/bin/python setup.py install --prefix=$(TARGET_DIR)/usr)
 endef
 
 ifeq ($(BR2_PACKAGE_PYTHON),y)
