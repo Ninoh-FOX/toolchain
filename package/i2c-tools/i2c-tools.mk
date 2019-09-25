@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-I2C_TOOLS_VERSION = 3.1.1
-I2C_TOOLS_SOURCE = i2c-tools-$(I2C_TOOLS_VERSION).tar.bz2
-I2C_TOOLS_SITE = http://dl.lm-sensors.org/i2c-tools/releases
+I2C_TOOLS_VERSION = 4.0
+I2C_TOOLS_SOURCE = i2c-tools-$(I2C_TOOLS_VERSION).tar.xz
+I2C_TOOLS_SITE = http://sources.buildroot.net/i2c-tools/
 I2C_TOOLS_LICENSE = GPLv2+, GPLv2 (py-smbus)
 I2C_TOOLS_LICENSE_FILES = COPYING
 
