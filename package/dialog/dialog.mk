@@ -6,7 +6,7 @@
 
 DIALOG_VERSION = 1.2-20140219
 DIALOG_SOURCE = dialog-$(DIALOG_VERSION).tgz
-DIALOG_SITE = ftp://invisible-island.net/dialog
+DIALOG_SITE = http://sources.buildroot.net/
 DIALOG_CONF_OPT = --with-ncurses --with-curses-dir=$(STAGING_DIR)/usr \
 	--disable-rpath-hack
 DIALOG_DEPENDENCIES = host-pkgconf ncurses
