@@ -18,7 +18,6 @@ define UBIBOOT_BUILD_CMDS
 endef
 
 define UBIBOOT_INSTALL_IMAGES_CMDS
-	mkdir -p $(BINARIES_DIR)/ubiboot/$(UBIBOOT_BOARD_NAME)
 	$(INSTALL) -D -m 0755 $(@D)/output/$(UBIBOOT_BOARD_NAME)/* $(BINARIES_DIR)/ubiboot
 endef
 
