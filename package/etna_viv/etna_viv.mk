@@ -31,7 +31,7 @@ endef
 define ETNA_VIV_INSTALL_STAGING_CMDS
 	cp $(@D)/attic/etnaviv/libetnaviv.a $(STAGING_DIR)/usr/lib
 	mkdir -p $(STAGING_DIR)/usr/include/etnaviv
-	cp $(@D)/src/etnaviv/.h $(STAGING_DIR)/usr/include/etnaviv
+	cp $(@D)/src/etnaviv/*.h $(STAGING_DIR)/usr/include/etnaviv
 	cp $(@D)/attic/etnaviv/*.h $(STAGING_DIR)/usr/include/etnaviv
 endef
 
