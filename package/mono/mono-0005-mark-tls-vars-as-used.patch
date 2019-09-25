@@ -1,0 +1,37 @@
+diff --git a/mono/metadata/sgen-alloc.c b/mono/metadata/sgen-alloc.c
+index 12beef893f16..aa475bc0d315 100644
+--- a/mono/metadata/sgen-alloc.c
++++ b/mono/metadata/sgen-alloc.c
+@@ -93,7 +93,7 @@ static __thread char *tlab_next;
+ static __thread char *tlab_temp_end;
+ static __thread char *tlab_real_end;
+ /* Used by the managed allocator/wbarrier */
+-static __thread char **tlab_next_addr;
++static __thread char **tlab_next_addr MONO_ATTR_USED;
+ #endif
+ 
+ #ifdef HAVE_KW_THREAD
+diff --git a/mono/utils/mono-compiler.h b/mono/utils/mono-compiler.h
+index 6cb60f2c3875..a910e917d7f2 100644
+--- a/mono/utils/mono-compiler.h
++++ b/mono/utils/mono-compiler.h
+@@ -7,13 +7,19 @@
+  */
+ #include <config.h>
+ 
++#ifdef __GNUC__
++#define MONO_ATTR_USED __attribute__ ((used))
++#else
++#define MONO_ATTR_USED
++#endif
++
+ #ifdef HAVE_KW_THREAD
+ 
+ #define MONO_HAVE_FAST_TLS
+ #define MONO_FAST_TLS_SET(x,y) x = y
+ #define MONO_FAST_TLS_GET(x) x
+ #define MONO_FAST_TLS_INIT(x)
+-#define MONO_FAST_TLS_DECLARE(x) static __thread gpointer x MONO_TLS_FAST;
++#define MONO_FAST_TLS_DECLARE(x) static __thread gpointer x MONO_TLS_FAST MONO_ATTR_USED;
+ 
+ #if HAVE_TLS_MODEL_ATTR
