@@ -18,3 +18,4 @@ done
 echo "done"
 echo "counter = $counter"
 echo "state = $STATE"
+exit 0
