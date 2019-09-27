@@ -1,3 +1,24 @@
+======================================================
+============= RG350 BUILD INSTRUCTIONS ===============
+======================================================
+
+### Pre-Build Steps ###
+
+$ sudo apt-get update
+$ sudo apt-get install bison flex gettext texinfo wget cpio python unzip mercurial subversion libncurses5-dev libc6-dev-i386 bzr
+## you need a javac compiler, (i.e. sudo apt-get install gcj-4.9-jdk)
+
+### Build Steps ###
+
+## Enter the directory where you want to clone the git repo
+$ git clone https://github.com/jbd1986/RG350_buildroot.git
+$ cd RG350_buildroot
+$ make rg350_defconfig
+$ make
+
+======================================================
+
+
 To build and use the buildroot stuff, do the following:
 
 1) run 'make menuconfig'
