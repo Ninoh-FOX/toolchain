@@ -3,16 +3,16 @@
 # pcsx4all
 #
 ################################################################################
-PCSX4ALL_VERSION = master
-PCSX4ALL_SITE = $(call github,dmitrysmagin,pcsx4all,$(PCSX4ALL_VERSION))
+PCSX4ALL_VERSION = c440034
+PCSX4ALL_SITE = $(call github,jbd1986,pcsx4all,$(PCSX4ALL_VERSION))
 PCSX4ALL_AUTORECONF = YES
 PCSX4ALL_INSTALL_STAGING = YES
 
 PCSX4ALL_MAKE_OPTS = \
+	MD="mkdir -p" \
     CC="$(TARGET_CC)" \
     CXX="$(TARGET_CXX)" \
     LD="$(TARGET_CXX)" \
-    C_ARCH="-std=c99 -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/lib"
 
 define PCSX4ALL_BUILD_CMDS
     $(MAKE) $(PCSX4ALL_MAKE_OPTS) -C $(@D) \
