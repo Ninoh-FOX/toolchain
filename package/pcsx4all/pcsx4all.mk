@@ -3,7 +3,7 @@
 # pcsx4all
 #
 ################################################################################
-PCSX4ALL_VERSION = 198ebfc
+PCSX4ALL_VERSION = 765c2a9
 PCSX4ALL_SITE = $(call github,gameblabla,pcsx4all,$(PCSX4ALL_VERSION))
 PCSX4ALL_AUTORECONF = YES
 PCSX4ALL_INSTALL_STAGING = YES
