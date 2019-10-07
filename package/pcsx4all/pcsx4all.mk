@@ -14,6 +14,19 @@ PCSX4ALL_MAKE_OPTS = \
     CXX="$(TARGET_CXX)" \
     LD="$(TARGET_CXX)" \
 
+# BEGIN hacks for older buildroot
+# Remove -flto
+# Remove -mframe-header-opt and replace with -std=c99
+# Add -lpthread -lrt
+define PCSX4ALL_PREPARE_BUILD
+    (   cd $(@D) ; \
+		sed -i 's/-flto//g' Makefile.gcw0 ; \
+        sed -i 's/-mframe-header-opt/-std=c99/g' Makefile.gcw0 ; \
+        sed -i 's/LDFLAGS = /LDFLAGS = -lpthread -lrt /g' Makefile.gcw0)
+endef
+PCSX4ALL_PRE_CONFIGURE_HOOKS += PCSX4ALL_PREPARE_BUILD
+# END hacks
+
 define PCSX4ALL_BUILD_CMDS
     $(MAKE) $(PCSX4ALL_MAKE_OPTS) -C $(@D) \
         -f Makefile.${BR2_PACKAGE_PCSX4ALL_PLATFORM}
