@@ -5,7 +5,7 @@
 ################################################################################
 
 XINETD_VERSION       = 2.3.15
-XINETD_SITE          = http://www.xinetd.org
+XINETD_SITE          = http://sources.buildroot.net
 XINETD_LICENSE       = xinetd license
 XINETD_LICENSE_FILES = COPYRIGHT
 
