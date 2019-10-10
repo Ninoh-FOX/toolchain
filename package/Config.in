@@ -283,6 +283,10 @@ comment "X window managers"
 	source "package/metacity/Config.in"
 endmenu
 
+menu "Emulators"
+	source "package/pcsx4all/Config.in"
+endmenu
+
 menu "Hardware handling"
 menu "Firmware"
 	source "package/am33x-cm3/Config.in"

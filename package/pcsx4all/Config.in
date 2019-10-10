@@ -1,0 +1,15 @@
+config BR2_PACKAGE_PCSX4ALL
+	bool "pcsx4all"
+	select BR2_PACKAGE_DEJAVU
+	select BR2_PACKAGE_LIBPNG
+	select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_SDL_TTF
+	help
+	  pcsx4all emulator package
+	  https://github.com/dmitrysmagin/pcsx4all
+
+if BR2_PACKAGE_PCSX4ALL
+
+config BR2_PACKAGE_PCSX4ALL_PLATFORM
+	string "Target platform"
+endif
