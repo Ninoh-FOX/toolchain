@@ -9,7 +9,7 @@
 #endif
 
 #ifndef BATTERY_LEVEL_WARN
-#define BATTERY_LEVEL_WARN 10
+#define BATTERY_LEVEL_WARN 15
 #endif
 
 #ifndef LED_ON_MS
@@ -43,17 +43,17 @@ static int power_online(void)
 	int online;
 	fscanf(f, "%i", &online);
 	fclose(f);
-	if (online)
-		return online;
+	// if (online)
+		// return online;
 
-	f = fopen("/sys/class/power_supply/dc/online", "r");
-	if (!f) {
-		perror("Unable to open USB sysfs file");
-		return -1;
-	}
+	// f = fopen("/sys/class/power_supply/dc/online", "r");
+	// if (!f) {
+		// perror("Unable to open USB sysfs file");
+		// return -1;
+	// }
 
-	fscanf(f, "%i", &online);
-	fclose(f);
+	// fscanf(f, "%i", &online);
+	// fclose(f);
 	return online;
 }
 
