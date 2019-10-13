@@ -3,16 +3,14 @@
 # gmenunx
 #
 ################################################################################
-GMENUNX_VERSION = 6b6d22905
+GMENUNX_VERSION = 8e053793
 GMENUNX_SITE = $(call github,podulator,gmenunx,$(GMENUNX_VERSION))
 GMENUNX_DEPENDENCIES = dejavu libpng sdl sdl_ttf
 GMENUNX_INSTALL_TARGET = YES
 
 GMENUNX_MAKE_OPTS = \
     MD="mkdir -p" \
-    CC="$(TARGET_CC)" \
-    CXX="$(TARGET_CXX)" \
-    LD="$(TARGET_CXX)" \
+    CROSS_COMPILE="$(TARGET_CROSS)"
     
 ifeq ($(BR2_PACKAGE_LIBOPK),y)
 GMENUNX_DEPENDENCIES += libopk
