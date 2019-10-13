@@ -8,7 +8,7 @@ echo ${OPK_NAME}
 cat > default.gcw0.desktop <<EOF
 [Desktop Entry]
 Name=PocketSNES
-Comment=Gameblabla SNES Emu
+Comment=PingFlood SNES Emulator
 Exec=PocketSNES.dge %f
 Terminal=false
 Type=Application
