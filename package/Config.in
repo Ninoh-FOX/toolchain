@@ -285,6 +285,7 @@ endmenu
 
 menu "Emulators"
 	source "package/pcsx4all/Config.in"
+	source "package/pocketsnes/Config.in"
 endmenu
 
 menu "Hardware handling"
