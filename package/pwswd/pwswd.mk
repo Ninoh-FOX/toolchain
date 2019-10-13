@@ -4,8 +4,13 @@
 #
 ################################################################################
 
+<<<<<<< Updated upstream
 PWSWD_VERSION = 59664aa7d7
 PWSWD_SITE = $(call github,tonyjih,pwswd,$(PWSWD_VERSION))
+=======
+PWSWD_VERSION = master
+PWSWD_SITE = $(call github,jamesofarrell,RG350_pwswd,$(PWSWD_VERSION))
+>>>>>>> Stashed changes
 PWSWD_DEPENDENCIES = alsa-lib libpng libini
 
 PWSWD_MAKE_ENV = CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)" \
