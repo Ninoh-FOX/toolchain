@@ -5,7 +5,7 @@
 ################################################################################
 GMENUNX_VERSION = 8e053793
 GMENUNX_SITE = $(call github,podulator,gmenunx,$(GMENUNX_VERSION))
-GMENUNX_DEPENDENCIES = dejavu libpng sdl sdl_ttf
+GMENUNX_DEPENDENCIES = dejavu libpng sdl sdl_ttf sdl_gfx
 GMENUNX_INSTALL_TARGET = YES
 
 GMENUNX_MAKE_OPTS = \
@@ -27,8 +27,8 @@ endef
 
 define GMENUNX_INSTALL_GMENUNX
     (   cd $(@D) ; \
-	cp -r assets/$(BR2_PACKAGE_GMENUNX_PLATFORM) $(TARGET_DIR)/usr/share/gmenunx ; \
-	cp dist/$(BR2_PACKAGE_GMENUNX_PLATFORM)/gmenunx/gmenunx $(TARGET_DIR)/usr/bin/ ; )
+	cp -r dist/$(BR2_PACKAGE_GMENUNX_PLATFORM)/gmenunx $(TARGET_DIR)/usr/share/ ; \
+	ln -s $(TARGET_DIR)/usr/share/gmenunx $(TARGET_DIR)/usr/bin/gmenunx ; )
 endef
 GMENUNX_POST_INSTALL_TARGET_HOOKS += GMENUNX_INSTALL_GMENUNX
 
