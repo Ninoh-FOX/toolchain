@@ -285,6 +285,7 @@ endmenu
 
 menu "Emulators"
 	source "package/pcsx4all/Config.in"
+	source "package/pocketsnes/Config.in"
 endmenu
 
 menu "Hardware handling"
@@ -948,6 +949,7 @@ menu "Miscellaneous"
 	source "package/collectd/Config.in"
 	source "package/empty/Config.in"
 	source "package/gmenu2x/Config.in"
+	source "package/gmenunx/Config.in"
 	source "package/googlefontdirectory/Config.in"
 	source "package/haveged/Config.in"
 	source "package/mcrypt/Config.in"

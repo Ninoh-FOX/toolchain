@@ -1,0 +1,15 @@
+config BR2_PACKAGE_POCKETSNES
+	bool "PocketSNES"
+	select BR2_PACKAGE_DEJAVU
+	select BR2_PACKAGE_LIBPNG
+	select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_SDL_TTF
+	help
+	  PocketSNES emulator package
+	  https://github.com/pingflood/PocketSNES
+
+if BR2_PACKAGE_POCKETSNES
+
+config BR2_PACKAGE_POCKETSNES_PLATFORM
+	string "Target platform"
+endif

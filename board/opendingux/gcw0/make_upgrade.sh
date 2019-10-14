@@ -1,34 +1,66 @@
 #!/bin/sh
 
-OPK_NAME=rg350_update_2019_10_09.opk
+KERNEL=output/images/vmlinuz.bin
+ROOTFS=output/images/rootfs.squashfs
+MODULES=output/images/modules.squashfs
 
-echo ${OPK_NAME}
+# create sha1sums
+sha1sum "$KERNEL" | cut -d' ' -f1 > "$KERNEL.sha1"
+sha1sum "$ROOTFS" | cut -d' ' -f1 > "$ROOTFS.sha1"
+sha1sum "$MODULES" | cut -d' ' -f1 > "$MODULES.sha1"
+
+if [ "$KERNEL" -a "$ROOTFS" ] ; then
+	if [ `date -r "$KERNEL" +%s` -gt `date -r "$ROOTFS" +%s` ] ; then
+		DATE=`date -r "$KERNEL" +%F`
+	else
+		DATE=`date -r "$ROOTFS" +%F`
+	fi
+elif [ "$KERNEL" ] ; then
+	DATE=`date -r "$KERNEL" +%F`
+elif [ "$ROOTFS" ] ; then
+	DATE=`date -r "$ROOTFS" +%F`
+else
+	echo "ERROR: No kernel or rootfs found."
+	exit 1
+fi
+
+OPK_NAME=rg350-update-$DATE.opk
+
+# Report metadata.
+echo
+echo "=========================="
+echo
+echo "NAME                  $OPK_NAME"
+echo "Bootloaders:          $BOOTLOADERS"
+echo "Mininit:              $MININIT"
+echo "Kernel:               $KERNEL"
+echo "Modules file system:  $MODULES"
+echo "Root file system:     $ROOTFS"
+echo "  build date:         $DATE"
+echo
+echo "=========================="
+echo
 
 # create default.gcw0.desktop
 cat > default.gcw0.desktop <<EOF
 [Desktop Entry]
 Name=OS Update
-Comment=JBDoge Update 2019-10-09
+Comment=OpenDingux Update $DATE
 Exec=update.sh
-Icon=Update
+Icon=opendingux
 Terminal=true
 Type=Application
 StartupNotify=true
 Categories=applications;
 EOF
 
-# create sha1sums (TODO: move this elsewhere)
-sha1sum output/images/vmlinuz.bin > output/images/vmlinuz.bin.sha1
-sha1sum output/images/rootfs.squashfs > output/images/rootfs.squashfs.sha1
-sha1sum output/images/rootfs.squashfs > output/images/modules.squashfs.sha1
+echo "$DATE" > output/images/date.txt
 
 # create opk
-FLIST="output/images/vmlinuz.bin"
-FLIST="${FLIST} output/images/rootfs.squashfs"
-FLIST="${FLIST} output/images/modules.squashfs"
-FLIST="output/images/vmlinuz.bin.sha1"
-FLIST="${FLIST} output/images/rootfs.squashfs.sha1"
-FLIST="${FLIST} output/images/modules.squashfs.sha1"
+FLIST="$KERNEL $KERNEL.sha1"
+FLIST="${FLIST} $ROOTFS $ROOTFS.sha1"
+FLIST="${FLIST} $MODULES $MODULES.sha1"
+FLIST="${FLIST} output/images/date.txt"
 FLIST="${FLIST} board/opendingux/gcw0/flash_partition.sh"
 FLIST="${FLIST} board/opendingux/gcw0/update.sh"
 FLIST="${FLIST} board/opendingux/gcw0/trimfat.py"
@@ -37,8 +69,8 @@ FLIST="${FLIST} default.gcw0.desktop"
 FLIST="${FLIST} board/opendingux/gcw0/Update.png"
 FLIST="${FLIST} board/opendingux/gcw0/opendingux.png"
 
-rm -f ${OPK_NAME}
-mksquashfs ${FLIST} output/images/${OPK_NAME} -all-root -no-xattrs -noappend -no-exports
+rm -f output/images/${OPK_NAME}
+mksquashfs ${FLIST} output/images/${OPK_NAME} -no-progress -noappend -comp gzip -all-root
 
 cat default.gcw0.desktop
 rm -f default.gcw0.desktop
