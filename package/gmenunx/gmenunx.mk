@@ -29,7 +29,7 @@ define GMENUNX_INSTALL_GMENUNX
     (   cd $(@D) ; \
 	cp -r dist/$(BR2_PACKAGE_GMENUNX_PLATFORM)/gmenunx $(TARGET_DIR)/usr/share/ ; \
 	if [ -L $(TARGET_DIR)/usr/bin/gmenunx ]; then echo "removing old link"; rm -rf $(TARGET_DIR)/usr/bin/gmenunx ; fi ; \
-	ln -s $(TARGET_DIR)/usr/share/gmenunx $(TARGET_DIR)/usr/bin/gmenunx ; )
+	ln -rs $(TARGET_DIR)/usr/share/gmenunx/gmenunx $(TARGET_DIR)/usr/bin/gmenunx ; )
 endef
 GMENUNX_POST_INSTALL_TARGET_HOOKS += GMENUNX_INSTALL_GMENUNX
 
