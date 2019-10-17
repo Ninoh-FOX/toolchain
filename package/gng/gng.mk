@@ -3,7 +3,7 @@
 # Ghouls 'n Ghosts Remix - GNG
 #
 ################################################################################
-GNG_VERSION = ec9bd376
+GNG_VERSION = e5054399
 GNG_SITE = $(call github,podulator,ggr_056,$(GNG_VERSION))
 GNG_DEPENDENCIES = allegro
 
