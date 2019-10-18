@@ -1,0 +1,5 @@
+config BR2_PACKAGE_GNG
+	bool "gng"
+	depends on BR2_PACKAGE_ALLEGRO
+	help
+	  Ghouls 'n Ghosts Remix

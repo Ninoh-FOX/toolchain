@@ -27,8 +27,16 @@ endef
 
 define GMENUNX_INSTALL_GMENUNX
     (   cd $(@D) ; \
+	if [ -D $(TARGET_DIR)/usr/share/gmenunx ]; then \
+		echo "removing old directory"; \
+		rm -rf $(TARGET_DIR)/usr/share/gmenunx ; \
+	fi ; \
 	cp -r dist/$(BR2_PACKAGE_GMENUNX_PLATFORM)/gmenunx $(TARGET_DIR)/usr/share/ ; \
-	ln -s $(TARGET_DIR)/usr/share/gmenunx $(TARGET_DIR)/usr/bin/gmenunx ; )
+	if [ -L $(TARGET_DIR)/usr/bin/gmenunx ]; then \
+		echo "removing old link"; \
+		rm -rf $(TARGET_DIR)/usr/bin/gmenunx ; \
+	fi ; \
+	ln -rs $(TARGET_DIR)/usr/share/gmenunx/gmenunx $(TARGET_DIR)/usr/bin/gmenunx ; )
 endef
 GMENUNX_POST_INSTALL_TARGET_HOOKS += GMENUNX_INSTALL_GMENUNX
 
