@@ -1,5 +1,0 @@
-title=Exit
-description=Exit GMenu2X to the official frontend
-icon=skin:icons/exit.png
-exec=scripts/exit.sh
-wrapper=false
