@@ -11,10 +11,13 @@ $ sudo apt-get install bison flex gettext texinfo wget cpio python unzip mercuri
 ### Build Steps ###
 
 ## Enter the directory where you want to clone the git repo
+## This assumes that you have a clean buildroot/dl and buildroot/output directory 
 $ git clone https://github.com/jbd1986/RG350_buildroot.git
 $ cd RG350_buildroot
 $ make rg350_defconfig
 $ make
+# To generate upgrade image
+$ . board/opendingux/gcw0/make_upgrade.sh
 
 ======================================================
 
