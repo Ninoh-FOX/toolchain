@@ -18,8 +18,6 @@ else ifeq ($(BR2_PACKAGE_ETNA_VIV),y)
 $(error No ABI version selected)
 endif
 
-ETNA_VIV_DEPENDENCIES = libpng
-
 define ETNA_VIV_BUILD_CMDS
 	$(MAKE) -C $(@D)/attic \
 		GCCPREFIX="$(TARGET_CROSS)" \
