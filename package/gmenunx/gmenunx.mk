@@ -3,7 +3,7 @@
 # gmenunx
 #
 ################################################################################
-GMENUNX_VERSION = e1e6043c1b3
+GMENUNX_VERSION = 358e0e8de916f
 GMENUNX_SITE = $(call github,podulator,gmenunx,$(GMENUNX_VERSION))
 GMENUNX_DEPENDENCIES = dejavu libpng sdl sdl_ttf sdl_gfx
 GMENUNX_INSTALL_TARGET = YES
