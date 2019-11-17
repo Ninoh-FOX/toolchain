@@ -42,7 +42,7 @@ function showHelp {
 
 function myMake {
 	args="$*"
-	cmd="make ${args}"
+	cmd="make BR2_EXTERNAL=board/opendingux ${args}"
 	echo "make command : ${cmd}"
 	${cmd}
 	if [ $? -ne 0 ]; then
