@@ -30,12 +30,10 @@ NCURSES_CONF_OPT = \
 	$(if $(BR2_PACKAGE_NCURSES_TARGET_PROGS),,--without-progs) \
 	--without-manpages
 
-ifeq ($(BR2_STATIC_LIBS),y)
+ifeq ($(BR2_PREFER_STATIC_LIB),y)
 NCURSES_CONF_OPT += --without-shared --with-normal
-else ifeq ($(BR2_SHARED_LIBS),y)
+else
 NCURSES_CONF_OPT += --with-shared --without-normal
-else ifeq ($(BR2_SHARED_STATIC_LIBS),y)
-NCURSES_CONF_OPT += --with-shared --with-normal
 endif
 
 # configure can't find the soname for libgpm when cross compiling
@@ -72,6 +70,11 @@ NCURSES_CONF_OPT += --enable-widec
 NCURSES_LIB_SUFFIX = w
 NCURSES_LIBS = ncurses menu panel form
 
+define NCURSES_LINK_CONFIG
+	ln -sf ncurses$(NCURSES_LIB_SUFFIX)6-config \
+		$(STAGING_DIR)/usr/bin/ncurses6-config
+endef
+
 define NCURSES_LINK_LIBS_STATIC
 	$(foreach lib,$(NCURSES_LIBS:%=lib%), \
 		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).a $(STAGING_DIR)/usr/lib/$(lib).a
@@ -95,14 +98,16 @@ define NCURSES_LINK_PC
 	)
 endef
 
+NCURSES_LINK_STAGING_CONFIG = $(call NCURSES_LINK_CONFIG)
+
 NCURSES_LINK_STAGING_LIBS = \
-	$(if $(BR2_STATIC_LIBS)$(BR2_SHARED_STATIC_LIBS),$(call NCURSES_LINK_LIBS_STATIC);) \
-	$(if $(BR2_SHARED_LIBS)$(BR2_SHARED_STATIC_LIBS),$(call NCURSES_LINK_LIBS_SHARED))
+	$(if $(BR2_PREFER_STATIC_LIB),$(call NCURSES_LINK_LIBS_STATIC),$(call NCURSES_LINK_LIBS_SHARED))
 
 NCURSES_LINK_STAGING_PC = $(call NCURSES_LINK_PC)
 
 NCURSES_CONF_OPT += --enable-ext-colors
 
+NCURSES_POST_INSTALL_STAGING_HOOKS += NCURSES_LINK_STAGING_CONFIG
 NCURSES_POST_INSTALL_STAGING_HOOKS += NCURSES_LINK_STAGING_LIBS
 NCURSES_POST_INSTALL_STAGING_HOOKS += NCURSES_LINK_STAGING_PC
 
