@@ -11,7 +11,7 @@ POCKETSNES_INSTALL_STAGING = YES
 CROSS_COMPILE=$(TARGET_CROSS)
 
 define POCKETSNES_BUILD_CMDS
-	cp -f package/pocketsnes/make_opk.sh $(@D)
+	cp -f $(BR2_EXTERNAL)/package/pocketsnes/make_opk.sh $(@D)
     $(MAKE) CROSS_COMPILE="$(TARGET_CROSS)" -C $(@D) all
 endef
 

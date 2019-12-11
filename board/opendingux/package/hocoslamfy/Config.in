@@ -1,6 +1,7 @@
 config BR2_PACKAGE_HOCOSLAMFY
 	bool "Hocoslamfy"
 	select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_LIBSHAKE
 	help
 	  Hocoslamfy Game - Rumble Version 
 	  https://github.com/jamesofarrell/hocoslamfy/tree/rg350

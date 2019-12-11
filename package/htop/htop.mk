@@ -21,7 +21,7 @@ endif
 # ARC uses an old uClibc that needs dladdr() for backtrace support,
 # which doesn't work for static only scenario, so as a workaround, we
 # pretend that execinfo.h is not available.
-ifeq ($(BR2_arc)$(BR2_STATIC_LIBS),yy)
+ifeq ($(BR2_arc)$(BR2_PREFER_STATIC_LIB),yy)
 HTOP_CONF_ENV += ac_cv_header_execinfo_h=no
 endif
 
