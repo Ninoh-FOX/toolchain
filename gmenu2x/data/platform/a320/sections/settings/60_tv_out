@@ -1,0 +1,6 @@
+title=TV-out
+description=Enable/Disable TV output
+icon=skin:icons/tv.png
+exec=/usr/sbin/tvout_config
+consoleapp=true
+editable=false

@@ -1,0 +1,17 @@
+# Project rules
+*.o
+
+# Top-level rules
+/Makefile
+/Makefile.in
+/aclocal.m4
+/autom4te.cache/
+/config.log
+/config.status
+/configure
+/depcomp
+/install-sh
+/missing
+#	src/.deps/
+#	src/Makefile
+#	src/Makefile.in
