@@ -1,0 +1,22 @@
+--- SDL2_mixer-2.0.0.org/dynamic_ogg.h	2013-08-10 19:39:55.000000000 +0200
++++ sdl2_mixer-2.0.0/dynamic_ogg.h	2014-07-04 00:49:50.881467322 +0200
+@@ -21,7 +21,7 @@
+ 
+ #ifdef OGG_MUSIC
+ #ifdef OGG_USE_TREMOR
+-#include <ivorbisfile.h>
++#include <tremor/ivorbisfile.h>
+ #else
+ #include <vorbis/vorbisfile.h>
+ #endif
+--- SDL2_mixer-2.0.0.org/music_ogg.h	2013-08-10 19:39:58.000000000 +0200
++++ sdl2_mixer-2.0.0/music_ogg.h	2014-07-04 00:50:07.986901424 +0200
+@@ -26,7 +26,7 @@
+ /* This file supports Ogg Vorbis music streams */
+ 
+ #ifdef OGG_USE_TREMOR
+-#include <ivorbisfile.h>
++#include <tremor/ivorbisfile.h>
+ #else
+ #include <vorbis/vorbisfile.h>
+ #endif

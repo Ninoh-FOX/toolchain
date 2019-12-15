@@ -1,0 +1,20 @@
+diff --git a/libgc/include/gc.h b/libgc/include/gc.h
+index 123d6cc..be492cd 100644
+--- a/libgc/include/gc.h
++++ b/libgc/include/gc.h
+@@ -493,6 +493,7 @@ GC_API GC_PTR GC_malloc_atomic_ignore_off_page GC_PROTO((size_t lb));
+ #   define GC_RETURN_ADDR (GC_word)__return_address
+ #endif
+ 
++#if 0
+ #ifdef __linux__
+ # include <features.h>
+ # if (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 1 || __GLIBC__ > 2) \
+@@ -509,6 +510,7 @@ GC_API GC_PTR GC_malloc_atomic_ignore_off_page GC_PROTO((size_t lb));
+ #if defined(GC_HAVE_BUILTIN_BACKTRACE) && !defined(GC_CAN_SAVE_CALL_STACKS)
+ # define GC_CAN_SAVE_CALL_STACKS
+ #endif
++#endif
+ 
+ #if defined(__sparc__)
+ #   define GC_CAN_SAVE_CALL_STACKS

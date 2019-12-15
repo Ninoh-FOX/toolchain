@@ -1,0 +1,6 @@
+config BR2_PACKAGE_BAR
+	bool "bar"
+	help
+	  ‘cat’ with ASCII progress bar
+
+	  http://www.theiling.de/projects/bar.html

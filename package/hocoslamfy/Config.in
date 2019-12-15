@@ -1,0 +1,12 @@
+config BR2_PACKAGE_HOCOSLAMFY
+	bool "Hocoslamfy"
+	select BR2_PACKAGE_SDL
+	help
+	  Hocoslamfy Game - Rumble Version 
+	  https://github.com/jamesofarrell/hocoslamfy/tree/rg350
+
+if BR2_PACKAGE_HOCOSLAMFY
+
+config BR2_PACKAGE_HOCOSLAMFY_PLATFORM
+	string "Target platform"
+endif 

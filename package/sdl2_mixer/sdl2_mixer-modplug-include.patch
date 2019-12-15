@@ -1,0 +1,56 @@
+diff -ru SDL2_mixer-2.0.0.org/configure sdl2_mixer-2.0.0/configure
+--- SDL2_mixer-2.0.0.org/configure	2013-08-10 19:39:55.000000000 +0200
++++ sdl2_mixer-2.0.0/configure	2014-07-04 00:29:55.137025203 +0200
+@@ -11817,7 +11817,7 @@
+ 
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+ $as_echo "no" >&6; }
+-                            ac_fn_c_check_header_mongrel "$LINENO" "modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
++                            ac_fn_c_check_header_mongrel "$LINENO" "libmodplug/modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
+ if test "x$ac_cv_header_modplug_h" = xyes; then :
+   have_libmodplug_hdr=yes
+ fi
+@@ -11870,7 +11870,7 @@
+ 
+ 
+ elif test $pkg_failed = untried; then
+-	            ac_fn_c_check_header_mongrel "$LINENO" "modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
++	            ac_fn_c_check_header_mongrel "$LINENO" "libmodplug/modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
+ if test "x$ac_cv_header_modplug_h" = xyes; then :
+   have_libmodplug_hdr=yes
+ fi
+diff -ru SDL2_mixer-2.0.0.org/configure.in sdl2_mixer-2.0.0/configure.in
+--- SDL2_mixer-2.0.0.org/configure.in	2013-08-10 19:39:55.000000000 +0200
++++ sdl2_mixer-2.0.0/configure.in	2014-07-04 00:28:26.170967588 +0200
+@@ -257,7 +257,7 @@
+             have_libmodplug_hdr=yes
+             have_libmodplug_lib=yes
+         ], [dnl
+-            AC_CHECK_HEADER([modplug.h], [have_libmodplug_hdr=yes])
++            AC_CHECK_HEADER([libmodplug/modplug.h], [have_libmodplug_hdr=yes])
+             AC_CHECK_LIB([modplug], [have_libmodplug_lib=yes])
+         ])
+ 
+--- SDL2_mixer-2.0.0.org/dynamic_modplug.h	2013-08-10 19:39:55.000000000 +0200
++++ sdl2_mixer-2.0.0/dynamic_modplug.h	2014-07-04 00:36:30.108963308 +0200
+@@ -21,7 +21,7 @@
+ 
+ #ifdef MODPLUG_MUSIC
+ 
+-#include "modplug.h"
++#include "libmodplug/modplug.h"
+ 
+ typedef struct {
+     int loaded;
+diff -ru SDL2_mixer-2.0.0.org/music_modplug.h sdl2_mixer-2.0.0/music_modplug.h
+--- SDL2_mixer-2.0.0.org/music_modplug.h	2013-08-10 19:39:58.000000000 +0200
++++ sdl2_mixer-2.0.0/music_modplug.h	2014-07-04 00:30:43.432427961 +0200
+@@ -21,7 +21,7 @@
+ 
+ #ifdef MODPLUG_MUSIC
+ 
+-#include "modplug.h"
++#include "libmodplug/modplug.h"
+ #include "SDL_rwops.h"
+ #include "SDL_audio.h"
+ #include "SDL_mixer.h"

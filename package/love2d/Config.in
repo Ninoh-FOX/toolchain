@@ -1,0 +1,12 @@
+config BR2_PACKAGE_LOVE2D
+	bool "Love2D"
+	depends on BR2_PACKAGE_HAS_LIBGLES
+	depends on BR2_PACKAGE_HAS_LUAINTERPRETER
+	select BR2_PACKAGE_DEVIL
+	select BR2_PACKAGE_LIBMODPLUG
+	select BR2_PACKAGE_LIBVORBIS
+	select BR2_PACKAGE_SDL2
+	help
+	  Framework for making 2D games in Lua
+
+	  https://love2d.org

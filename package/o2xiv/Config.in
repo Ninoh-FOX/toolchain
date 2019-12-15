@@ -1,0 +1,9 @@
+config BR2_PACKAGE_O2XIV
+	bool "o2xiv"
+	select BR2_PACKAGE_JPEG
+	select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_SDL_IMAGE
+	help
+	  Simple image viewer using SDL
+
+	  http://www.intoorbit.org/projects/o2xiv

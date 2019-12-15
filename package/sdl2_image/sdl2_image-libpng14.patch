@@ -1,0 +1,11 @@
+diff -ru SDL2_image-2.0.0.org/IMG_png.c sdl2_image-2.0.0/IMG_png.c
+--- SDL2_image-2.0.0.org/IMG_png.c	2013-08-10 19:38:36.000000000 +0200
++++ sdl2_image-2.0.0/IMG_png.c	2014-07-03 19:57:14.773270137 +0200
+@@ -76,6 +76,7 @@
+ #if (PNG_LIBPNG_VER_MINOR < 6)
+ typedef png_structp png_const_structrp;
+ typedef png_infop png_const_inforp;
++typedef png_bytep png_const_bytep;
+ #endif
+ #endif
+ 

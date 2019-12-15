@@ -1,0 +1,25 @@
+config BR2_PACKAGE_ETNA_VIV
+	bool "etna_viv"
+	depends on !BR2_PTHREADS_NONE
+	help
+	  User-space driver for the Vivante GCxxx series of embedded GPUs.
+
+	  https://github.com/laanwj/etna_viv
+
+	  Select the ABI version to match the "galcore" driver.
+
+if BR2_PACKAGE_ETNA_VIV
+
+choice
+	prompt "Kernel driver ABI version"
+	default BR2_PACKAGE_ETNA_VIV_ABIV2
+
+config BR2_PACKAGE_ETNA_VIV_ABIV2
+        bool "v2"
+
+config BR2_PACKAGE_ETNA_VIV_ABIV4
+        bool "v4"
+
+endchoice
+
+endif

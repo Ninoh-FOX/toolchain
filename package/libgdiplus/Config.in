@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBGDIPLUS
+	bool "libgdiplus"
+	select BR2_PACKAGE_CAIRO
+	select BR2_PACKAGE_FREETYPE
+	help
+	  An Open Source implementation of the GDI+ API.
+
+	  http://mono-project.com

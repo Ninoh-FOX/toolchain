@@ -1,0 +1,6 @@
+#!/bin/sh
+
+[ "$IFACE" != "lo" ] || exit 0
+
+/sbin/start-stop-daemon -o -S -q -x /usr/sbin/xinetd -- \
+	-pidfile /var/run/xinetd.pid

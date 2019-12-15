@@ -1,0 +1,14 @@
+comment "apitrace needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP
+
+config BR2_PACKAGE_APITRACE
+	bool "apitrace"
+	depends on BR2_INSTALL_LIBSTDCPP
+	select BR2_PACKAGE_POPT
+	select BR2_PACKAGE_BINUTILS
+	help
+	  Trace and replay OpenGL and OpenGL ES APIs calls to/from a
+	  file. You may install apitrace GUI from your distribution to
+	  inspect generated traces.
+
+	  http://apitrace.github.io/

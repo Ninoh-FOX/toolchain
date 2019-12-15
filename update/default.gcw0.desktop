@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=OS Update 1.7.9
+Comment=RG350 ROGUE Update 2019-12-15
+Exec=update.sh
+Icon=rogue
+Terminal=true
+Type=Application
+StartupNotify=true
+Categories=applications;

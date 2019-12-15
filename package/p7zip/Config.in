@@ -1,0 +1,10 @@
+config BR2_PACKAGE_P7ZIP
+	bool "p7zip"
+	help
+	  Command line (de)compression tool for 7z archives.
+
+	  Only the "7zr" tool is built, which is sufficient to handle 7z
+	  archives, but doesn't support all the other compression formats
+	  that the full 7-Zip and p7zip packages do.
+
+	  http://p7zip.sourceforge.net/

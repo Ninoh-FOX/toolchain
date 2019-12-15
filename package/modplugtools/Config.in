@@ -1,0 +1,6 @@
+config BR2_PACKAGE_MODPLUGTOOLS
+	bool "modplugtools"
+	help
+	  Simple command line tools to play music files using libmodplug.
+
+	  http://modplug-xmms.sourceforge.net/

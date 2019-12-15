@@ -1,0 +1,23 @@
+diff -ru SDL_mixer-1.2.12.org/configure.in sdl_mixer-1.2.12/configure.in
+--- SDL_mixer-1.2.12.org/configure.in	2012-01-15 23:01:05.000000000 +0100
++++ sdl_mixer-1.2.12/configure.in	2014-07-03 05:25:44.761854572 +0200
+@@ -315,7 +315,7 @@
+ 	EXTRA_CFLAGS="$EXTRA_CFLAGS -DMODPLUG_MUSIC  $MODPLUG_CFLAGS"
+ 	EXTRA_LDFLAGS="$EXTRA_LDFLAGS $MODPLUG_LIBS"
+ dnl	AC_TRY_COMPILE([
+-dnl     #include "modplug.h"
++dnl     #include "libmodplug/modplug.h"
+ dnl    ],[
+ dnl    ],[
+     have_libmodplug=yes
+diff -ru SDL_mixer-1.2.12.org/music_modplug.h sdl_mixer-1.2.12/music_modplug.h
+--- SDL_mixer-1.2.12.org/music_modplug.h	2012-01-15 23:01:05.000000000 +0100
++++ sdl_mixer-1.2.12/music_modplug.h	2014-07-03 05:26:03.919219618 +0200
+@@ -1,6 +1,6 @@
+ #ifdef MODPLUG_MUSIC
+ 
+-#include "modplug.h"
++#include "libmodplug/modplug.h"
+ #include "SDL_rwops.h"
+ #include "SDL_audio.h"
+ #include "SDL_mixer.h"

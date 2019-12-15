@@ -1,0 +1,46 @@
+diff -ru p7zip-9.20.1.org/makefile.glb p7zip-9.20.1/makefile.glb
+--- p7zip-9.20.1.org/makefile.glb	2009-07-03 22:44:21.000000000 +0200
++++ p7zip-9.20.1/makefile.glb	2014-08-11 20:06:02.909020904 +0200
+@@ -4,12 +4,14 @@
+ -I../../../../C \
+ -I../../../myWindows \
+ -I../../../include_windows \
+--I../../..
++-I../../.. \
++$(BR_CFLAGS) $(ALLFLAGS)
+ 
+ CXXFLAGS=-c -I. \
+ -I../../../myWindows \
+ -I../../../ \
+--I../../../include_windows
++-I../../../include_windows \
++$(BR_CXXFLAGS) $(ALLFLAGS)
+ 
+ DFLAGS=-MM -I. \
+ -I../../../myWindows \
+diff -ru p7zip-9.20.1.org/makefile.machine p7zip-9.20.1/makefile.machine
+--- p7zip-9.20.1.org/makefile.machine	2011-03-13 12:54:57.000000000 +0100
++++ p7zip-9.20.1/makefile.machine	2014-08-11 20:05:31.055070124 +0200
+@@ -2,20 +2,13 @@
+ # makefile for Linux (x86, PPC, alpha ...)
+ #
+ 
+-OPTFLAGS=-O
+-
+-ALLFLAGS=${OPTFLAGS} -pipe -s \
+-    	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+-	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+-	-D_7ZIP_LARGE_PAGES \
++ALLFLAGS=-pthread -DNDEBUG -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
+ CC_SHARED=-fPIC
+ LINK_SHARED=-fPIC -shared
+ 
+-LOCAL_LIBS=-lpthread
++LOCAL_LIBS=-pthread
+ LOCAL_LIBS_DLL=$(LOCAL_LIBS) -ldl
+ 
+ OBJ_CRC32=$(OBJ_CRC32_C)

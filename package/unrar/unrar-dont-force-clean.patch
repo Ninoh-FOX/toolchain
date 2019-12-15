@@ -1,0 +1,27 @@
+diff -ru unrar.org/makefile unrar-5.0.7/makefile
+--- unrar.org/makefile	2013-04-29 16:27:05.000000000 +0200
++++ unrar-5.0.7/makefile	2013-07-21 20:56:08.000000000 +0200
+@@ -118,20 +118,20 @@
+ clean:
+ 	@rm -f *.o *.bak *~
+ 
+-unrar:	clean $(OBJECTS) $(UNRAR_OBJ)
++unrar:	$(OBJECTS) $(UNRAR_OBJ)
+ 	@rm -f unrar
+ 	$(LINK) -o unrar $(LDFLAGS) $(OBJECTS) $(UNRAR_OBJ) $(LIBS)	
+ 	$(STRIP) unrar
+ 
+ sfx:	WHAT=SFX_MODULE
+-sfx:	clean $(OBJECTS)
++sfx:	$(OBJECTS)
+ 	@rm -f default.sfx
+ 	$(LINK) -o default.sfx $(LDFLAGS) $(OBJECTS)
+ 	$(STRIP) default.sfx
+ 
+ lib:	WHAT=RARDLL
+ lib:	CXXFLAGS+=$(LIBFLAGS)
+-lib:	clean $(OBJECTS) $(LIB_OBJ)
++lib:	$(OBJECTS) $(LIB_OBJ)
+ 	@rm -f libunrar.so
+ 	$(LINK) -shared -o libunrar.so $(LDFLAGS) $(OBJECTS) $(LIB_OBJ)
+ 
