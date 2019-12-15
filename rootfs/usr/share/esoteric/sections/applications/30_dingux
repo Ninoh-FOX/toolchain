@@ -1,0 +1,10 @@
+title=Dingux Commander
+description=Two pane file manager
+icon=skin:icons/commander.png
+exec=/usr/bin/DinguxCommander
+params=
+consoleapp=false
+selectorbrowser=false
+selectordir=
+selectorfilter=
+workdir=/media/data/local/home

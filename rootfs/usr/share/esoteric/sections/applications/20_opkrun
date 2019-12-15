@@ -1,0 +1,9 @@
+title=OPK launcher
+description=Hacky opk launcher
+icon=skin:icons/utilities-terminal.png
+exec=/usr/bin/opkrun 
+params=
+consoleapp=false
+selectorbrowser=true
+selectordir=/media/data/apps
+selectorfilter=.opk

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 {device}"
+    echo "Restores the device's calibration."
+    exit 1
+fi
+
+if [ ! -x /sbin/udevadm ]; then
+    echo Restoring joystick configuration requires udev! >&2
+    exit 1
+fi
+
+STORE=/var/lib/joystick/joystick.state
+
+if [ ! -f $STORE ]; then
+    echo No saved joystick configuration\(s\) to restore! >&2
+    exit 1
+fi
+
+DEVICE=""
+NAME=""
+SERIAL=""
+VENDOR=""
+PRODUCT=""
+
+# Backup original $IFS (Internal Field Separator) variable
+OIFS=$IFS
+# Set $IFS to newline only as output from /usr/share/joystick/ident might contain spaces
+# in the NAME value
+IFS=$'\x0A'
+
+for ATTRIBUTE in $( /sbin/udevadm info -a -n $1 | /usr/share/joystick/ident ); do
+    ID=$( echo "$ATTRIBUTE" | cut -f 1 -d = )
+    VALUE=$( echo "$ATTRIBUTE" | cut -f 2 -d \" )
+    case $ID in
+        "DEVICE" ) DEVICE="$VALUE" ;;
+        "NAME" ) NAME="$VALUE" ;;
+        "SERIAL" ) SERIAL="$VALUE" ;;
+        "VENDOR" ) VENDOR="$VALUE" ;;
+        "PRODUCT" ) PRODUCT="$VALUE" ;;
+    esac
+done
+
+# Restore original $IFS
+IFS=$OIFS
+
+# Retrieve the applicable commands
+if [ -z "$NAME" ] && [ -z "$VENDOR" ]; then
+    # Use the device name only
+    cat $STORE | /usr/share/joystick/extract kernel="$DEVICE" | while read COMMAND; do
+        $COMMAND $1
+    done
+else
+    cat $STORE | /usr/share/joystick/extract name="$NAME" serial="$SERIAL" vendor="$VENDOR" product="$PRODUCT" | while read COMMAND; do
+        $COMMAND $1
+    done
+fi
+

@@ -1,0 +1,889 @@
+#!/usr/bin/python
+#
+# PyCLOCK 1.01 Copyright (C) 2012 by BouKiCHi
+#
+# 
+# 1.01 : hwclock problem is fixed , thanks mth.
+# 1.0  : First release
+#
+# The code is provided under the MIT License
+#
+# Please see the below URL for the detail
+# http://opensource.org/licenses/mit-license.php
+#
+
+
+import pygame
+import random
+import datetime
+import calendar
+import os
+import os.path
+import math
+
+pygame.init()
+pygame.mouse.set_visible(False)
+
+#
+# global values
+#
+
+sw = 320
+sh = 240
+screen = pygame.display.set_mode( [ sw , sh ] )
+half_sw = sw / 2
+half_sh = sh / 2
+
+font_s = pygame.font.SysFont("None", 16 )
+font_m = pygame.font.SysFont("None", 24 )
+
+color_white  = ( 255 , 255 , 255 )
+color_red    = ( 255,0,0 )
+color_lblue  = ( 0,255,255 )
+color_purple = ( 255,0,255 )
+color_yellow = ( 255,255,0 )
+shadow       = ( 0 , 0 , 0 )
+
+timer_sec = 180
+setup_delta = datetime.timedelta()
+alarm_min   = 7 * 60
+alarm_date = datetime.datetime.now()
+
+
+def calc_alarm():
+	global alarm_date
+	
+	day = datetime.datetime.now()
+	alarm_date = day.replace(hour=(alarm_min / 60),minute=(alarm_min % 60),second=0,microsecond=0)
+
+	delta = alarm_date - day
+
+	if delta < datetime.timedelta(0):
+		alarm_date += datetime.timedelta(1)
+		
+calc_alarm()
+
+def load_music(filename):
+	my_path = os.path.dirname(__file__)
+	for path in (my_path, os.path.join(my_path, '../share/pyclock')):
+		try:
+			pygame.mixer.music.load(os.path.join(path, filename))
+		except pygame.error:
+			pass
+		else:
+			return
+	print 'Failed to load music "%s"' % filename
+
+def sys_write( path, value ):
+	sys_path = '/sys/' + str( path )
+	f = open( sys_path,'w')
+	f.write( value )
+	f.close()
+	
+def sys_read( path ):
+	sys_path = '/sys/' + str( path )
+	f = open( sys_path,'r')
+	ret = f.read()
+	f.close()
+		
+	return ret
+
+#
+# READ RTC and SET ALARM
+#
+
+def do_sleep():
+	print "do_sleep!!"
+	
+	day = datetime.datetime.now()
+	
+	delta = alarm_date - day
+	
+	print "After %dsec" % delta.seconds
+	
+	if delta.seconds >= 30:
+		print "Time to sleep!"
+		print "Wake before 20sec of the time"
+		
+		rtc_time = int(sys_read( "class/rtc/rtc0/since_epoch" ).rstrip())
+		rtc_time += (delta.seconds - 20)
+		
+		sys_write( "class/rtc/rtc0/wakealarm" , "0" )
+		sys_write( "class/rtc/rtc0/wakealarm" , "%d" % rtc_time )
+		
+		sys_write( "power/state" , "mem" )
+		
+
+#
+# SET SYSTEM TIME and HWCLOCK
+#
+	
+def do_setup():
+	print "do_setup!!"
+	
+	day = datetime.datetime.now() - setup_delta
+	
+	day_str  = "%04d-%02d-%02d " % ( day.year , day.month, day.day )
+	day_str += "%02d:%02d:%02d" % ( day.hour , day.minute, day.second )
+
+
+	cmd_str = "date --set \"%s\"" % day_str
+	print cmd_str
+	
+	os.system( cmd_str )
+	os.system( "hwclock -uw" )
+
+
+
+def draw_string ( msg , x , y , color , center = False ):
+
+	surf_s = font_m.render( msg, True , shadow )
+	surf   = font_m.render( msg, True , color )
+
+	if center:
+		x -= surf_s.get_width() /2
+	
+	screen.blit( surf_s , (x+1,y+1) )
+	screen.blit( surf , (x,y) )
+	
+	return surf_s
+
+
+def draw_string_s ( msg , x , y , color , center = False ):
+
+	surf_s = font_s.render( msg, True , shadow )
+	surf   = font_s.render( msg, True , color )
+	
+	if center:
+		x -= surf_s.get_width() /2
+	
+	screen.blit( surf_s , (x+1,y+1) )
+	screen.blit( surf , (x,y) )
+	
+	return surf_s
+
+def base_screen():
+	bg_color = [ 0 , 0 , 255 ]
+	screen.fill( bg_color )
+	screen.blit( font_s.render("pyCLOCK 1.01", True , color_white ) , (0,0) )
+
+
+#
+# displays current time on bottom
+#
+
+def disp_current():
+
+	day = datetime.datetime.now()
+
+	str_current = "%04d-%02d-%02d %02d:%02d:%02d" % \
+	( day.year , day.month , day.day , day.hour , day.minute , day.second )
+
+	x = 30
+	y = 200
+
+	screen.blit( font_m.render(str_current , True , shadow ) , (x+1,y+1) )
+	screen.blit( font_m.render(str_current , True , color_white ) , (x,y) )
+	
+#
+# displays bottom menu bar
+#
+
+def disp_menu_bar(pos):
+	menu = [ "CAL", "CLOCK", "ALARM", "TIMER" , "SETUP" ]
+
+	for i in range( 5 ):
+		y = 220
+	
+		color = color_white
+		if i == pos:
+			color = color_purple
+		
+		surf_s = font_s.render( menu[i] , True , shadow )
+
+		x = (i * 64) + 32 - ( surf_s.get_width() / 2 )
+		
+		screen.blit( surf_s , (x+1,y+1) )
+		screen.blit( font_s.render( menu[i], True , color ) , (x,y) )
+
+#
+# displays calendar
+#
+
+def disp_cal( pos , diff ):
+	base_screen()
+	
+	mon = [ "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec" ]
+	date = [ "Sun","Mon","Tue","Wed","Thu","Fri","Sat" ]
+	
+	day = datetime.datetime.now()
+
+	present_year = day.year
+	present_mon = day.month
+	present_day = day.day
+	
+	temp = day.year * 12 + (day.month - 1)
+	temp += diff
+	
+	disp_year = temp / 12 
+	disp_mon = (temp % 12) + 1
+		
+	# draw current month
+	
+	color = color_white
+	
+	if pos == 0:
+		color = color_purple
+		
+	draw_string ( "%s / %04d" % ( mon[disp_mon-1] , disp_year ) , half_sw , 12 , color , True )
+
+	# draw weekdays
+	
+	day_w = sw / 7
+	day_hw = day_w / 2
+	y = 32
+	
+	for i in range(7):
+		x = day_hw + (day_w * i)
+		
+		color = color_white
+		if i == 0:
+			color = color_red
+		if i == 6:
+			color = color_lblue
+
+		draw_string_s ( date[i] , x , y , color , True )
+
+
+	# draw calendar	
+	cal = calendar.monthrange( disp_year, disp_mon )
+	
+	wday = ( cal[0] + 1 ) % 7
+
+	y = 48
+
+	for i in range( cal[1] ):
+		x = day_hw + ( day_w * wday )
+
+		color = color_white
+		
+		if wday == 0:
+			color = color_red
+		
+		if wday == 6:
+			color = color_lblue
+		
+		# today is colored
+
+		if disp_year == present_year \
+			and disp_mon == present_mon \
+			and (i + 1) == present_day:
+			color = color_yellow 
+			
+		draw_string( "%2d" % ( i+1 ),x,y,color,True )
+		
+		wday = wday + 1
+
+		# next line
+
+		if wday > 6:
+			wday = 0
+			y = y + 20
+			
+	disp_current()
+	
+	if pos >= 0:
+		disp_menu_bar( -1 )
+
+#
+# displays clock
+#
+
+def disp_clock():
+	base_screen()
+
+	draw_string ( "CLOCK", half_sw , 12 , color_white , True )
+
+	day = datetime.datetime.now()
+
+	theta_fine = (2 * math.pi)/360
+
+	theta = (2 * math.pi)/24
+	
+	ce_len    = half_sh - 40 # endpoint
+	cn_len    = half_sh - 41 # normal 
+	cl_len    = half_sh - 45 # long
+
+	h_len   = 40
+	m_len   = 65
+	s_len   = 70
+	
+	c_cx = half_sw
+	c_cy = half_sh - 10
+
+	s_step = ( day.second * 6 ) 
+	s_step -= 90 
+
+	m_step = ( day.minute * 6 ) + ( day.second / 10 ) 
+	m_step -= 90 
+
+	h_step = ((day.hour * 3600) + ( day.minute * 60 ) + day.second) / 120
+	h_step -= 90 
+
+
+	
+	for i in range(360):
+		if i % 6 == 0:
+			x_len = cn_len
+
+			if i % 30 == 0:
+				x_len = cl_len
+
+			x = c_cx + int((math.cos( theta_fine * i ) * x_len))
+			y = c_cy + int((math.sin( theta_fine * i ) * x_len))
+		
+			dx = c_cx + int((math.cos( theta_fine * i ) * ce_len))
+			dy = c_cy + int((math.sin( theta_fine * i ) * ce_len))
+		
+			pygame.draw.line ( screen , shadow , (x+1,y+1) ,(dx+1,dy+1) )
+			pygame.draw.line ( screen , color_white , (x,y) ,(dx,dy) )
+		
+	x = c_cx + int((math.cos( theta_fine * h_step ) * h_len))
+	y = c_cy + int((math.sin( theta_fine * h_step ) * h_len))
+
+	pygame.draw.line ( screen , shadow ,  (c_cx+1,c_cy+1),(x+1,y+1) , 4 )
+	pygame.draw.line ( screen , color_white ,  (c_cx,c_cy) , (x,y) , 4 )
+	
+
+	x = c_cx + int((math.cos( theta_fine * m_step ) * m_len))
+	y = c_cy + int((math.sin( theta_fine * m_step ) * m_len))
+
+	pygame.draw.line ( screen , shadow ,  (c_cx+1,c_cy+1) , (x+1,y+1) , 2 )
+	pygame.draw.line ( screen , color_white ,  (c_cx,c_cy) , (x,y) , 2 )
+
+	x = c_cx + int((math.cos( theta_fine * s_step ) * s_len))
+	y = c_cy + int((math.sin( theta_fine * s_step ) * s_len))
+
+	pygame.draw.line ( screen , shadow ,  (c_cx+1,c_cy+1) , (x+1,y+1) )
+	pygame.draw.line ( screen , color_white ,  (c_cx,c_cy) , (x,y) )
+
+		
+	disp_current()
+
+#
+# displays alarm
+#
+
+def disp_alarm(pos):
+	base_screen()
+
+	draw_string ( "ALARM", half_sw , 12 , color_white , True )
+	
+	x = 50
+	
+	day_num = [
+		"%02d" % (alarm_min / 60) ,
+		"%02d" % (alarm_min % 60) ]
+			
+	day_after = [ ":","" ]
+
+	x = 140
+	y = 50
+
+	for i in range(2):
+		
+		color = color_white
+		if pos == i:
+			color = color_purple
+	
+		x = x + draw_string( day_num[i],x,y,color ).get_width()
+		x = x + draw_string( day_after[i],x,y,color_white ).get_width()
+	
+	x = half_sw
+	y = 140
+	
+	day = datetime.datetime.now()
+	alm = day.replace(hour=(alarm_min / 60),minute=(alarm_min % 60),second=0,microsecond=0)
+	
+	delta = alm - day
+
+	if delta < datetime.timedelta(0):
+		alm += datetime.timedelta(1)
+		delta += datetime.timedelta(1)
+	
+	delta_min = delta.seconds / 60
+		
+	msg = "ALARM AFTER %02d:%02d" % ( delta_min / 60 , delta_min % 60 )
+	draw_string( msg,x,y,color_white, True )
+	
+	x = half_sw/2
+	y = 170
+				
+	color = color_white
+	if pos == 2:
+			color = color_purple
+	draw_string( "SLEEP" , x,y,color, True )
+
+
+	x += half_sw
+
+	color = color_white
+	if pos == 3:
+			color = color_purple				
+	draw_string( "STOP" , x,y, color, True )
+		
+	disp_current()
+
+	if pos >= 0:
+		disp_menu_bar( -1 )
+
+#
+# displays setup
+#
+
+def disp_setup(pos):
+	base_screen()
+
+	draw_string ( "SETUP", half_sw , 12 , color_white , True )
+	
+	x = 50
+	
+	# YYYY-MM-DD HH:MM:SS
+	
+	day = datetime.datetime.now() - setup_delta
+	
+	day_num = [
+		"%04d" % day.year ,
+		"%02d" % day.month ,
+		"%02d" % day.day ,
+		"%02d" % day.hour ,
+		"%02d" % day.minute ,
+		"%02d" % day.second ]
+	
+	day_after = [ "-","-"," ",":",":","" ]
+
+	x = 80
+	y = 100
+
+	for i in range(6):
+		
+		color = color_white
+		if pos == i:
+			color = color_purple
+	
+		x = x + draw_string( day_num[i],x,y,color ).get_width()
+		x = x + draw_string( day_after[i],x,y,color_white ).get_width()
+		
+	
+	x = half_sw/2
+	y = 170
+				
+	color = color_white
+	if pos == 6:
+			color = color_purple
+	draw_string( "SET" , x,y,color, True )
+
+
+	x += half_sw
+
+	color = color_white
+	if pos == 7:
+			color = color_purple				
+	draw_string( "RESET" , x,y, color, True )
+		
+	disp_current()
+
+	if pos >= 0:
+		disp_menu_bar( -1 )
+
+
+#
+# displays timer
+#
+
+def disp_timer( pos ):
+	base_screen()
+
+	draw_string ( "TIMER" , half_sw , 12 , color_white , True )
+
+	x = 140
+	y = 50
+
+	color = color_white
+	if pos == 0:
+		color = color_purple
+	
+	x = x + draw_string( "%02d" % (timer_sec / 60) , x,y, color ).get_width()
+
+	x = x + draw_string( ":" , x,y, color_white ).get_width()
+	
+	color = color_white
+	if pos == 1:
+		color = color_purple
+		
+	x = x + draw_string( "%02d" % (timer_sec % 60 ) , x,y, color ).get_width()
+	
+	x = half_sw/2
+	y = 170
+				
+	color = color_white
+	if pos == 2:
+			color = color_purple
+
+	draw_string( "START" , x,y,color, True )
+
+	x = half_sw + ( half_sw / 2 )
+
+	color = color_white
+	if pos == 3:
+			color = color_purple
+	
+	draw_string( "STOP" , x,y, color, True )
+	
+	disp_current()
+	
+	if pos >= 0:
+		disp_menu_bar( -1 )
+
+
+#
+# displays menu choose
+#
+
+def disp_menu(pos):
+
+	if  pos == 0:
+		disp_cal(-1,0)
+	elif pos == 1:
+		disp_clock()
+	elif pos == 2:
+		disp_alarm(-1)	
+	elif pos == 3:
+		disp_timer(-1)
+	elif pos == 4:
+		disp_setup(-1)
+	else:
+		base_screen()
+		
+	disp_menu_bar( pos )
+
+#
+#
+#
+def cal_loop():
+	global timer_sec
+
+	diff = 0
+	max_pos = 0
+	pos = 0
+	done = False
+	
+	while not done:
+		for event in pygame.event.get():
+
+			if event.type == pygame.QUIT:
+				done = True
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					if pos > 0:
+						pos = pos - 1
+					else:
+						pos = max_pos
+					
+				if event.key == pygame.K_RIGHT:
+					if pos < max_pos:
+						pos = pos + 1
+					else:
+						pos = 0
+				
+				if event.key == pygame.K_UP:
+					diff -= 1
+				
+				if event.key == pygame.K_DOWN:
+					diff += 1
+					
+				if event.key == pygame.K_ESCAPE:
+					done = True
+					
+		disp_cal(pos,diff)
+		pygame.display.update()
+		pygame.time.delay(100) 
+
+#
+#
+#
+
+def timer_loop():
+	global timer_sec
+
+	max_pos = 3
+	pos = 0
+	done = False
+	
+	timer_start = False
+	timer_next = 0
+	
+	timer_sec = 180
+	
+	while not done:
+		for event in pygame.event.get():
+
+			if event.type == pygame.QUIT:
+				done = True 
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					if pos > 0:
+						pos = pos - 1
+					else:
+						pos = max_pos
+					
+				if event.key == pygame.K_RIGHT:
+					if pos < max_pos:
+						pos = pos + 1
+					else:
+						pos = 0
+				
+				if event.key == pygame.K_UP:
+					if pos == 0 and timer_sec <= 5879:
+						timer_sec += 60
+					if pos == 1 and timer_sec <= 5999:
+						timer_sec += 1					
+
+				if event.key == pygame.K_DOWN:
+					if pos == 0 and timer_sec >= 60:
+						timer_sec -= 60
+					if pos == 1 and timer_sec >= 1:
+						timer_sec -= 1
+					
+				if event.key == pygame.K_RETURN:
+					
+					if pos == 2:
+						timer_start = True
+						timer_next = pygame.time.get_ticks() + 1000
+					
+					if pos == 3:
+						timer_start = False
+						pygame.mixer.music.stop()
+
+				if event.key == pygame.K_ESCAPE:
+					done = True
+		
+		while timer_start and timer_next <= pygame.time.get_ticks():
+			timer_next += 1000
+			
+			if timer_sec > 0:
+				timer_sec = timer_sec - 1
+
+			if timer_sec == 0:
+				timer_start = False
+				load_music("tone.wav")
+				pygame.mixer.music.play(-1)
+
+		disp_timer(pos)
+		pygame.display.update()
+		pygame.time.delay(100) 
+
+
+#
+#
+#
+
+def alarm_loop():
+	global alarm_min
+	global alarm_date
+
+	alarm_flag = False
+	max_pos = 3
+	pos = 0
+	done = False
+
+	while not done:
+		for event in pygame.event.get():
+
+			if event.type == pygame.QUIT:
+				done = True 
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					if pos > 0:
+						pos = pos - 1
+					else:
+						pos = max_pos
+					
+				if event.key == pygame.K_RIGHT:
+					if pos < max_pos:
+						pos = pos + 1
+					else:
+						pos = 0
+				
+				old_alarm = alarm_min
+				
+				if event.key == pygame.K_UP:
+					if pos == 0:
+						alarm_min += 60
+					if pos == 1:
+						alarm_min += 1
+						
+				if event.key == pygame.K_DOWN:
+					if pos == 0:
+						alarm_min -= 60
+					if pos == 1:
+						alarm_min -= 1
+					
+				while alarm_min < 0:
+					alarm_min += 1440
+				
+				while alarm_min >= 1440:
+					alarm_min -= 1440
+					
+				if old_alarm != alarm_min:
+					calc_alarm()
+
+										
+				if event.key == pygame.K_RETURN:
+					if pos == 2:
+						do_sleep()
+				
+					if pos == 3:
+						calc_alarm()
+						pygame.mixer.music.stop()
+						alarm_flag = False
+
+				if event.key == pygame.K_ESCAPE:
+					done = True
+		
+		
+		if alarm_date - datetime.datetime.now() < datetime.timedelta(0):
+			if not alarm_flag:
+				alarm_flag = True
+				load_music("tone.wav")
+				pygame.mixer.music.play(-1)
+				
+				
+		disp_alarm(pos)
+		pygame.display.update()
+		pygame.time.delay(100) 
+
+
+#
+#
+#
+
+def setup_loop():
+	global setup_delta	
+
+	max_pos = 7
+	pos = 0
+	done = False
+
+	while not done:
+		for event in pygame.event.get():
+
+			if event.type == pygame.QUIT:
+				done = True 
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					if pos > 0:
+						pos = pos - 1
+					else:
+						pos = max_pos
+					
+				if event.key == pygame.K_RIGHT:
+					if pos < max_pos:
+						pos = pos + 1
+					else:
+						pos = 0
+						
+				if event.key == pygame.K_UP:
+					if pos == 0:
+						setup_delta -= datetime.timedelta(365)
+					if pos == 1:
+						setup_delta -= datetime.timedelta(31)
+					if pos == 2:
+						setup_delta -= datetime.timedelta(1)
+					if pos == 3:
+						setup_delta -= datetime.timedelta(hours=1)
+					if pos == 4:
+						setup_delta -= datetime.timedelta(minutes=1)
+					if pos == 5:
+						setup_delta -= datetime.timedelta(seconds=1)
+				
+				
+				if event.key == pygame.K_DOWN:
+					if pos == 0:
+						setup_delta += datetime.timedelta(365)
+					if pos == 1:
+						setup_delta += datetime.timedelta(31)
+					if pos == 2:
+						setup_delta += datetime.timedelta(1)
+					if pos == 3:
+						setup_delta += datetime.timedelta(hours=1)
+					if pos == 4:
+						setup_delta += datetime.timedelta(minutes=1)
+					if pos == 5:
+						setup_delta += datetime.timedelta(seconds=1)
+										
+				if event.key == pygame.K_RETURN:
+					if pos == 6:
+						do_setup()
+						setup_delta = datetime.timedelta(0)
+				
+					if pos == 7:
+						setup_delta = datetime.timedelta(0)
+
+				if event.key == pygame.K_ESCAPE:
+					done = True
+				
+		disp_setup(pos)
+		pygame.display.update()
+		pygame.time.delay(100) 
+
+
+
+
+	
+def enter_sub( pos ):
+	if pos == 3:
+		timer_loop()
+	if pos == 4:
+		setup_loop()
+	if pos == 2:
+		alarm_loop()
+	if pos == 0:
+		cal_loop()
+					
+		
+def main_loop():
+	max_pos = 4
+	pos = 0
+	done = False
+
+	while not done:
+		for event in pygame.event.get():
+
+			if event.type == pygame.QUIT:
+				done = True 
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					if pos > 0:
+						pos = pos - 1
+					else:
+						pos = max_pos
+					
+				if event.key == pygame.K_RIGHT:
+					if pos < max_pos:
+						pos = pos + 1
+					else:
+						pos = 0
+					
+				if event.key == pygame.K_RETURN:
+					enter_sub( pos )
+
+				if event.key == pygame.K_ESCAPE:
+					done = True
+
+		disp_menu(pos)
+		pygame.display.update()
+		pygame.time.delay(100) # Save your Battery!
+
+main_loop()
+pygame.quit() 

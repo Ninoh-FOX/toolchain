@@ -1,0 +1,4 @@
+title=Esoteric
+description=A gmenu2x modern launcher
+exec=/usr/bin/esoteric
+icon=/usr/share/esoteric/skins/Default/icons/device.png

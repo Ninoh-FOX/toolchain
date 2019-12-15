@@ -1,0 +1,5 @@
+title=XMAME v1.3
+description=XMAME Frontend v1.3
+icon=/media/data/local/share/xmame/resource/xmame.png
+exec=/media/data/local/share/xmame/xmame.dge
+manual=/media/data/local/share/xmame/readme.txt

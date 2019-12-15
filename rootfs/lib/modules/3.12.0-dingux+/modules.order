@@ -1,0 +1,3 @@
+kernel/drivers/net/wireless/rtl8188eu/8188eu.ko
+kernel/drivers/net/wireless/rtl8192cu/8192cu.ko
+kernel/drivers/input/joystick/mxc6225.ko
