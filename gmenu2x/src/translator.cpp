@@ -48,8 +48,6 @@ void Translator::setLang(const string &lang) {
 
 	string line;
 	ifstream infile (((GMENU2X_SYSTEM_DIR "/translations/") + lang).c_str(), ios_base::in);
-	if (!infile.is_open())
-	  infile.open((string(GMENU2X_SYSTEM_DIR "/translations/") + lang).c_str(), ios_base::in);
 
 	if (infile.is_open()) {
 		while (getline(infile, line, '\n')) {

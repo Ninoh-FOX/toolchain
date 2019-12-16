@@ -47,7 +47,7 @@ bool WallpaperDialog::exec()
 	fl.setFilter("png");
 
 	fl.browse(GMENU2X_SYSTEM_DIR "/skins/"
-		+ gmenu2x->confStr["skin"] + "/wallpapers", false);
+		+ gmenu2x->confStr["skin"] + "/wallpapers", true);
 
 	if (gmenu2x->confStr["skin"] != "Default") {
 		fl.browse(GMENU2X_SYSTEM_DIR "/skins/Default/wallpapers", false);

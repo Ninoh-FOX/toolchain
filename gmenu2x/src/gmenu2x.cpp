@@ -197,12 +197,12 @@ void GMenu2X::initCPULimits() {
 	//       The NanoNote does not have cpufreq enabled in its kernel and
 	//       other devices are not actively maintained.
 	// TODO: Read min and max from sysfs.
-	cpuFreqMin = 30;
-	cpuFreqMax = 500;
-	cpuFreqSafeMax = 420;
+	cpuFreqMin = 300;
+	cpuFreqMax = 1100;
+	cpuFreqSafeMax = 1080;
 	cpuFreqMenuDefault = 200;
-	cpuFreqAppDefault = 384;
-	cpuFreqMultiple = 24;
+	cpuFreqAppDefault = 1080;
+	cpuFreqMultiple = 20;
 
 	// Round min and max values to the specified multiple.
 	cpuFreqMin = ((cpuFreqMin + cpuFreqMultiple - 1) / cpuFreqMultiple)
@@ -756,7 +756,7 @@ void GMenu2X::skinMenu() {
 	FileLister fl_sk;
 	fl_sk.setShowFiles(false);
 	fl_sk.setShowUpdir(false);
-	fl_sk.browse(GMENU2X_SYSTEM_DIR "/skins", false);
+	fl_sk.browse(GMENU2X_SYSTEM_DIR "/skins");
 
 	string curSkin = confStr["skin"];
 
@@ -823,9 +823,7 @@ void GMenu2X::setSkin(const string &skin, bool setWallpaper) {
 
 	/* Load skin settings from user directory if present,
 	 * or from the system directory. */
-	if (!readSkinConfig(GMENU2X_SYSTEM_DIR "/skins/" + skin + "/skin.conf")) {
-		readSkinConfig(GMENU2X_SYSTEM_DIR "/skins/" + skin + "/skin.conf");
-	}
+	readSkinConfig(GMENU2X_SYSTEM_DIR "/skins/" + skin + "/skin.conf");
 
 	if (setWallpaper && !skinConfStr["wallpaper"].empty()) {
 		string fp = sc.getSkinFilePath("wallpapers/" + skinConfStr["wallpaper"]);
@@ -925,7 +923,6 @@ void GMenu2X::editLink() {
 	string diagIcon = linkApp->getIconPath();
 
 	SettingsDialog sd(this, input, ts, diagTitle, diagIcon);
-	if (!linkApp->isOpk()) {
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingString(
 				this, ts, tr["Title"],
 				tr["Link title"],
@@ -946,8 +943,6 @@ void GMenu2X::editLink() {
 				this, ts, tr["Manual"],
 				tr["Select a manual or README file"],
 				&linkManual, "man.png,txt")));
-	}
-	if (!linkApp->isOpk() || !linkApp->getSelectorDir().empty()) {
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingDir(
 				this, ts, tr["Selector Directory"],
 				tr["Directory to scan for the selector"],
@@ -956,14 +951,12 @@ void GMenu2X::editLink() {
 				this, ts, tr["Selector Browser"],
 				tr["Allow the selector to change directory"],
 				&linkSelBrowser)));
-	}
 #ifdef ENABLE_CPUFREQ
-	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
+	   sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			this, ts, tr["Clock frequency"],
 			tr["CPU clock frequency for this link"],
 			&linkClock, cpuFreqMin, confInt["maxClock"], cpuFreqMultiple)));
 #endif
-	if (!linkApp->isOpk()) {
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingString(
 				this, ts, tr["Selector Filter"],
 				tr["Selector filter (Separate values with a comma)"],
@@ -972,7 +965,6 @@ void GMenu2X::editLink() {
 				this, ts, tr["Display Console"],
 				tr["Must be enabled for console-based applications"],
 				&linkApp->consoleApp)));
-	}
 
 	if (sd.exec()) {
 		linkApp->setTitle(linkTitle);
