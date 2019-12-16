@@ -1,0 +1,604 @@
+menusettingstring.o: menusettingstring.cpp menusettingstring.h \
+ menusettingstringbase.h menusetting.h buttonbox.h iconbutton.h gmenu2x.h \
+ contextmenu.h layer.h inputmanager.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_main.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_stdinc.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_config.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_platform.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/types.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/features.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_config.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/cdefs.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/types.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/wordsize.h \
+ /opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stddef.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/typesizes.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/pthreadtypes.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/endian.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/endian.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/byteswap.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/byteswap.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/byteswap-common.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sgidefs.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/time.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/select.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/select.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/sigset.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/time.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/sysmacros.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdio.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_stdio.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/wchar.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/wchar.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_mutex.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/pthread.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sched.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/sched.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_clk_tck.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/signal.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/setjmp.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_pthread.h \
+ /opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stdarg.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/stdio_lim.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdlib.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/waitflags.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/waitstatus.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/alloca.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/string.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/strings.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/inttypes.h \
+ /opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stdint.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdint.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/ctype.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_touplow.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/begin_code.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/close_code.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_audio.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_error.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_endian.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_mutex.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_thread.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_rwops.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_cdrom.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_cpuinfo.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_events.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_active.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_keyboard.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_keysym.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_mouse.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_video.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_joystick.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_quit.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_loadso.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_timer.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_version.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/string \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++config.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/os_defines.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/cpu_defines.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stringfwd.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/memoryfwd.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/char_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_algobase.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/functexcept.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/exception_defines.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/cpp_type_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/type_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/numeric_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_pair.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/move.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/concept_check.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/type_traits \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator_base_types.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator_base_funcs.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/debug/debug.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ptr_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/predefined_ops.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/postypes.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cwchar \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdint \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/allocator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++allocator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/new_allocator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/new \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/exception \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/atomic_lockfree_defines.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/exception_ptr.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/nested_exception.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/localefwd.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++locale.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/clocale \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/locale.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_locale.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/iosfwd \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cctype \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ostream_insert.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/cxxabi_forced.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_function.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/backward/binders.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/range_access.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_string.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/atomicity.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/gthr.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/gthr-default.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/atomic_word.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/initializer_list \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/string_conversions.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdlib \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdio \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cerrno \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/errno.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/errno.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/linux/errno.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/asm/errno.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/asm-generic/errno-base.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/functional_hash.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hash_bytes.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_string.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/vector \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_construct.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/alloc_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/alloc_traits.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_uninitialized.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_vector.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_bvector.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/vector.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/memory \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_tempbuf.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_raw_storage_iter.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/typeinfo \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/concurrence.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/uses_allocator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/functional \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/tuple \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/utility \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_relops.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/array \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/stdexcept \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/unique_ptr.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/shared_ptr.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/shared_ptr_base.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/aligned_buffer.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/backward/auto_ptr.h \
+ surfacecollection.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/unordered_map \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hashtable.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hashtable_policy.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/unordered_map.h \
+ translator.h touchscreen.h powersaver.h surface.h font.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_ttf.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ostream \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ios \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ios_base.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_classes.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_classes.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/streambuf \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/streambuf.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_ios.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_facets.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cwctype \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/wctype.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/ctype_base.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/streambuf_iterator.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/ctype_inline.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_facets.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_ios.tcc \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ostream.tcc \
+ utilities.h \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/iostream \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/istream \
+ /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/istream.tcc \
+ inputdialog.h dialog.h
+
+menusettingstring.h:
+
+menusettingstringbase.h:
+
+menusetting.h:
+
+buttonbox.h:
+
+iconbutton.h:
+
+gmenu2x.h:
+
+contextmenu.h:
+
+layer.h:
+
+inputmanager.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_main.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_stdinc.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_config.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_platform.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/types.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/features.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_config.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/cdefs.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/types.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/wordsize.h:
+
+/opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stddef.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/typesizes.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/pthreadtypes.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/endian.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/endian.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/byteswap.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/byteswap.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/byteswap-common.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sgidefs.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/time.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/select.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/select.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/sigset.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/time.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sys/sysmacros.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdio.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_stdio.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/wchar.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/wchar.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_mutex.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/pthread.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/sched.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/sched.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_clk_tck.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/signal.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/setjmp.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_pthread.h:
+
+/opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stdarg.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/stdio_lim.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdlib.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/waitflags.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/waitstatus.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/alloca.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/string.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/strings.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/inttypes.h:
+
+/opt/gcw0-toolchain/usr/lib/gcc/mipsel-gcw0-linux-uclibc/4.9.1/include/stdint.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/stdint.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/ctype.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_touplow.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/begin_code.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/close_code.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_audio.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_error.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_endian.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_mutex.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_thread.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_rwops.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_cdrom.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_cpuinfo.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_events.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_active.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_keyboard.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_keysym.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_mouse.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_video.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_joystick.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_quit.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_loadso.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_timer.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_version.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/string:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++config.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/os_defines.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/cpu_defines.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stringfwd.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/memoryfwd.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/char_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_algobase.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/functexcept.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/exception_defines.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/cpp_type_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/type_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/numeric_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_pair.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/move.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/concept_check.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/type_traits:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator_base_types.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator_base_funcs.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/debug/debug.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_iterator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ptr_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/predefined_ops.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/postypes.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cwchar:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdint:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/allocator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++allocator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/new_allocator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/new:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/exception:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/atomic_lockfree_defines.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/exception_ptr.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/nested_exception.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/localefwd.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/c++locale.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/clocale:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/locale.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/uClibc_locale.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/iosfwd:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cctype:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ostream_insert.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/cxxabi_forced.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_function.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/backward/binders.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/range_access.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_string.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/atomicity.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/gthr.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/gthr-default.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/atomic_word.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/initializer_list:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/string_conversions.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdlib:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cstdio:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cerrno:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/errno.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/bits/errno.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/linux/errno.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/asm/errno.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/asm-generic/errno-base.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/functional_hash.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hash_bytes.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_string.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/vector:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_construct.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/alloc_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/alloc_traits.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_uninitialized.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_vector.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_bvector.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/vector.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/memory:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_tempbuf.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_raw_storage_iter.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/typeinfo:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/concurrence.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/uses_allocator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/functional:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/tuple:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/utility:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/stl_relops.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/array:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/stdexcept:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/unique_ptr.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/shared_ptr.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/shared_ptr_base.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ext/aligned_buffer.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/backward/auto_ptr.h:
+
+surfacecollection.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/unordered_map:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hashtable.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/hashtable_policy.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/unordered_map.h:
+
+translator.h:
+
+touchscreen.h:
+
+powersaver.h:
+
+surface.h:
+
+font.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL_ttf.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL/SDL.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ostream:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/ios:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ios_base.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_classes.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_classes.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/streambuf:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/streambuf.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_ios.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_facets.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/cwctype:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/wctype.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/ctype_base.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/streambuf_iterator.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/mipsel-gcw0-linux-uclibc/bits/ctype_inline.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/locale_facets.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/basic_ios.tcc:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/ostream.tcc:
+
+utilities.h:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/iostream:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/istream:
+
+/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/include/c++/4.9.1/bits/istream.tcc:
+
+inputdialog.h:
+
+dialog.h:
