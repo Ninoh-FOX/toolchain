@@ -22,7 +22,17 @@ void Background::paint(Surface& s) {
 			s.width() / 2, gmenu2x.bottomBarTextY,
 			Font::HAlignCenter, Font::VAlignMiddle);
 
-	battery.getIcon().blit(s, s.width() - 19, gmenu2x.bottomBarIconY);
+	battery.getIcon()->blit(s, s.width() - 19, gmenu2x.bottomBarIconY);
+		
+	// rafavico, he puesto la posición a ojo para probar, hay que medir bien -->
+	font.write(s, battery.getLevel(),
+			s.width() - 38, gmenu2x.bottomBarTextY,
+			Font::HAlignCenter, Font::VAlignMiddle);
+	font.write(s, "%",
+			s.width() - 25, gmenu2x.bottomBarTextY,
+			Font::HAlignCenter, Font::VAlignMiddle);
+    // <-- rafavico
+
 }
 
 bool Background::handleButtonPress(InputManager::Button button) {

@@ -17,13 +17,15 @@ public:
 	/**
 	 * Gets the icon that reflects the current battery status.
 	 */
-	OffscreenSurface const& getIcon();
+	const OffscreenSurface *getIcon();
+	std::string getLevel();       // <-- rafa vico
 
 private:
 	void update();
 
 	SurfaceCollection& sc;
 	std::string iconPath;
+	std::string lv;
 	unsigned int lastUpdate;
 };
 
