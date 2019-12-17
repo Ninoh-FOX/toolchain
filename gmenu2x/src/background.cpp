@@ -24,12 +24,12 @@ void Background::paint(Surface& s) {
 
 	battery.getIcon()->blit(s, s.width() - 19, gmenu2x.bottomBarIconY);
 		
-	// rafavico, he puesto la posición a ojo para probar, hay que medir bien -->
+	// rafavico, fix por Ninoh-fox -->
 	font.write(s, battery.getLevel(),
-			s.width() - 38, gmenu2x.bottomBarTextY,
+			s.width() - 34, gmenu2x.bottomBarTextY,
 			Font::HAlignCenter, Font::VAlignMiddle);
 	font.write(s, "%",
-			s.width() - 25, gmenu2x.bottomBarTextY,
+			s.width() - 24, gmenu2x.bottomBarTextY,
 			Font::HAlignCenter, Font::VAlignMiddle);
     // <-- rafavico
 
