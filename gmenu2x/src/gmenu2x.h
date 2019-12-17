@@ -175,6 +175,7 @@ public:
 	void showSettings();
 	void skinMenu();
 	void about();
+	void firstSteps();
 	void viewLog();
 	void changeWallpaper();
 

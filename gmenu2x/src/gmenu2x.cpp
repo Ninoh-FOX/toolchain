@@ -411,6 +411,10 @@ void GMenu2X::initMenu() {
 					bind(&GMenu2X::about, this),
 					tr["Info about GMenu2X"],
 					"skin:icons/about.png");
+			menu->addActionLink(i, tr["Primeros pasos"],
+					bind(&GMenu2X::firstSteps, this),
+					tr["First steps with RG350"],
+					"skin:icons/about.png");
 		}
 	}
 
@@ -421,6 +425,12 @@ void GMenu2X::initMenu() {
 	menu->setLinkIndex(confInt["link"]);
 
 	layers.push_back(menu);
+}
+
+void GMenu2X::firstSteps() {
+	string text(readFileAsString(GMENU2X_SYSTEM_DIR "/firststeps.txt"));
+	TextDialog td(this, "GMenu2X", "Primeros pasos", "icons/about.png", text);
+	td.exec();
 }
 
 void GMenu2X::about() {
