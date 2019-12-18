@@ -53,9 +53,10 @@ BrowseDialog::~BrowseDialog()
 bool BrowseDialog::exec()
 {
 	string path = getPath();
-	if (path.empty() || !fileExists(path)
-		|| path.compare(0, strlen(CARD_ROOT), CARD_ROOT) != 0)
+
+	if (path.empty() || !fileExists(path))
 		setPath(CARD_ROOT);
+		//|| path.compare(0, strlen(CARD_ROOT), CARD_ROOT) != 0)   // this make always browse in root
 
 	const int topBarHeight = gmenu2x->skinConfInt["topBarHeight"];
 	rowHeight = gmenu2x->font->getLineSpacing() + 1; // gp2x=15+1 / pandora=19+1

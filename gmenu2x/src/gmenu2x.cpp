@@ -324,6 +324,10 @@ void GMenu2X::initBG() {
 	cpuX = 32 + font->write(*bgmain, getDiskFree(getHome().c_str()),
 			22, bottomBarTextY, Font::HAlignLeft, Font::VAlignMiddle);
 
+  // sdcard 2 (have to check if exist, and very slow)
+  /*font->write(*bgmain, getDiskFree("/media/sdcard"),
+			92, bottomBarTextY, Font::HAlignLeft, Font::VAlignMiddle);*/
+
 #ifdef ENABLE_CPUFREQ
 	{
 		auto cpu = OffscreenSurface::loadImage(
@@ -411,10 +415,10 @@ void GMenu2X::initMenu() {
 					bind(&GMenu2X::about, this),
 					tr["Info about GMenu2X"],
 					"skin:icons/about.png");
-			menu->addActionLink(i, tr["Primeros pasos"],
-					bind(&GMenu2X::firstSteps, this),
-					tr["First steps with RG350"],
-					"skin:icons/about.png");
+			menu->addActionLink(i, "Docs",
+					bind(&GMenu2X::docs, this),
+					tr["RG350 Docs"],
+					"skin:icons/ebook.png");
 		}
 	}
 
@@ -427,10 +431,15 @@ void GMenu2X::initMenu() {
 	layers.push_back(menu);
 }
 
-void GMenu2X::firstSteps() {
-	string text(readFileAsString(GMENU2X_SYSTEM_DIR "/firststeps.txt"));
-	TextDialog td(this, "GMenu2X", "Primeros pasos", "icons/about.png", text);
-	td.exec();
+void GMenu2X::docs() {
+  FileDialog fd(this, ts, tr["Select a doc"], "txt", GMENU2X_SYSTEM_DIR "/docs/d.txt");
+	if (fd.exec()) {
+		if (confInt["saveSelection"] && (confInt["section"]!=menu->selSectionIndex() || confInt["link"]!=menu->selLinkIndex()))
+			writeConfig();
+    string text(readFileAsString(string(fd.getPath()+"/"+fd.getFile()).c_str()));
+    TextDialog td(this, "GMenu2X", tr["RG350 Docs"], "icons/about.png", text);
+    td.exec();
+	}
 }
 
 void GMenu2X::about() {
