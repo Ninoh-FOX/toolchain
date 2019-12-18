@@ -2,7 +2,7 @@
 set -e
 umask 0022
 
-VERSION="1.7.9"
+VERSION="`cat ./version.txt`"
 
 if [ -r "update/vmlinuz.bin" ]; then
 KERNEL="update/vmlinuz.bin"

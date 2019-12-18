@@ -24,6 +24,8 @@
 # You shouldn't need to mess with anything beyond this point...
 #--------------------------------------------------------------
 
+export VERSION := $(shell cat ./version.txt)
+
 # Set and export the version string
 export BR2_VERSION := 2014.08
 
@@ -606,7 +608,14 @@ endif
 	else \
 		/sbin/ldconfig -r $(TARGET_DIR); \
 	fi
-
+	( \
+		echo "NAME=RG350"; \
+		echo "VERSION=\"ROGUE $(VERSION) by Ninoh-FOX\""; \
+		echo "ID=ROGUE"; \
+		echo "VERSION_ID=$(VERSION)"; \
+		echo "PRETTY_NAME=\"RG350 ROGUE $(VERSION) by Ninoh-FOX\"" \
+	) >  $(TARGET_DIR)/etc/os-release
+	
 	@$(foreach d, $(call qstrip,$(BR2_ROOTFS_OVERLAY)), \
 		$(call MESSAGE,"Copying overlay $(d)"); \
 		rsync -a --ignore-times $(RSYNC_VCS_EXCLUSIONS) \
