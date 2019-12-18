@@ -28,9 +28,6 @@ void Background::paint(Surface& s) {
 	font.write(s, battery.getLevel(),
 			s.width() - 34, gmenu2x.bottomBarTextY,
 			Font::HAlignCenter, Font::VAlignMiddle);
-	font.write(s, "%",
-			s.width() - 24, gmenu2x.bottomBarTextY,
-			Font::HAlignCenter, Font::VAlignMiddle);
     // <-- rafavico
 
 }
