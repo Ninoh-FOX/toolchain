@@ -252,9 +252,12 @@ void Menu::paint(Surface &s) {
 	LinkApp *linkApp = selLinkApp();
 	if (linkApp) {
 #ifdef ENABLE_CPUFREQ
-		s.write(&font, linkApp->clockStr(gmenu2x->confInt["maxClock"]),
+		font.write(s, linkApp->clockStr(gmenu2x->confInt["maxClock"]),
 				gmenu2x->cpuX, gmenu2x->bottomBarTextY,
 				Font::HAlignLeft, Font::VAlignMiddle);
+		/*s.write(&font, linkApp->clockStr(gmenu2x->confInt["maxClock"]),
+				gmenu2x->cpuX, gmenu2x->bottomBarTextY,
+				Font::HAlignLeft, Font::VAlignMiddle);*/
 #endif
 		//Manual indicator
 		if (!linkApp->getManual().empty())

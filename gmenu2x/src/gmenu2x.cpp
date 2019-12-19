@@ -197,10 +197,10 @@ void GMenu2X::initCPULimits() {
 	//       The NanoNote does not have cpufreq enabled in its kernel and
 	//       other devices are not actively maintained.
 	// TODO: Read min and max from sysfs.
-	cpuFreqMin = 300;
-	cpuFreqMax = 1100;
+	cpuFreqMin = 360;     // para RG350, antes 300
+	cpuFreqMax = 1080;    // para RG350, antes 1100
 	cpuFreqSafeMax = 1080;
-	cpuFreqMenuDefault = 200;
+	cpuFreqMenuDefault = 360;   // para RG350, antes 200
 	cpuFreqAppDefault = 1080;
 	cpuFreqMultiple = 20;
 
@@ -733,11 +733,11 @@ void GMenu2X::showSettings() {
 	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			this, ts, tr["Clock for GMenu2X"],
 			tr["Set the cpu working frequency when running GMenu2X"],
-			&confInt["menuClock"], cpuFreqMin, cpuFreqSafeMax, cpuFreqMultiple)));
+			&confInt["menuClock"], cpuFreqMin, cpuFreqSafeMax, 720)));  // se pone a mano 720 en vez de cpuFreqMultiple, para OBTENER sólo Min o Max (360,1080)
 	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			this, ts, tr["Maximum overclock"],
 			tr["Set the maximum overclock for launching links"],
-			&confInt["maxClock"], cpuFreqMin, cpuFreqMax, cpuFreqMultiple)));
+			&confInt["maxClock"], cpuFreqMin, cpuFreqMax, 720)));       // se pone a mano 720 en vez de cpuFreqMultiple, para OBTENER sólo Min o Max  (360,1080)
 #endif
 	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingBool(
 			this, ts, tr["Output logs"],
@@ -974,7 +974,7 @@ void GMenu2X::editLink() {
 	   sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			this, ts, tr["Clock frequency"],
 			tr["CPU clock frequency for this link"],
-			&linkClock, cpuFreqMin, confInt["maxClock"], cpuFreqMultiple)));
+			&linkClock, cpuFreqMin, confInt["maxClock"], 720)));    // se pone a mano 720 en vez de cpuFreqMultiple, para obtener sólo Min o Max  (360,1080)
 #endif
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingString(
 				this, ts, tr["Selector Filter"],
