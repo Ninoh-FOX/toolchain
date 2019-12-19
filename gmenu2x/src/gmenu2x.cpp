@@ -432,7 +432,7 @@ void GMenu2X::initMenu() {
 }
 
 void GMenu2X::docs() {
-  FileDialog fd(this, ts, tr["Select a doc"], "txt", GMENU2X_SYSTEM_DIR "/docs/d.txt");
+  FileDialog fd(this, ts, tr["Select a doc"], "txt", GMENU2X_SYSTEM_DIR "/docs/"+tr.lang()+"/");
 	if (fd.exec()) {
 		if (confInt["saveSelection"] && (confInt["section"]!=menu->selSectionIndex() || confInt["link"]!=menu->selLinkIndex()))
 			writeConfig();

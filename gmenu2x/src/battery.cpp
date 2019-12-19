@@ -2,7 +2,7 @@
 
 #include "surfacecollection.h"
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <cstdio>
 #include <sstream>
 
@@ -13,7 +13,7 @@
  * @return A number representing battery charge: 0 means fully discharged,
  * 5 means fully charged, 6 represents running on external power.
  */
-// rafavico, la función se divide en dos ->
+// la función de lectura de batería se divide en 2, una para ver carga y otra para ver si está conectada por usb
 static unsigned short getBatteryLevel()
 {
 	FILE *batteryHandle = NULL;
@@ -51,7 +51,6 @@ static unsigned short isBatteryCharging()
 
 	return 0;
 }
-// <-- rafavico
 
 Battery::Battery(SurfaceCollection& sc_)
 	: sc(sc_)
@@ -72,7 +71,6 @@ const OffscreenSurface *Battery::getIcon()
 	return sc.skinRes(iconPath);
 }
 
-// rafavico ->
 std::string Battery::getLevel()
 {
   std::stringstream lv;
@@ -81,7 +79,6 @@ std::string Battery::getLevel()
   lv >> value;
   return value;
 }
-// <-- rafavico
 
 void Battery::update()
 {
@@ -89,15 +86,11 @@ void Battery::update()
 	if (isBatteryCharging()) {
 		iconPath = "imgs/battery/ac.png";
 	} else {
-// rafavico -->
     int iconid=1+battlevel/20;
     if(iconid>5)
       iconid=5;
-// <-- rafavico
 		std::stringstream ss;
 		ss << "imgs/battery/" << iconid << ".png";   // rafa vico
 		ss >> iconPath;
-		std::stringstream lv;
-        lv << getBatteryLevel() << "%";   // no aparece el porcentaje (fix ninoh-fox)
 	}
 }
