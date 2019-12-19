@@ -72,11 +72,11 @@ const OffscreenSurface *Battery::getIcon()
 	return sc.skinRes(iconPath);
 }
 
-// rafavico, fix % por ninoh-fox->
+// rafavico ->
 std::string Battery::getLevel()
 {
   std::stringstream lv;
-  lv << getBatteryLevel() << "%";  // no aparece el porcentaje
+  lv << getBatteryLevel() << "%";  // no aparece el porcentaje (fix ninoh-fox)
   std::string value;
   lv >> value;
   return value;
@@ -98,6 +98,6 @@ void Battery::update()
 		ss << "imgs/battery/" << iconid << ".png";   // rafa vico
 		ss >> iconPath;
 		std::stringstream lv;
-        lv << getBatteryLevel() << "%";
+        lv << getBatteryLevel() << "%";   // no aparece el porcentaje (fix ninoh-fox)
 	}
 }
