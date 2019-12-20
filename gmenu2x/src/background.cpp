@@ -19,7 +19,7 @@ void Background::paint(Surface& s) {
 	bgmain.blit(s, 0, 0);
 
 	font.write(s, clock.getTime(),
-			s.width() / 2, gmenu2x.bottomBarTextY,
+			s.width() - 70, gmenu2x.bottomBarTextY,
 			Font::HAlignCenter, Font::VAlignMiddle);
 
 	battery.getIcon()->blit(s, s.width() - 19, gmenu2x.bottomBarIconY);
