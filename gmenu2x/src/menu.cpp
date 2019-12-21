@@ -252,12 +252,13 @@ void Menu::paint(Surface &s) {
 	LinkApp *linkApp = selLinkApp();
 	if (linkApp) {
 #ifdef ENABLE_CPUFREQ
+    // show cpu icon and frequency
+		auto cpu = OffscreenSurface::loadImage(
+				sc.getSkinFilePath("imgs/cpu.png"));
+		if (cpu) cpu->blit(s, gmenu2x->cpuX-20, gmenu2x->bottomBarIconY);
 		font.write(s, linkApp->clockStr(gmenu2x->confInt["maxClock"]),
 				gmenu2x->cpuX, gmenu2x->bottomBarTextY,
 				Font::HAlignLeft, Font::VAlignMiddle);
-		/*s.write(&font, linkApp->clockStr(gmenu2x->confInt["maxClock"]),
-				gmenu2x->cpuX, gmenu2x->bottomBarTextY,
-				Font::HAlignLeft, Font::VAlignMiddle);*/
 #endif
 		//Manual indicator
 		if (!linkApp->getManual().empty())

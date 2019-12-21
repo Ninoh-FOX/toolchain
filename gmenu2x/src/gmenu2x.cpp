@@ -323,17 +323,11 @@ void GMenu2X::initBG() {
 
 	cpuX = 32 + font->write(*bgmain, getDiskFree(getHome().c_str()),
 			22, bottomBarTextY, Font::HAlignLeft, Font::VAlignMiddle);
-
   // sdcard 2 (have to check if exist, and very slow)
   /*font->write(*bgmain, getDiskFree("/media/sdcard"),
 			92, bottomBarTextY, Font::HAlignLeft, Font::VAlignMiddle);*/
 
 #ifdef ENABLE_CPUFREQ
-	{
-		auto cpu = OffscreenSurface::loadImage(
-				sc.getSkinFilePath("imgs/cpu.png"));
-		if (cpu) cpu->blit(*bgmain, cpuX, bottomBarIconY);
-	}
 	cpuX += 19;
 	manualX = cpuX + font->getTextWidth("300MHz") + 5;
 #else
@@ -437,7 +431,7 @@ void GMenu2X::docs() {
 		if (confInt["saveSelection"] && (confInt["section"]!=menu->selSectionIndex() || confInt["link"]!=menu->selLinkIndex()))
 			writeConfig();
     string text(readFileAsString(string(fd.getPath()+"/"+fd.getFile()).c_str()));
-    TextDialog td(this, "GMenu2X", tr["RG350 Docs"], "icons/about.png", text);
+    TextDialog td(this, "GMenu2X", tr["RG350 Docs"], "icons/ebook.png", text);
     td.exec();
 	}
 }
