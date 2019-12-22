@@ -175,10 +175,25 @@ bool InputManager::getButton(Button *button, bool wait) {
 	else if (!SDL_PollEvent(&event))
 		return false;
 
+  // si está en modo salvapantallas y pulsamos power, activamos la pantalla
+  if(!powerSaver.getState() && event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_HOME) {
+    powerSaver.resetScreenTimer();
+    return false;
+  }
+  else
+    if(!powerSaver.getState())    // si estamos en modo salvapantallas, volvemos sin procesar nada
+      return false;
+
 	bool is_kb = false, is_js = false;
 	switch(event.type) {
 		case SDL_KEYDOWN:
 			is_kb = true;
+		  // si pulsamos power, activamos el salvapantallas
+      if(event.key.keysym.sym==SDLK_HOME)
+        if(powerSaver.getState()) {
+          powerSaver.enablePowerSaver();
+          return false;
+        }
 			break;
 #ifndef SDL_JOYSTICK_DISABLED
 		case SDL_JOYHATMOTION: {
@@ -260,7 +275,7 @@ bool InputManager::getButton(Button *button, bool wait) {
 								 + "/apps").c_str());
 					break;
 #endif /* HAVE_LIBOPK */
-				case REPAINT_MENU:
+        case REPAINT_MENU:
 				default:
 					break;
 			}
@@ -298,7 +313,7 @@ bool InputManager::getButton(Button *button, bool wait) {
 	if (i == BUTTON_TYPE_SIZE)
 		return false;
 
-	if (wait) {
+	if (wait && powerSaver.getState()) {
 		powerSaver.resetScreenTimer();
 	}
 

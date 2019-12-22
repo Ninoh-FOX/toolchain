@@ -9,6 +9,8 @@ public:
 	~PowerSaver();
 	void resetScreenTimer();
 	void setScreenTimeout(unsigned int seconds);
+	bool getState();
+	void enablePowerSaver();
 
 private:
 	void addScreenTimer();

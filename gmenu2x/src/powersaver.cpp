@@ -54,6 +54,14 @@ void PowerSaver::resetScreenTimer() {
 	}
 }
 
+bool PowerSaver::getState() {
+  return screenState;
+}
+
+void PowerSaver::enablePowerSaver() {
+  disableScreen();
+}
+
 void PowerSaver::addScreenTimer() {
 	assert(!screenTimer);
 	timeout_startms = SDL_GetTicks();
