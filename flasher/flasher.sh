@@ -38,7 +38,8 @@ echo
 echo "Flashing the system in the sdcard, please wait..."
 echo
 sleep 2
-./dd bs=1M if=./sd_image.bin | ./pv ./sd_image.bin | ./dd bs=1M of=/dev/mmcblk0 oflag=sync
+./dd bs=512 if=./sd_image.bin | ./pv ./sd_image.bin | ./dd bs=512 of=/dev/mmcblk0 oflag=sync conv=notrunc
+sync
 sleep 2
 clear
 echo
