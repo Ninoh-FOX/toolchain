@@ -32,7 +32,9 @@ class Menu;
 class PowerSaver;
 class InputManager;
 
+// añadido EMPTY para evitar eventos fantasma con code=0
 enum EventCode {
+  EMPTY,
 	REMOVE_LINKS,
 	OPEN_PACKAGE,
 	OPEN_PACKAGES_FROM_DIR,
@@ -53,14 +55,16 @@ struct Joystick {
 
 class InputManager {
 public:
+// añadido el valor EMPTY para que, en caso de producirse una pulsación fantasma, no se procese
 	enum Button {
+	  EMPTY,
 		UP, DOWN, LEFT, RIGHT,
 		ACCEPT, CANCEL,
 		ALTLEFT, ALTRIGHT,
 		MENU, SETTINGS,
 		REPAINT,
 	};
-	#define BUTTON_TYPE_SIZE 10
+	#define BUTTON_TYPE_SIZE 11     // botones a procesar, todos excepto REPAINT
 
 	InputManager(PowerSaver& powerSaver);
 	~InputManager();
