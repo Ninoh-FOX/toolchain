@@ -141,6 +141,7 @@ mksquashfs \
 	update/flash_partition.sh \
 	update/date.txt \
         update/version.txt \
+        update/fsck.fat \
 	$BOOTLOADERS \
 	$MININIT \
 	$KERNEL \
