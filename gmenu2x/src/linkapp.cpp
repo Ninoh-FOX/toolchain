@@ -237,7 +237,7 @@ LinkApp::LinkApp(GMenu2X *gmenu2x_, string const& linkfile, bool deletable)
 			if (value=="false") selectorbrowser = false;
 // NOTA ---> estos datos sólo los carga si NO estamos viendo un OPK, peeeero, podemos forzarlo a que cargue datos
 //           de .gmenu2x si exiten (o sea, que se hayan editado)
-		} else if (!isOpk()) {        // para forzar a que cargue los datos hay que cambiar esta comprobación
+		} /*else if (!isOpk()) {        // para forzar a que cargue los datos hay que cambiar esta comprobación
                                    // lo suyo sería editar sólo: título, descripción e icono, lo demás no sé si tiene sentido
                                    // se puede hacer que estos 3 los cargue de .gmenu2x (si existen), y el resto que lo siga
                                    // haciendo desde el opk
@@ -245,25 +245,25 @@ LinkApp::LinkApp(GMenu2X *gmenu2x_, string const& linkfile, bool deletable)
                                    // } else if(1) {          // forzamos a leer siempre los datos
                                    // if (name == "title") {
                                    //   if(title!="")         // si está editado, lo cargamos
-                                   //     title=value;
-			if (name == "title") {
+                                   //     title=value;*/
+			else if (name == "title") {
 				title = value;
 			} else if (name == "description") {
 				description = value;
                                    // y estas líneas que se cargan siempre del opk, habría que añadir algo para que no se sobreescriban
                                    // con datos de .gmenu2x
                                    // } else if (name == "launchmsg" && !isOpk()) {
-			} else if (name == "launchmsg") {
+			} else if (name == "launchmsg" && !isOpk()) {
 				launchMsg = value;
 			} else if (name == "icon") {    // si es editable no hace falta meter !isOpk()
 				setIcon(value);
-			} else if (name == "exec") {
+			} else if (name == "exec" && !isOpk()) {
 				exec = value;
-			} else if (name == "params") {
+			} else if (name == "params" && !isOpk()) {
 				params = value;
 			} else if (name == "manual") {
 				manual = value;
-			} else if (name == "consoleapp") {
+			} else if (name == "consoleapp" && !isOpk()) {
 				if (value == "true") consoleApp = true;
 			} else if (name == "selectorfilter") {
 				setSelectorFilter( value );
@@ -272,8 +272,6 @@ LinkApp::LinkApp(GMenu2X *gmenu2x_, string const& linkfile, bool deletable)
 					editable = false;
 			} else
 				WARNING("Unrecognized option: '%s'\n", name.c_str());
-		} else
-			WARNING("Unrecognized option: '%s'\n", name.c_str());
 	}
 	infile.close();
 
@@ -346,18 +344,20 @@ bool LinkApp::save() {
 // NOTA ---> esto es lo más importante, los datos editados que se graban en .gmenu2x
 	std::ostringstream out;
 	if (!isOpk()) {   // si es un opk no guarda estos, pero si sacamos los que nos interesan, se guardan en .gmenu2x
-		if (!title.empty()       ) out << "title="           << title           << endl;  // si queremos guardar este, lo llevamos...
-		if (!description.empty() ) out << "description="     << description     << endl;
+		  // si queremos guardar este, lo llevamos...
+		
 		if (!launchMsg.empty()   ) out << "launchmsg="       << launchMsg       << endl;
-		if (!icon.empty()        ) out << "icon="            << icon            << endl;
 		if (!exec.empty()        ) out << "exec="            << exec            << endl;
 		if (!params.empty()      ) out << "params="          << params          << endl;
-		if (!manual.empty()      ) out << "manual="          << manual          << endl;
 		if (consoleApp           ) out << "consoleapp=true"                     << endl;
-		if (selectorfilter != "*") out << "selectorfilter="  << selectorfilter  << endl;
+		
 	}
 	// if (!title.empty()       ) out << "title="           << title           << endl;     // hasta aquí... si ponemos la línea aquí,
-                                                                                          // se guarda el nombre editado
+    if (!title.empty()       ) out << "title="           << title           << endl; // se guarda el nombre editado
+	if (!description.empty() ) out << "description="     << description     << endl;
+	if (!manual.empty()      ) out << "manual="          << manual          << endl;
+	if (!icon.empty()        ) out << "icon="            << icon            << endl;
+	if (selectorfilter != "*") out << "selectorfilter="  << selectorfilter  << endl;
 	if (iclock != 0              ) out << "clock="           << iclock          << endl;
 	if (!selectordir.empty()     ) out << "selectordir="     << selectordir     << endl;
 	if (!selectorbrowser         ) out << "selectorbrowser=false"               << endl;
