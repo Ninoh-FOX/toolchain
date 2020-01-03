@@ -219,46 +219,6 @@ bool InputManager::getButton(Button *button, bool wait) {
 				}
 				startTimer(joystick);
 			}
-		case SDL_JOYBUTTONDOWN:
-			is_js = true;
-			break;
-		case SDL_JOYAXISMOTION: {
-				is_js = true;
-
-				unsigned int axis = event.jaxis.axis;
-				/* We only handle the first joystick */
-				if (axis > 1)
-					return false;
-
-				Joystick *joystick = &joysticks[event.jaxis.which];
-				bool *axisState = joystick->axisState[axis];
-
-				if (event.jaxis.value < -20000) {
-					if (axisState[AXIS_STATE_NEGATIVE])
-						return false;
-					axisState[AXIS_STATE_NEGATIVE] = true;
-					axisState[AXIS_STATE_POSITIVE] = false;
-					*button = axis ? UP : LEFT;
-				} else if (event.jaxis.value > 20000) {
-					if (axisState[AXIS_STATE_POSITIVE])
-						return false;
-					axisState[AXIS_STATE_NEGATIVE] = false;
-					axisState[AXIS_STATE_POSITIVE] = true;
-					*button = axis ? DOWN : RIGHT;
-				} else {
-					bool *otherAxisState = joystick->axisState[!axis];
-					if (!otherAxisState[AXIS_STATE_NEGATIVE] &&
-								!otherAxisState[AXIS_STATE_POSITIVE] && (
-									axisState[AXIS_STATE_NEGATIVE] ||
-									axisState[AXIS_STATE_POSITIVE]))
-						stopTimer(joystick);
-
-					axisState[0] = axisState[1] = false;
-					return false;
-				}
-				startTimer(joystick);
-				break;
-			}
 #endif
 		case SDL_USEREVENT:
 			switch ((enum EventCode) event.user.code) {
