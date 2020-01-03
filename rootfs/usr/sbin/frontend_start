@@ -31,14 +31,13 @@ if [ -f /usr/local/sbin/frontend_start ]; then
 	exec /usr/local/sbin/frontend_start
 else
     if [ -f /media/data/.linker ];then
-        exec /usr/local/home/.gmenu2x/gmenu2x
+        exec /usr/bin/gmenu2x
     else
         rm -rf /usr/local/home/.gmenu2x
         mkdir /usr/local/home/.gmenu2x/
         cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
         rm -rf /usr/local/home/.gmenu2x/gmenu2x
-        ln -s /usr/share/gmenu2x/gmenu2x /usr/local/home/.gmenu2x/gmenu2x
         touch /media/data/.linker
-        exec /usr/local/home/.gmenu2x/gmenu2x
+        exec /usr/bin/gmenu2x
     fi
 fi
