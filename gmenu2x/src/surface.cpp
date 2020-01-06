@@ -31,6 +31,69 @@
 
 using namespace std;
 
+// pixel operations
+// getpixel
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        return *p;
+
+    case 2:
+        return *(Uint16 *)p;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+
+    case 4:
+        return *(Uint32 *)p;
+
+    default:
+        return 0;       /* shouldn't happen, but avoids warnings */
+    }
+}
+
+// pixel operations
+// putpixel
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to set */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        *p = pixel;
+        break;
+
+    case 2:
+        *(Uint16 *)p = pixel;
+        break;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+            p[0] = (pixel >> 16) & 0xff;
+            p[1] = (pixel >> 8) & 0xff;
+            p[2] = pixel & 0xff;
+        } else {
+            p[0] = pixel & 0xff;
+            p[1] = (pixel >> 8) & 0xff;
+            p[2] = (pixel >> 16) & 0xff;
+        }
+        break;
+
+    case 4:
+        *(Uint32 *)p = pixel;
+        break;
+    }
+}
 
 // RGBAColor:
 
@@ -71,6 +134,45 @@ Surface::Surface(Surface const& other)
 	//       problems if the surface is later converted to a format without
 	//       an alpha channel, such as the display format.
 	raw->format->alpha = other.raw->format->alpha;
+}
+
+void Surface::blitScaled(Surface &destination, int x, int y, int w, int h, int a) const {
+	if (a==0 || w==0 || h==0) return;
+
+  if (a>0 && a!=raw->format->alpha)
+		SDL_SetAlpha(raw, SDL_SRCALPHA|SDL_RLEACCEL, a);
+
+  Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+  rmask = 0xff000000;
+  gmask = 0x00ff0000;
+  bmask = 0x0000ff00;
+  amask = 0x000000ff;
+#else
+  rmask = 0x000000ff;
+  gmask = 0x0000ff00;
+  bmask = 0x00ff0000;
+  amask = 0xff000000;
+#endif
+  SDL_Surface *tempsrc=SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, w, h, 32, bmask, gmask, rmask, amask);
+
+  SDL_LockSurface(tempsrc);
+  double srcx, srcy;
+  double srcx_ratio=double(raw->w)/double(w);
+  double srcy_ratio=double(raw->h)/double(h);
+  for(int posy=0; posy<h; posy++) {
+    for(int posx=0; posx<w; posx++) {
+      srcx=posx*srcx_ratio;
+      srcy=posy*srcy_ratio;
+      putpixel(tempsrc,posx,posy,getpixel(raw,int(srcx),int(srcy)));
+    }
+  }
+  SDL_UnlockSurface(tempsrc);
+
+
+  SDL_Rect dest = { static_cast<Sint16>(x), static_cast<Sint16>(y), 0, 0};
+  SDL_BlitSurface(tempsrc,NULL,destination.raw,&dest);
+  SDL_FreeSurface(tempsrc);
 }
 
 void Surface::blit(SDL_Surface *destination, int x, int y, int w, int h, int a) const {

@@ -502,6 +502,7 @@ void GMenu2X::readConfig(string conffile) {
 	evalIntConf( confInt, "backlightTimeout", 15, 0,120 );
 	evalIntConf( confInt, "buttonRepeatRate", 10, 0, 20 );
 	evalIntConf( confInt, "videoBpp", 32, 16, 32 );
+	evalIntConf( confInt, "previewType", 1, 1, 2);
 
 	if (confStr["tvoutEncoding"] != "PAL") confStr["tvoutEncoding"] = "NTSC";
 	resX = constrain( confInt["resolutionX"], 320,1920 );
@@ -745,6 +746,10 @@ void GMenu2X::showSettings() {
 			this, ts, tr["Button repeat rate"],
 			tr["Set button repetitions per second"],
 			&confInt["buttonRepeatRate"], 0, 20)));
+	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
+			this, ts, tr["Preview type"],
+			tr["Type of preview images"],
+			&confInt["previewType"], 1, 2)));
 
 	if (sd.exec()) {
 #ifdef ENABLE_CPUFREQ

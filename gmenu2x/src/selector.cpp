@@ -116,7 +116,12 @@ int Selector::exec(int startSelection) {
 				string path = screendir + trimExtension(fl[selected]) + ".png";
 				auto screenshot = OffscreenSurface::loadImage(path, false);
 				if (screenshot) {
-					screenshot->blitRight(s, 320, 0, 320, 240, 128u);
+					if(gmenu2x->confInt["previewType"]==1) {
+            screenshot->blitRight(s, 320, 0, 320, 240, 128u);   // background preview
+          } else {
+            #define PREVIEW_RATIO   0.45      // preview scale, 1=320x240
+            screenshot->blitScaled(s, 315-320*PREVIEW_RATIO, 0, 320*PREVIEW_RATIO, 240*PREVIEW_RATIO);          // thumbnail preview
+					}
 				}
 			}
 
