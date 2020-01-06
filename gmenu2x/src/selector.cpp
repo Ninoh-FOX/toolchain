@@ -239,7 +239,7 @@ bool Selector::prepare(FileLister& fl) {
 	if (!screendir.empty() && screendir[screendir.length() - 1] != '/') {
 		screendir += "/";
 	}
-	screendir += "previews/";
+	screendir += ".previews/";
 
 	return opened;
 }
