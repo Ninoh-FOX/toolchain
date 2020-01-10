@@ -47,7 +47,7 @@ private:
 	bool dontleave;
 #ifdef HAVE_LIBOPK
 	bool isOPK;
-	std::string opkMount, opkFile, category, metadata;
+	std::string opkMount, opkFile, opkExec, category, metadata;
 #endif
 
 	void start();
@@ -100,6 +100,7 @@ public:
 	void renameFile(const std::string &name);
 
 private:
+  void cutName(std::string &name);
 	void drawLaunch(Surface& s);
 	std::unique_ptr<Launcher> prepareLaunch(const std::string &selectedFile);
 

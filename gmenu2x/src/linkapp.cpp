@@ -168,6 +168,8 @@ LinkApp::LinkApp(GMenu2X *gmenu2x_, string const& linkfile, bool deletable)
 
 			} else if (!strncmp(key, "Exec", lkey)) {
 				string tmp = buf;
+				opkExec=std::string("_")+buf;
+				cutName(opkExec);
 
 				for (auto token : tokens) {
 					if (tmp.find(token) != tmp.npos) {
@@ -211,7 +213,15 @@ LinkApp::LinkApp(GMenu2X *gmenu2x_, string const& linkfile, bool deletable)
 #endif /* HAVE_LIBXDGMIME */
 		}
 
-		file = gmenu2x->getHome() + "/sections/" + category + '/' + opkMount;
+		// if exist old config, rename it
+		std::string fileold;
+		fileold = gmenu2x->getHome() + "/sections/" + category + '/' + opkMount;
+		file = gmenu2x->getHome() + "/sections/" + category + '/' + opkMount + opkExec;
+
+		if(std::ifstream(fileold)) {
+      rename(fileold.c_str(), file.c_str());
+		}
+
 		opkMount = (string) "/mnt/" + opkMount + '/';
 		edited = true;
 	}
@@ -345,12 +355,12 @@ bool LinkApp::save() {
 	std::ostringstream out;
 	if (!isOpk()) {   // si es un opk no guarda estos, pero si sacamos los que nos interesan, se guardan en .gmenu2x
 		  // si queremos guardar este, lo llevamos...
-		
+
 		if (!launchMsg.empty()   ) out << "launchmsg="       << launchMsg       << endl;
 		if (!exec.empty()        ) out << "exec="            << exec            << endl;
 		if (!params.empty()      ) out << "params="          << params          << endl;
 		if (consoleApp           ) out << "consoleapp=true"                     << endl;
-		
+
 	}
 	// if (!title.empty()       ) out << "title="           << title           << endl;     // hasta aquí... si ponemos la línea aquí,
     if (!title.empty()       ) out << "title="           << title           << endl; // se guarda el nombre editado
@@ -705,4 +715,13 @@ void LinkApp::setSelectorFilter(const string &selectorfilter) {
 
 void LinkApp::renameFile(const string &name) {
 	file = name;
+}
+
+void LinkApp::cutName(std::string &name) {
+  std::string tmp="";
+  for(int f=0; f<name.size(); f++) {
+    if(name[f]>=35 && name[f]<127 && name[f]!=37 && name[f]!=39 && name[f]!=42)
+      tmp.append(name.substr(f,1));
+  }
+  name=tmp;
 }
