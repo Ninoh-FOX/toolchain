@@ -955,7 +955,7 @@ void GMenu2X::editLink() {
 				&newSection, &menu->getSections())));
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingImage(
 				this, ts, tr["Icon"],
-				tr.translate("Select an icon for this link", linkTitle.c_str(), NULL),
+				tr.translate("Select an icon for the link: $1", linkTitle.c_str(), NULL),
 				&linkIcon, "png")));
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingFile(
 				this, ts, tr["Manual"],
