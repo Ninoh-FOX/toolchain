@@ -119,8 +119,10 @@ int Selector::exec(int startSelection) {
 					if(gmenu2x->confInt["previewType"]==1) {
             screenshot->blitRight(s, 320, 0, 320, 240, 128u);   // background preview
           } else {
-            #define PREVIEW_RATIO   0.45      // preview scale, 1=320x240
-            screenshot->blitScaled(s, 315-320*PREVIEW_RATIO, 0, 320*PREVIEW_RATIO, 240*PREVIEW_RATIO);          // thumbnail preview
+            #define PREVIEW_RATIO   0.45      // preview scale, 1=240 height
+            int h=240*PREVIEW_RATIO;
+            int w=h * screenshot->width() / screenshot->height();
+            screenshot->blitScaled(s, 315-w, 0, w, h);          // thumbnail preview
 					}
 				}
 			}
