@@ -1,10 +1,10 @@
 ################################################################################
 #
-# sdl2_net
+# sdl2_net 2.0.1>>2.0.0
 #
 ################################################################################
 
-SDL2_NET_VERSION = 2.0.0
+SDL2_NET_VERSION = 2.0.1
 SDL2_NET_SITE = http://www.libsdl.org/projects/SDL_net/release
 SDL2_NET_SOURCE = SDL2_net-$(SDL2_NET_VERSION).tar.gz
 SDL2_NET_INSTALL_STAGING = YES

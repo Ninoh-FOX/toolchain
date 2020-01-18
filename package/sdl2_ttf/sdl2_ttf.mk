@@ -1,6 +1,6 @@
 ################################################################################
 #
-# sdl2_ttf
+# sdl2_ttf   2.0.14 >> 2.0.12
 #
 ################################################################################
 
@@ -10,26 +10,13 @@ SDL2_TTF_SITE = http://www.libsdl.org/projects/SDL_ttf/release/
 SDL2_TTF_INSTALL_STAGING = YES
 SDL2_TTF_LICENSE = zlib
 SDL2_TTF_LICENSE_FILES = COPYING.txt
-SDL2_TTF_INSTALL_STAGING = YES
-SDL2_TTF_DEPENDENCIES = sdl2 freetype host-pkgconf
 
-# Two patches touching configure.in
-SDL2_TTF_AUTORECONF = YES
+SDL2_TTF_DEPENDENCIES = sdl2 freetype
 
-SDL2_TTF_CONF_ENV = \
-	FREETYPE_CONFIG=$(STAGING_DIR)/usr/bin/freetype-config
+SDL2_TTF_CONF_OPT = --without-x \
+		--with-freetype-prefix=$(STAGING_DIR)/usr \
+		--with-sdl-prefix=$(STAGING_DIR)/usr
 
-# x-includes and x-libraries must be set for cross-compiling
-# By default x_includes and x_libraries contains unsafe paths.
-# (/usr/include and /usr/lib)
-ifeq ($(BR2_PACKAGE_SDL2_X11),y)
-SDL2_TTF_CONF_OPT += \
-	--with-x \
-	--x-includes=$(STAGING_DIR)/usr/include \
-	--x-libraries=$(STAGING_DIR)/usr/lib
-else
-SDL2_TTF_CONF_OPT += \
-	--without-x
-endif
+#SDL2_TTF_MAKE_OPT = INCLUDES="-I$(STAGING_DIR)/usr/include/SDL2"  LDFLAGS="-L$(STAGING_DIR)/usr/lib"
 
 $(eval $(autotools-package))

@@ -5,8 +5,8 @@
 ################################################################################
 
 ALSA_LIB_VERSION = 1.0.28
-ALSA_LIB_SOURCE = /alsa-lib_$(ALSA_LIB_VERSION).orig.tar.bz2
-ALSA_LIB_SITE = http://cdn-fastly.deb.debian.org/debian/pool/main/a/alsa-lib
+ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
+ALSA_LIB_SITE = http://alsa.cybermirror.org/lib
 ALSA_LIB_LICENSE = LGPLv2.1+
 ALSA_LIB_LICENSE_FILES = COPYING
 ALSA_LIB_INSTALL_STAGING = YES

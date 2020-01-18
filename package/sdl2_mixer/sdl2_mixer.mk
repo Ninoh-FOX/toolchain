@@ -1,10 +1,10 @@
 ################################################################################
 #
-# sdl2_mixer
+# sdl2_mixer  2.0.1>>2.0.0
 #
 ################################################################################
 
-SDL2_MIXER_VERSION = 2.0.0
+SDL2_MIXER_VERSION = 2.0.1
 SDL2_MIXER_SOURCE = SDL2_mixer-$(SDL2_MIXER_VERSION).tar.gz
 SDL2_MIXER_SITE = http://www.libsdl.org/projects/SDL_mixer/release/
 SDL2_MIXER_INSTALL_STAGING = YES

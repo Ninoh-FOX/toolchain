@@ -3,7 +3,7 @@
 # esoteric
 #
 ################################################################################
-ESOTERIC_VERSION = master
+ESOTERIC_VERSION = eae909b
 ESOTERIC_SITE = $(call github,podulator,esoteric,$(ESOTERIC_VERSION))
 ESOTERIC_DEPENDENCIES = dejavu libpng sdl sdl_ttf sdl_gfx
 ESOTERIC_INSTALL_TARGET = YES

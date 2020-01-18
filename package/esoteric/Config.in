@@ -4,6 +4,8 @@ config BR2_PACKAGE_ESOTERIC
 	select BR2_PACKAGE_LIBPNG
 	select BR2_PACKAGE_SDL
 	select BR2_PACKAGE_SDL_TTF
+	select BR2_PACKAGE_SDL_GFX
+	
 	help
 	  Application menu for devices with a 320x240 screen and buttons.
 
