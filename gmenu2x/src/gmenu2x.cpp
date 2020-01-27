@@ -379,7 +379,7 @@ void GMenu2X::initMenu() {
 	for (uint i=0; i<menu->getSections().size(); i++) {
 		//Add virtual links in the applications section
 		if (menu->getSections()[i]=="applications") {
-			menu->addActionLink(i, "Explorer",
+			menu->addActionLink(i, tr["Explorer"],
 					bind(&GMenu2X::explorer, this),
 					tr["Launch an application"],
 					"skin:icons/explorer.png");
@@ -409,7 +409,7 @@ void GMenu2X::initMenu() {
 					bind(&GMenu2X::about, this),
 					tr["Info about GMenu2X"],
 					"skin:icons/about.png");
-			menu->addActionLink(i, "Docs",
+			menu->addActionLink(i, tr["Docs"],
 					bind(&GMenu2X::docs, this),
 					tr["RG350 Docs"],
 					"skin:icons/ebook.png");
