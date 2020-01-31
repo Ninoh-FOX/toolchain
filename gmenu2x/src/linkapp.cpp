@@ -412,7 +412,8 @@ void LinkApp::drawLaunch(Surface& s) {
 		gmenu2x->sc[getIcon()]->blit(gmenu2x->s,x,104);
 	else
 		gmenu2x->sc["icons/generic.png"]->blit(gmenu2x->s,x,104);*/
-	iconSurface->blit(s, x, gmenu2x->halfY - 16);
+  if(iconSurface)
+    iconSurface->blit(s, x, gmenu2x->halfY - 16);
 	gmenu2x->font->write(s, text, x + 42, gmenu2x->halfY + 1, Font::HAlignLeft, Font::VAlignMiddle);
 }
 
