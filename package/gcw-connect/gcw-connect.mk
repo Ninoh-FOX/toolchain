@@ -5,7 +5,7 @@
 ################################################################################
 
 GCW_CONNECT_VERSION = master
-GCW_CONNECT_SITE = $(call github,gcwnow,gcwconnect,$(GCW_CONNECT_VERSION))
+GCW_CONNECT_SITE = $(call github,Ninoh-FOX,gcwconnect,$(GCW_CONNECT_VERSION))
 GCW_CONNECT_DEPENDENCIES = python python-pygame
 
 ifeq ($(BR2_PACKAGE_GMENU2X),y)
