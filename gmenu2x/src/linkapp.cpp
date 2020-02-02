@@ -720,7 +720,7 @@ void LinkApp::renameFile(const string &name) {
 
 void LinkApp::cutName(std::string &name) {
   std::string tmp="";
-  for(int f=0; f<name.size(); f++) {
+  for(unsigned int f=0; f<name.size(); f++) {
     if(name[f]>=35 && name[f]<127 && name[f]!=37 && name[f]!=39 && name[f]!=42)
       tmp.append(name.substr(f,1));
   }
