@@ -1,5 +1,0 @@
-title=Power Off
-description=Shut down the system
-icon=skin:icons/poweroff.png
-exec=/sbin/poweroff
-editable=false

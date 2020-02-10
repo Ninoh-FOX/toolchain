@@ -1,6 +1,0 @@
-title=Suspend
-description=Suspend the dingoo
-icon=skin:icons/suspend.png
-exec=/usr/sbin/suspend
-dontleave=true
-editable=false
