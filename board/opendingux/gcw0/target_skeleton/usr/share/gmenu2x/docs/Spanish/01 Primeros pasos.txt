@@ -1,0 +1,25 @@
+Parte 1: La consola y su sistema 
+
+La rg350 es una consola con un sistema operativo libre llamado genéricamente opendingux y usado por primera vez en el 2010 con la consola dingoo a320. 
+
+Opendingux es como decir el Windows refiriéndose al sistema operativo ya que cada distribución va acorde al hardware de la consola. 
+
+Al ser un sistema de código abierto no existe tal cosa como una versión oficial, si no que varias, adaptadas, en el caso de la Rg350 igual. En este caso solemos usar la rogue edition, mantenida por el usuario español Ninoh-FOX 
+
+Opendingux usa una interfaz gráfica básica llamada gmenu2x, basada en la versión de gmenu2x lanzada para el ordenador de bolsillo Ben nanonote en 2011 que a su vez está basada en la original lanzada para la consola open source gp2x
+
+De igual modo hay más interfaces como gmenunx o simplemenu. 
+----
+Parte 2: Tarjetas de memoria micro sd
+
+Las consolas incluyen 2 ranuras para tarjetas de memoria micro sd, una interna y otra externa, cada una con sus funcionalidades:
+
+Interna: En ella se instala el sistema y algunos archivos necesarios para los juegos o emuladores. (partidas guardadas o datos de Quake, por ejemplo) 
+
+Externa: El resto de aplicaciones, música, roms y demás. 
+----
+Parte 3: Las aplicaciones 
+
+Las aplicaciones en la rg350 van en un archivo con extensión opk, este es un archivo comprimido en squashfs (https://es.m.wikipedia.org/wiki/Squashfs) que incluye el ejecutable, los iconos, archivos del programa y librerías así como un archivo .Desktop que es el que vemos en gmenu* (el acceso directo) 
+
+Para editar un archivo opk necesitamos descomprimir el opk usando unsquashfs nombre.opk y ahí se crea una carpeta, luego editamos el archivo .Desktop con el nombre deseado, el icono deseado o cualquier otro cambio, guardamos y lo volvemos a comprimir usando mksquashfs /rutacarpeta archivo.opk 
