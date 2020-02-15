@@ -9,7 +9,7 @@ ACTION=="add", ENV{mount_options}="noatime,nodiratime"
 
 # Filesystem specific options
 ACTION=="add", PROGRAM=="/sbin/blkid -o value -p -s TYPE %N", ENV{fs_type}="%c"
-ACTION=="add", ENV{fs_type}=="vfat", ENV{mount_prog}="/bin/mount, ENV{mount_options}="%E{mount_options},utf8"
+ACTION=="add", ENV{fs_type}=="vfat", ENV{mount_prog}="/bin/mount", ENV{mount_options}="%E{mount_options},utf8"
 ACTION=="add", ENV{fs_type}=="exfat", ENV{mount_prog}="/usr/sbin/mount.exfat", ENV{mount_options}="%E{mount_options},utf8"
 ACTION=="add", ENV{fs_type}=="ntfs", ENV{mount_prog}="/usr/bin/ntfs-3g", ENV{mount_options}="%E{mount_options},utf8"
 ACTION=="add", ENV{fs_type}=="ext4", ENV{mount_prog}="/bin/mount", ENV{mount_options}="%E{mount_options}"
