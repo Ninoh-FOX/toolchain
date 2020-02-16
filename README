@@ -11,9 +11,10 @@ $ sudo apt-get install bison flex gettext texinfo wget cpio python unzip mercuri
 ### Build Steps ###
 
 ## Enter the directory where you want to clone the git repo
-$ git clone https://github.com/jbd1986/RG350_buildroot.git
-$ cd RG350_buildroot
+$ git clone https://github.com/Ninoh-FOX/toolchain.git
+$ cd toolchain
 $ make rg350_defconfig
+$ sed -ie 's%^BR2_HOST_DIR=.*$%BR2_HOST_DIR="/opt/gcw0-toolchain"%' .config
 $ make
 
 ======================================================
