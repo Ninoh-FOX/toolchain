@@ -5,7 +5,7 @@
 ################################################################################
 
 FBGRAB_VERSION = 1.3.1
-FBGRAB_SITE = http://fbgrab.monells.se
+FBGRAB_SITE = $(call github,GunnarMonell,fbgrab,$(FBGRAB_VERSION))
 FBGRAB_DEPENDENCIES = libpng
 FBGRAB_LICENSE = GPLv2
 FBGRAB_LICENSE_FILES = COPYING
