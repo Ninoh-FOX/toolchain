@@ -8,13 +8,22 @@ $ sudo apt-get update
 $ sudo apt-get install bison flex gettext texinfo wget cpio python unzip mercurial subversion libncurses5-dev libc6-dev-i386 bzr
 ## you need a javac compiler, (i.e. sudo apt-get install gcj-4.9-jdk)
 
+Make the folder /opt and download http://www.gcw-zero.com/files/opendingux-gcw0-toolchain.2014-08-20.tar.bz2
+how superuser move the bz2 file in /opt folder and type
+
+/opt$ sudo tar jxvf ./opendingux-gcw0-toolchain.2014-08-20.tar.bz2
+/opt$ sudo rm -rf ./opendingux-gcw0-toolchain.2014-08-20.tar.bz2
+
+the next step is add the GCW0 Path in .bashrc file in your home folder, type this in the last line in the file:
+
+export PATH="/opt/gcw0-toolchain/usr/bin:${PATH}:/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin"
+
 ### Build Steps ###
 
 ## Enter the directory where you want to clone the git repo
 $ git clone https://github.com/Ninoh-FOX/toolchain.git
 $ cd toolchain
 $ make rg350_defconfig
-$ sed -ie 's%^BR2_HOST_DIR=.*$%BR2_HOST_DIR="/opt/gcw0-toolchain"%' .config
 $ make
 
 ======================================================
