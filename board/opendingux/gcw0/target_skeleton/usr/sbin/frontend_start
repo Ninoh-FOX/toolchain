@@ -48,6 +48,7 @@ else
 		cp /usr/share/gmenu2x/sections/settings/60_network /usr/local/home/.gmenu2x/sections/settings/60_network
 		cp /usr/share/gmenu2x/sections/settings/60_wireless /usr/local/home/.gmenu2x/sections/settings/60_wireless
 		cp /usr/share/gmenu2x/sections/settings/60_rogueupdater /usr/local/home/.gmenu2x/sections/settings/60_rogueupdater
+		cp /usr/share/gmenu2x/sections/settings/60_rogueappstore /usr/local/home/.gmenu2x/sections/settings/60_rogueappstore
 		
         	exec /usr/bin/gmenu2x
     else
