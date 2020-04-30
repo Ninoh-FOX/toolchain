@@ -1,0 +1,5 @@
+exec=/usr/share/pg2test/pg2test.gcw
+title=PocketGo2 test
+description=Test your PocketGo2
+icon=/usr/share/pg2test/pg2test.png
+clock=1080

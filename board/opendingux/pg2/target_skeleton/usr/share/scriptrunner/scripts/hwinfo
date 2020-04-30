@@ -1,0 +1,29 @@
+#!/bin/sh
+# title=Hardware Info
+# desc=Display processor, model and other hardware info.
+
+echo "FIRMWARE info"
+echo ""
+cat /proc/version
+echo ""
+echo "CPU info."
+echo ""
+cat /proc/cpuinfo
+lscpu
+echo ""
+echo "SOUND info."
+echo ""
+aplay --list-devices
+echo ""
+cat /proc/asound/devices
+echo ""
+echo "DISK info."
+echo ""
+lsblk
+echo ""
+echo "USB info"
+echo ""
+lsusb
+echo ""
+echo "END"
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+# title=Backup home folder
+# desc=Backup home folder to SD card, save all your settings.
+# author=eduardofilo
+
+echo "Backup home folder."
+tar -cf /media/sdcard/home_backup.tar -C /media/data/local home
+echo ""
+echo "Backup done."
+echo "END"
