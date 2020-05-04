@@ -6,7 +6,8 @@
 
 ICU_VERSION = 51.2
 ICU_SOURCE = icu4c-$(subst .,_,$(ICU_VERSION))-src.tgz
-ICU_SITE = http://download.icu-project.org/files/icu4c/$(ICU_VERSION)
+ICU_SITE = http://sources.buildroot.net/$(ICU_VERSION)
+#ICU_SITE = http://download.icu-project.org/files/icu4c/$(ICU_VERSION)
 ICU_LICENSE = ICU License
 ICU_LICENSE_FILES = license.html
 
