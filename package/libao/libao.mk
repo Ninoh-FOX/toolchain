@@ -5,7 +5,7 @@
 ################################################################################
 
 LIBAO_VERSION = 1.1.0
-LIBAO_SITE = http://downloads.xiph.org/releases/ao
+LIBAO_SITE = https://ftp.osuosl.org/pub/xiph/releases/ao/
 LIBAO_DEPENDENCIES = host-pkgconf
 LIBAO_INSTALL_STAGING = YES
 LIBAO_LICENSE = GPLv2+
