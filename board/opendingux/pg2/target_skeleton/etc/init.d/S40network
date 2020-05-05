@@ -11,7 +11,6 @@ case "$1" in
   stop)
 	echo -n "Stopping network..."
 	/sbin/ifdown -a
-	/sbin/ifdown wlan0 2>/dev/null
 	/sbin/ifdown eth0 2>/dev/null
 	;;
   restart|reload)

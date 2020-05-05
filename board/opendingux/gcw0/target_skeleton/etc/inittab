@@ -38,5 +38,5 @@ ttyS2::respawn:/sbin/getty -n -l /usr/sbin/rootlogin -L ttyS2 57600 vt100
 
 # Stuff to do before rebooting
 null::shutdown:/etc/init.d/rcS stop
-null::shutdown:/sbin/swapoff -a
 null::shutdown:/bin/umount -a -r
+null::shutdown:/sbin/swapoff -a

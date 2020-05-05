@@ -30,33 +30,5 @@ fi
 if [ -f /usr/local/sbin/frontend_start ]; then
 	exec /usr/local/sbin/frontend_start
 else
-    if [ -f /media/data/.linker ]; then
-    		rm -rf /usr/local/home/.gmenu2x/sections/applications/20_pyclock
-		rm -rf /usr/local/home/.gmenu2x/sections/applications/25_Esoteric
-		
-		cp /usr/share/gmenu2x/sections/applications/20_clockod /usr/local/home/.gmenu2x/sections/applications/20_clockod
-		cp /usr/share/gmenu2x/sections/applications/20_script /usr/local/home/.gmenu2x/sections/applications/20_script
-		cp /usr/share/gmenu2x/sections/applications/25_DinguxCommander /usr/local/home/.gmenu2x/sections/applications/25_DinguxCommander
-		cp /usr/share/gmenu2x/sections/applications/25_o2xiv /usr/local/home/.gmenu2x/sections/applications/25_o2xiv
-		cp /usr/share/gmenu2x/sections/applications/30_terminal /usr/local/home/.gmenu2x/sections/applications/30_terminal
-		cp /usr/share/gmenu2x/sections/applications/40_rg350test /usr/local/home/.gmenu2x/sections/applications/40_rg350test
-		
-		cp /usr/share/gmenu2x/sections/settings/10_poweroff /usr/local/home/.gmenu2x/sections/settings/10_poweroff
-		cp /usr/share/gmenu2x/sections/settings/20_reboot /usr/local/home/.gmenu2x/sections/settings/20_reboot
-		cp /usr/share/gmenu2x/sections/settings/40_alsamixer /usr/local/home/.gmenu2x/sections/settings/40_alsamixer
-		cp /usr/share/gmenu2x/sections/settings/50_system_info /usr/local/home/.gmenu2x/sections/settings/50_system_info
-		cp /usr/share/gmenu2x/sections/settings/60_network /usr/local/home/.gmenu2x/sections/settings/60_network
-		cp /usr/share/gmenu2x/sections/settings/60_wireless /usr/local/home/.gmenu2x/sections/settings/60_wireless
-		cp /usr/share/gmenu2x/sections/settings/60_rogueupdater /usr/local/home/.gmenu2x/sections/settings/60_rogueupdater
-		cp /usr/share/gmenu2x/sections/settings/60_rogueappstore /usr/local/home/.gmenu2x/sections/settings/60_rogueappstore
-		
-        	exec /usr/bin/gmenu2x
-    else
-        rm -rf /usr/local/home/.gmenu2x
-        mkdir /usr/local/home/.gmenu2x/
-        cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
-        rm -rf /usr/local/home/.gmenu2x/gmenu2x
-        touch /media/data/.linker
-        exec /usr/bin/gmenu2x
-    fi
+	exec /usr/bin/gmenu2x
 fi

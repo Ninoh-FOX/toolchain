@@ -1,6 +1,7 @@
 #!/bin/sh
 
 if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
+
     # Defaults.
     . /etc/swap.conf
 
@@ -21,26 +22,11 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
     fi
 
     # Swap to SD card.
-    size=$(( $SWAP_SD_SIZE_MB * 1024 ))
+    size=$(( $SWAP_SD_SIZE_MB * 1024 * 1024 ))
     if [ $size -ne 0 ]; then
-        if [[ -r $SWAP_SD_FILE && -f /media/data/.swapon ]]; then
-        /sbin/swapon -p$SWAP_SD_PRIORITY $SWAP_SD_FILE
-        else
-        echo -n 1 >/sys/devices/virtual/vtconsole/vtcon1/bind
-        clear
-        echo
-        echo "Make SWAP file for first time, please wait..."
-        echo
-        dd if=/dev/zero bs=1024 | pv -s 498M | dd of=$SWAP_SD_FILE bs=1024 count=$size conv=notrunc,noerror 
-        echo "done"
-        sleep 2
-        echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
-        chown root:root $SWAP_SD_FILE
-        chmod 0600 $SWAP_SD_FILE
+        /bin/dd if=/dev/zero of=$SWAP_SD_FILE bs=1 count=0 seek=$size
         /sbin/mkswap $SWAP_SD_FILE
         /sbin/swapon -p$SWAP_SD_PRIORITY $SWAP_SD_FILE
-        touch /media/data/.swapon
-        fi
     fi
 fi
 

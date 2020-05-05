@@ -17,7 +17,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 
 	mount -o remount,rw /media
 	ln -s data/local/home /media/home
-        mount -o remount,ro /media
+	mount -o remount,ro /media
 
 	if [ ! -f /usr/local/etc/shadow ]; then
 		echo 'root:*:::::::' > /usr/local/etc/shadow
