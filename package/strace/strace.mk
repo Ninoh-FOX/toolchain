@@ -5,8 +5,8 @@
 ################################################################################
 
 STRACE_VERSION = 4.8
-STRACE_SOURCE = strace-$(STRACE_VERSION).tar.xz
-STRACE_SITE = http://downloads.sourceforge.net/project/strace/strace/$(STRACE_VERSION)
+STRACE_SOURCE = strace-$(STRACE_VERSION).tar.bz2
+STRACE_SITE = http://repository.timesys.com/buildsources/s/strace/strace-$(STRACE_VERSION)
 STRACE_LICENSE = BSD-3c
 STRACE_LICENSE_FILES = COPYING
 
