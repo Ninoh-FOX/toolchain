@@ -31,23 +31,67 @@ if [ -f /usr/local/sbin/frontend_start ]; then
 	exec /usr/local/sbin/frontend_start
 else
     if [ -f /media/data/.linker ]; then
-    		rm -rf /usr/local/home/.gmenu2x/sections/applications/20_pyclock
+		rm -rf /usr/local/home/.gmenu2x/sections/applications/20_pyclock
 		rm -rf /usr/local/home/.gmenu2x/sections/applications/25_Esoteric
 		
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/20_clockod ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/20_clockod /usr/local/home/.gmenu2x/sections/applications/20_clockod
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/20_script ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/20_script /usr/local/home/.gmenu2x/sections/applications/20_script
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/25_DinguxCommander ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/25_DinguxCommander /usr/local/home/.gmenu2x/sections/applications/25_DinguxCommander
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/25_o2xiv ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/25_o2xiv /usr/local/home/.gmenu2x/sections/applications/25_o2xiv
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/30_terminal ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/30_terminal /usr/local/home/.gmenu2x/sections/applications/30_terminal
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/40_pg2test ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/applications/40_pg2test /usr/local/home/.gmenu2x/sections/applications/40_pg2test
+		fi
 		
+		if [ -f /usr/local/home/.gmenu2x/sections/settings/10_poweroff ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/settings/10_poweroff /usr/local/home/.gmenu2x/sections/settings/10_poweroff
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/settings/20_reboot ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/settings/20_reboot /usr/local/home/.gmenu2x/sections/settings/20_reboot
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/settings/40_alsamixer ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/settings/40_alsamixer /usr/local/home/.gmenu2x/sections/settings/40_alsamixer
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/settings/50_system_info ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/settings/50_system_info /usr/local/home/.gmenu2x/sections/settings/50_system_info
+		fi
+		if [ -f /usr/local/home/.gmenu2x/sections/settings/60_network ]; then
+		continue
+		else
 		cp /usr/share/gmenu2x/sections/settings/60_network /usr/local/home/.gmenu2x/sections/settings/60_network
+		fi
 		
-        	exec /usr/bin/gmenu2x
+		exec /usr/bin/gmenu2x
     else
         rm -rf /usr/local/home/.gmenu2x
         mkdir /usr/local/home/.gmenu2x/
