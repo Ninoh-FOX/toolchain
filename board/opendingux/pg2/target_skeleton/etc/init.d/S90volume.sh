@@ -1,3 +1,8 @@
+#!/bin/sh
+#
+# Simple script to load/store ALSA volume.
+#
+
 VOLUME_STATEFILE1=/usr/local/etc/volume1.state
 VOLUME_DEVICE1=default
 VOLUME_CONTROL1=PCM
