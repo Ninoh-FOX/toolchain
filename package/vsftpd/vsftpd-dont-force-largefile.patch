@@ -8,10 +8,10 @@ Signed-off-by: Peter Korsgaard <jacmet@sunsite.dk>
  sysutil.c |    6 ------
  1 file changed, 6 deletions(-)
 
-Index: vsftpd-2.3.2/sysutil.c
+Index: vsftpd-3.0.2/sysutil.c
 ===================================================================
---- vsftpd-2.3.2.orig/sysutil.c
-+++ vsftpd-2.3.2/sysutil.c
+--- vsftpd-3.0.2/sysutil.c
++++ vsftpd-3.0.2/sysutil.c
 @@ -17,12 +17,6 @@
  #include "tunables.h"
  #include "sysdeputil.h"
