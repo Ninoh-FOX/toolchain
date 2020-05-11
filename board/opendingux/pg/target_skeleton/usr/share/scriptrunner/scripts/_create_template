@@ -1,0 +1,20 @@
+#!/bin/sh
+# title=New script template
+# desc=Create a script template in /usr/local/home/.scriptrunner directory.
+
+echo "Creating template"
+cat > /usr/local/home/.scriptrunner/template <<EOF
+#!/bin/sh
+# title=Template title
+# desc=Script description
+# author=me
+
+echo "New script"
+echo "Change also the file name if don't want to overwrite it."
+EOF
+
+chmod +x /usr/local/home/.scriptrunner/template
+
+echo "Template script created in /usr/local/home/.scriptrunner/"
+echo "END"
+
