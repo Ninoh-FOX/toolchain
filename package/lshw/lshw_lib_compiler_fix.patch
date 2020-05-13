@@ -1,0 +1,23 @@
+--- lshw-B.02.19.2/src/Makefile	2020-03-22 18:50:25.000000000 +0100
++++ lshw-B.02.19.2/src/Makefile.mod	2020-05-14 00:15:31.294330001 +0200
+@@ -35,7 +35,7 @@
+ 	LDFLAGS+= -Wl,--as-needed
+ endif
+ LDSTATIC=-static
+-LIBS+=-llshw -lresolv
++LIBS+=-llshw
+ ifeq ($(SQLITE), 1)
+ 	LIBS+= $(shell pkg-config --libs sqlite3)
+ endif
+
+--- lshw-B.02.19.2/src/gui/Makefile	2020-05-14 00:16:05.530330001 +0200
++++ lshw-B.02.19.2/src/gui/Makefile.mod	2020-05-14 00:16:23.562330001 +0200
+@@ -14,7 +14,7 @@
+ endif
+ CFLAGS=$(CXXFLAGS) -g $(DEFINES)
+ GTKLIBS=$(shell pkg-config gtk+-2.0 gmodule-2.0 --libs)
+-LIBS+=-L../core -llshw -lresolv $(GTKLIBS)
++LIBS+=-L../core -llshw $(GTKLIBS)
+ ifeq ($(SQLITE), 1)
+ 	LIBS+= $(shell pkg-config --libs sqlite3)
+ endif
