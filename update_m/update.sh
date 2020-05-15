@@ -79,14 +79,14 @@ error_quit() {
 	exit 1
 }
 
-export DIALOGOPTS="--colors --backtitle \"RG350 ROGUE VERSION update\""
+export DIALOGOPTS="--colors --backtitle \"RG350M ROGUE VERSION update\""
 
 DISCLAIMER="\Zb\Z3ATTENTION\Zn
 
-This update is \Zb\Z3ONLY\Zn for the \Zb\Z3RG350\Zn,
-it will \Zb\Z3not work\Zn on a \Zb\Z3RG350M\Zn model.
+This update is \Zb\Z3ONLY\Zn for the \Zb\Z3RG350M\Zn,
+it will \Zb\Z3not work\Zn on a \Zb\Z3RG350\Zn model.
 
-Are you sure your console is the \Zb\Z3RG350\Zn?"
+Are you sure your console is the \Zb\Z3RG350M\Zn?"
 
 dialog --defaultno --yes-label 'Yes' --no-label 'No' --yesno "$DISCLAIMER" 15 48
 if [ $? -eq 1 ] ; then
@@ -99,7 +99,7 @@ While we carefully constructed this updater,
 it is possible flaws in the updater or in
 the updated OS could lead to \Zb\Z3data loss\Zn. We
 recommend that you \Zb\Z3backup\Zn all valuable
-personal data on your RG-350 before you
+personal data on your RG-350M before you
 perform the update.
 
 Do you want to update now?"
@@ -129,7 +129,7 @@ UP_TO_DATE=yes
 if [ -f "$DATE_FILE" ] ; then
 	DATE="`cat $DATE_FILE`"
         VERSION="`cat $VERSION_FILE`"
-	export DIALOGOPTS="--colors --backtitle \"RG350 ROGUE VERSION update $DATE $VERSION\""
+	export DIALOGOPTS="--colors --backtitle \"RG350M ROGUE VERSION update $DATE $VERSION\""
 fi
 
 echo "screen_color = (RED,RED,ON)" > /tmp/dialog_err.rc
