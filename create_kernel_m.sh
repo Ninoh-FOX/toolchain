@@ -107,7 +107,7 @@ Categories=applications;
 EOF
 
 # Create OPK.
-OPK_FILE=update_m/RG350-Kernel-update-$VERSION-$DATE.opk
+OPK_FILE=update_m/RG350M-Kernel-update-$VERSION-$DATE.opk
 mksquashfs \
 	update_m/default.gcw0.desktop \
 	update_m/rogue.png \

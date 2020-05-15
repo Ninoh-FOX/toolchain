@@ -88,7 +88,7 @@ it will \Zb\Z3not work\Zn on a \Zb\Z3RG350\Zn model.
 
 Are you sure your console is the \Zb\Z3RG350M\Zn?"
 
-dialog --defaultno --yes-label 'Yes' --no-label 'No' --yesno "$DISCLAIMER" 15 48
+dialog --defaultno --yes-label 'Yes' --no-label 'No' --yesno "$DISCLAIMER" 11 44
 if [ $? -eq 1 ] ; then
 	error_quit
 fi
