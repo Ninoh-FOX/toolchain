@@ -223,6 +223,7 @@ endif
 	source "package/sdl_net/Config.in"
 	source "package/sdl_sound/Config.in"
 	source "package/sdl_ttf/Config.in"
+	source "package/sdl_gpu/Config.in"
 	source "package/sdl2/Config.in"
 	source "package/sdl2_image/Config.in"
 	source "package/sdl2_mixer/Config.in"
