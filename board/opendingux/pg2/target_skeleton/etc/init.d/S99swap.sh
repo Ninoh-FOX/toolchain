@@ -33,8 +33,6 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		echo
 		dd if=/dev/zero bs=1024 | pv -s 498M | dd of=$SWAP_SD_FILE bs=1024 count=$size conv=notrunc,noerror 
 		echo "done"
-		sleep 2
-		echo "The system reboot in 10s..."
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		chown root:root $SWAP_SD_FILE
 		chmod 0600 $SWAP_SD_FILE
