@@ -1,4 +1,5 @@
 #!/bin/sh
+
 if [ -f /media/data/.reconfig ]; then
 		exit 1
 	else
@@ -15,7 +16,9 @@ if [ -f /media/data/.reconfig ]; then
 		sleep 10
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		touch /media/data/.reconfig
-	reboot
+		
+		reboot
+		
 fi
 
 exit 1

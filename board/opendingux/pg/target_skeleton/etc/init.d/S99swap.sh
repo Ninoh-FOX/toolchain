@@ -42,7 +42,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		touch /media/data/.swapon
 		sleep 2
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
+		exit 1
 		fi
 	fi
 fi
-exit 1
