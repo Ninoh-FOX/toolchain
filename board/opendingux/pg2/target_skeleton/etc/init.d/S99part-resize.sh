@@ -75,3 +75,4 @@ echo "All done."
 sleep 2
 
 echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
+exit 1

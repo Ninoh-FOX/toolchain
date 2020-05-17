@@ -16,3 +16,5 @@ if [ -f /media/data/.finish ]; then
 		touch /media/data/.finish
 	reboot
 fi
+
+exit 1

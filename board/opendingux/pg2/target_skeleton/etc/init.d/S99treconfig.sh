@@ -17,3 +17,5 @@ if [ -f /media/data/.reconfig ]; then
 		touch /media/data/.reconfig
 	reboot
 fi
+
+exit 1

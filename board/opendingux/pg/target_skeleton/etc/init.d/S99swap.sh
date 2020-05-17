@@ -33,14 +33,16 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		echo
 		dd if=/dev/zero bs=1024 | pv -s 498M | dd of=$SWAP_SD_FILE bs=1024 count=$size conv=notrunc,noerror 
 		echo "done"
+		sleep 4
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		chown root:root $SWAP_SD_FILE
 		chmod 0600 $SWAP_SD_FILE
 		/sbin/mkswap $SWAP_SD_FILE
 		/sbin/swapon -p$SWAP_SD_PRIORITY $SWAP_SD_FILE
 		touch /media/data/.swapon
-		sleep 10
+		sleep 2
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		fi
 	fi
 fi
+exit 1
