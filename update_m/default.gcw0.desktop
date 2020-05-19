@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=OS update 1.7.9.9M
-Comment=RG350M ROGUE update 2020-05-19
-Exec=update.sh
-Icon=rogue
-Terminal=true
-Type=Application
-StartupNotify=true
-Categories=applications;
