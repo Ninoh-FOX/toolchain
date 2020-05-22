@@ -14,7 +14,7 @@ if [ "$SWAP" ]; then
 SWAP="Total available amount of swap:
 $SWAP"
 fi
-echo "PG2 ROGUE VERSION"
+echo "PG2V2 ROGUE VERSION"
 echo ""
 echo "Kernel version: $KERNEL_VERSION ROGUE
 Compiled on $KERNEL_DATE"
