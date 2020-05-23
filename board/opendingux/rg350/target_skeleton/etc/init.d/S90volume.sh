@@ -3,7 +3,7 @@
 # Simple script to load/store ALSA volume.
 #
 
-/usr/bin/alsa-setvolume default Master 240
+/usr/bin/alsa-setvolume default Master 224
 
 case "$1" in
 	start)
