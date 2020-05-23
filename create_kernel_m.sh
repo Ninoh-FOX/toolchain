@@ -100,6 +100,7 @@ Name=Kernel update $VERSION
 Comment=RG350M ROGUE update $DATE
 Exec=update.sh
 Icon=rogue
+params=480 640
 Terminal=true
 Type=Application
 StartupNotify=true
@@ -115,8 +116,8 @@ mksquashfs \
 	update_m/trimfat.py \
 	update_m/flash_partition.sh \
 	update_m/date.txt \
-    update_m/version.txt \
-    update_m/fsck.fat \
+	update_m/version.txt \
+	update_m/fsck.fat \
 	$BOOTLOADERS \
 	$MININIT \
 	$KERNEL \

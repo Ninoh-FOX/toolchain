@@ -125,6 +125,7 @@ Name=OS update $VERSION
 Comment=RG350M ROGUE update $DATE
 Exec=update.sh
 Icon=rogue
+params=480 640
 Terminal=true
 Type=Application
 StartupNotify=true
