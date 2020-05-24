@@ -4,7 +4,7 @@
 #
 ################################################################################
 GMENU2XM_VERSION = master
-GMENU2XM_SITE = $(call github,Ninoh-FOX,GMENU2XM,$(GMENU2XM_VERSION))
+GMENU2XM_SITE = $(call github,Ninoh-FOX,gmenu2xm,$(GMENU2XM_VERSION))
 GMENU2XM_DEPENDENCIES = dejavu libpng sdl sdl_ttf
 GMENU2XM_AUTORECONF = YES
 GMENU2XM_CONF_OPT = \

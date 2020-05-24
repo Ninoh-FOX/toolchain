@@ -15,9 +15,10 @@ endef
 else
 ifeq ($(BR2_PACKAGE_GMENU2XM),y)
 PYCLOCK_DEPENDENCIES += gmenu2xm
-define PYCLOCK_INSTALL_TARGET_GMENU2X
+define PYCLOCK_INSTALL_TARGET_GMENU2XM
 	$(INSTALL) -m 0644 -D package/pyclock/gmenu2x $(TARGET_DIR)/usr/share/gmenu2x/sections/applications/20_pyclock
 endef
+endif
 endif
 
 define PYCLOCK_INSTALL_TARGET_CMDS
