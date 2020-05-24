@@ -7,8 +7,6 @@ if [ -f /media/data/.reconfig ]; then
 		echo -n 1 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		clear
 		echo "wipe old config from file system"
-		sleep 2
-		touch /media/data/.reconfig
 		sleep 4
 		echo "done"
 		sleep 2
