@@ -23,6 +23,13 @@ define O2XIV_INSTALL_TARGET_GMENU2X
 		$(TARGET_DIR)/usr/share/gmenu2x/sections/applications/25_o2xiv
 endef
 endif
+ifeq ($(BR2_PACKAGE_GMENU2XM),y)
+O2XIV_DEPENDENCIES += gmenu2x
+define O2XIV_INSTALL_TARGET_GMENU2X
+	$(INSTALL) -m 0644 -D package/o2xiv/gmenu2x \
+		$(TARGET_DIR)/usr/share/gmenu2x/sections/applications/25_o2xiv
+endef
+endif
 
 define O2XIV_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 -D $(@D)/o2xiv $(TARGET_DIR)/usr/bin/o2xiv
