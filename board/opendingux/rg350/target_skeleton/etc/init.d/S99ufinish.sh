@@ -15,9 +15,7 @@ if [ -f /media/data/.finish ]; then
 		sleep 10
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		touch /media/data/.finish
-		
 		reboot
-		
 fi
 
 exit 1
