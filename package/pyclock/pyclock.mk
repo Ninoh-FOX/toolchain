@@ -12,9 +12,9 @@ PYCLOCK_DEPENDENCIES += gmenu2x
 define PYCLOCK_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D package/pyclock/gmenu2x $(TARGET_DIR)/usr/share/gmenu2x/sections/applications/20_pyclock
 endef
-endif
+else
 ifeq ($(BR2_PACKAGE_GMENU2XM),y)
-PYCLOCK_DEPENDENCIES += gmenu2x
+PYCLOCK_DEPENDENCIES += gmenu2xm
 define PYCLOCK_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D package/pyclock/gmenu2x $(TARGET_DIR)/usr/share/gmenu2x/sections/applications/20_pyclock
 endef

@@ -15,9 +15,9 @@ define OD_NETWORK_CONFIG_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D $(@D)/gmenu2x $(TARGET_DIR)/usr/share/gmenu2x/sections/settings/60_network
 	$(INSTALL) -m 0644 -D $(@D)/icon.png $(TARGET_DIR)/usr/share/gmenu2x/skins/Default/icons/network.png
 endef
-endif
+else
 ifeq ($(BR2_PACKAGE_GMENU2XM),y)
-OD_NETWORK_CONFIG_DEPENDENCIES += gmenu2x
+OD_NETWORK_CONFIG_DEPENDENCIES += gmenu2xm
 define OD_NETWORK_CONFIG_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D $(@D)/gmenu2x $(TARGET_DIR)/usr/share/gmenu2x/sections/settings/60_network
 	$(INSTALL) -m 0644 -D $(@D)/icon.png $(TARGET_DIR)/usr/share/gmenu2x/skins/Default/icons/network.png
