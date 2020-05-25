@@ -4,7 +4,4 @@
 
 # Play a dummy WAV.
 # This fixes the audio hardware not working properly after reset.
-/usr/bin/aplay /usr/share/alsa/dummy.wav >/dev/null 2>&1
-
-# Unmute DAC
-amixer -q -D hw:GCW0 cset "name='Master'" on
+/usr/bin/aplay /usr/share/bootsound/dummy.wav >/dev/null 2>&1

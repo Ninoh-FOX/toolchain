@@ -24,8 +24,8 @@ define O2XIV_INSTALL_TARGET_GMENU2X
 endef
 else
 ifeq ($(BR2_PACKAGE_GMENU2XM),y)
-O2XIV_DEPENDENCIES += gmenu2xm
-define O2XIV_INSTALL_TARGET_GMENU2XM
+O2XIV_DEPENDENCIES += gmenu2x
+define O2XIV_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D package/o2xiv/gmenu2x \
 		$(TARGET_DIR)/usr/share/gmenu2x/sections/applications/25_o2xiv
 endef

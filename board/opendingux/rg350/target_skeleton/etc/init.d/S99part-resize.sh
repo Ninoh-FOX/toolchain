@@ -71,7 +71,6 @@ resize2fs -p /dev/${DEVICE}p${PART_NUM} || failexit
 touch /media/data/.partition_resized
 echo
 echo "All done."
-
 sleep 2
 
 echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind

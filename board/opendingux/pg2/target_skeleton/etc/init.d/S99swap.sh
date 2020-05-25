@@ -31,7 +31,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		echo
 		echo "Make SWAP file for first time, please wait..."
 		echo
-		dd if=/dev/zero bs=1024 | pv -s 498M | dd of=$SWAP_SD_FILE bs=1024 count=$size conv=notrunc,noerror 
+		dd if=/dev/zero bs=1024 | pv -s 498M | dd of=$SWAP_SD_FILE bs=1024 count=$size conv=notrunc,noerror 1>/dev/null 2>&1
 		echo "done"
 		sleep 4
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
@@ -41,8 +41,6 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		/sbin/swapon -p$SWAP_SD_PRIORITY $SWAP_SD_FILE
 		touch /media/data/.swapon
 		sleep 2
-		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
-		exit 1
 		fi
 	fi
 fi

@@ -2,4 +2,3 @@ title=Network
 description=Configure remote access
 exec=/usr/bin/od-network-config
 icon=skin:icons/network.png
-params=480 640

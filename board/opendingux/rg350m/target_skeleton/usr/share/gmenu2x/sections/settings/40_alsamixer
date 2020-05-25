@@ -2,6 +2,5 @@ title=Sound Mixer
 description=Configure sound settings
 icon=skin:icons/alsamixer.png
 exec=/usr/bin/alsamixer
-params=480 640
 consoleapp=true
 editable=false

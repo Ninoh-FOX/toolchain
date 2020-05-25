@@ -1,0 +1,3 @@
+sudo unsquashfs -f -d /home/ninoh-fox/rogue/prueba/pg2v2 /home/ninoh-fox/rogue/prueba/rootfs.squashfs
+
+sudo mksquashfs /home/ninoh-fox/rogue/prueba/pg2v2 /home/ninoh-fox/rogue/prueba/rootfs.squashfs -noappend -comp gzip && sudo chmod 0644 /home/ninoh-fox/rogue/prueba/rootfs.squashfs

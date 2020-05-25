@@ -2,4 +2,3 @@ title=Clock
 description=Clock, calendar
 exec=/usr/share/clockod/clockod
 icon=skin:icons/pyclock.png
-params=480 640

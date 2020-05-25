@@ -19,8 +19,8 @@ endef
 GCW_CONNECT_POST_INSTALL_TARGET_HOOKS += GCW_CONNECT_INSTALL_TARGET_GMENU2X
 else
 ifeq ($(BR2_PACKAGE_GMENU2XM),y)
-GCW_CONNECT_DEPENDENCIES += gmenu2xm
-define GCW_CONNECT_INSTALL_TARGET_GMENU2XM
+GCW_CONNECT_DEPENDENCIES += gmenu2x
+define GCW_CONNECT_INSTALL_TARGET_GMENU2X
 	$(INSTALL) -m 0644 -D package/gcw-connect/gmenu2x \
 		$(TARGET_DIR)/usr/share/gmenu2x/sections/settings/60_wireless
 	$(INSTALL) -m 0644 -D $(@D)/icon.png \
