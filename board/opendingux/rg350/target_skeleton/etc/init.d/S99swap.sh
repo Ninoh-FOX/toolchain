@@ -35,6 +35,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		echo "done"
 		sleep 4
 		echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
+		sync
 		chown root:root $SWAP_SD_FILE
 		chmod 0600 $SWAP_SD_FILE
 		/sbin/mkswap $SWAP_SD_FILE
