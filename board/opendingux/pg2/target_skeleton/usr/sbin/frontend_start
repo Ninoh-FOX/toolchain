@@ -67,7 +67,7 @@ else
 		if [ -f /usr/local/home/.gmenu2x/sections/applications/50_Pixel-Fixer ]; then
 		continue
 		else
-		cp /usr/share/gmenu2x/sections/applications/50_Pixel-Fixer /usr/local/home/.gmenu2x/sections/applications/50_Pixel-Fixel
+		cp /usr/share/gmenu2x/sections/applications/50_Pixel-Fixer /usr/local/home/.gmenu2x/sections/applications/50_Pixel-Fixer
 		fi
 		
 		if [ -f /usr/local/home/.gmenu2x/sections/settings/10_poweroff ]; then
