@@ -111,6 +111,8 @@ else
 		cp /usr/share/gmenu2x/sections/settings/60_rogueappstore /usr/local/home/.gmenu2x/sections/settings/60_rogueappstore
 		fi
 		
+		cp /usr/share/gmenu2x/translations/* /usr/local/home/.gmenu2x/translations/
+		
 		exec /usr/bin/gmenu2x
     else
         rm -rf /usr/local/home/.gmenu2x

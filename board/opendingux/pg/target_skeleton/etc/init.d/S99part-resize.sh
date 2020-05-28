@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
+
 DEVICE=mmcblk0
 PART_NUM=2
 
@@ -75,3 +77,5 @@ sleep 2
 
 echo -n 0 >/sys/devices/virtual/vtconsole/vtcon1/bind
 exit 1
+
+fi
