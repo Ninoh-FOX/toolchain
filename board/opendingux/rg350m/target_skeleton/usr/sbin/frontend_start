@@ -121,6 +121,7 @@ else
 		rm -rf /usr/local/home/.gmenu2x/docs
 		rm -rf /usr/local/home/.gmenu2x/skins
 		rm -rf /usr/local/home/.gmenu2x/translations
+		rm -rf /usr/local/home/.gmenu2x/user_manual
 		rm -rf /usr/local/home/.gmenu2x/*.txt
 		touch /media/data/.linker
 		exec /usr/bin/gmenu2x
