@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2014.08-g853c30368 Configuration
+# Buildroot 2014.08-g73a1b9ce4-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_NEEDS_HOST_JAVAC=y

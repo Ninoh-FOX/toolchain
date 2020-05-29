@@ -113,6 +113,8 @@ else
 		
 		cp /usr/share/gmenu2x/translations/* /usr/local/home/.gmenu2x/translations/
 		
+		cp -r /usr/share/gmenu2x/docs/* /usr/local/home/.gmenu2x/docs/
+		
 		exec /usr/bin/gmenu2x
     else
         rm -rf /usr/local/home/.gmenu2x
