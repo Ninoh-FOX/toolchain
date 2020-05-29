@@ -9,7 +9,8 @@ GMENU2X_DEPENDENCIES = dejavu libpng sdl sdl_ttf
 GMENU2X_AUTORECONF = YES
 GMENU2X_CONF_OPT = \
 	--with-sdl-prefix=$(STAGING_DIR)/usr \
-	--enable-platform=$(BR2_PACKAGE_GMENU2X_PLATFORM)
+	--enable-platform=$(BR2_PACKAGE_GMENU2X_PLATFORM) \
+	--enable-stick=$(BR2_PACKAGE_GMENU2X_STICK)
 
 ifeq ($(BR2_PACKAGE_LIBOPK),y)
 GMENU2X_DEPENDENCIES += libopk

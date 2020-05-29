@@ -17,4 +17,7 @@ if BR2_PACKAGE_GMENU2X
 config BR2_PACKAGE_GMENU2X_PLATFORM
 	string "Target platform"
 
+config BR2_PACKAGE_GMENU2X_STICK
+	string "stick"
+
 endif
