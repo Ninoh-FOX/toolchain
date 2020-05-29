@@ -118,12 +118,17 @@ else
 		cp /usr/share/gmenu2x/about.txt /usr/local/home/.gmenu2x/about.txt
 		
 		exec /usr/bin/gmenu2x
+		
     else
-        rm -rf /usr/local/home/.gmenu2x
-        mkdir /usr/local/home/.gmenu2x/
-        cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
-        rm -rf /usr/local/home/.gmenu2x/gmenu2x
-        touch /media/data/.linker
-        exec /usr/bin/gmenu2x
-    fi
+		rm -rf /usr/local/home/.gmenu2x
+		mkdir /usr/local/home/.gmenu2x/
+		cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
+		rm -rf /usr/local/home/.gmenu2x/gmenu2x
+		rm -rf /usr/local/home/.gmenu2x/docs
+		rm -rf /usr/local/home/.gmenu2x/skins
+		rm -rf /usr/local/home/.gmenu2x/translations
+		rm -rf /usr/local/home/.gmenu2x/*.txt
+		touch /media/data/.linker
+		exec /usr/bin/gmenu2x
+	fi
 fi
