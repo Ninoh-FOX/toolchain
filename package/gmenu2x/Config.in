@@ -19,5 +19,8 @@ config BR2_PACKAGE_GMENU2X_PLATFORM
 
 config BR2_PACKAGE_GMENU2X_STICK
 	string "stick"
+	
+config BR2_PACKAGE_GMENU2X_BATTERY
+	string "battery"	
 
 endif
