@@ -1,4 +1,4 @@
 title=Pixel-Fixer
 description=Epileptic screen
-icon=/usr/share/Pixel-Fixer/rg350m_pixelfixer.png
+icon=skin:icons/rg350m_pixelfixer.png
 exec=/usr/share/Pixel-Fixer/rg350m_pixelfixer

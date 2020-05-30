@@ -1,4 +1,4 @@
 title=Scriptrunner
 description=Run scripts and tools
 exec=/usr/share/scriptrunner/scriptrunner
-icon=/usr/share/scriptrunner/scriptrunner.png
+icon=skin:icons/scriptrunner.png

@@ -1,4 +1,4 @@
 title=ROGUE App Store
 description=App Store
 exec=/usr/share/rogueappstore/rogueappstore
-icon=/usr/share/rogueappstore/rogueappstore.png
+icon=skin:icons/rogueappstore.png
