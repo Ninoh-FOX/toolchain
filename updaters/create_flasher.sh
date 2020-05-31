@@ -2,7 +2,7 @@
 set -e
 umask 0022
 
-VERSION="`cat ./version.txt`"
+VERSION="`cat ../version.txt`"
 
 if [ -r "flasher/sd_image.bin" ]; then
 SD="flasher/sd_image.bin"
@@ -54,7 +54,7 @@ mksquashfs \
 	flasher/dd \
 	flasher/pv \
 	flasher/date.txt \
-        flasher/version.txt \
+    flasher/version.txt \
 	$SD \
 	$OPK_FILE \
 	-no-progress -noappend -comp gzip -all-root
@@ -64,3 +64,5 @@ echo "=========================="
 echo
 echo "Flasher OPK:       $OPK_FILE"
 echo
+
+rm flasher/default.gcw0.desktop flasher/date.txt flasher/version.txt

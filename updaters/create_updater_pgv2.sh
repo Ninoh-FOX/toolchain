@@ -2,18 +2,24 @@
 set -e
 umask 0022
 
-VERSION="`cat ./version.txt`"
+VERSION="`cat ../version.txt`"
 
-if [ -r "updatev2/vmlinuz.bin" ]; then
-KERNEL="updatev2/vmlinuz.bin"
+if [ -r "../output/images/vmlinuz.bin" ]; then
+KERNEL="../output/images/vmlinuz.bin"
 else
 KERNEL=""
 fi
 
-if [ -r "updatev2/modules.squashfs" ]; then
-MODULES_FS="updatev2/modules.squashfs"
+if [ -r "../output/images/modules.squashfs" ]; then
+MODULES_FS="../output/images/modules.squashfs"
 else
 MODULE_FS=""
+fi
+
+if [ -r "../output/images/rootfs.squashfs" ]; then
+ROOTFS="../output/images/rootfs.squashfs"
+else
+ROOTFS=""
 fi
 
 if [ -r "updatev2/mininit-syspart" ]; then
@@ -36,8 +42,17 @@ fi
 # copy is made, specifying the symlink will include the symlink in the OPK
 # and specifying the real path might use a different name than the updatev2
 # script expects.
-if [ "$KERNEL" ] ; then
+if [ "$KERNEL" -a "$ROOTFS" ] ; then
+	if [ `date -r "$KERNEL" +%s` -gt `date -r "$ROOTFS" +%s` ] ; then
+		DATE=`date -r "$KERNEL" +%F`
+	else
+		DATE=`date -r "$ROOTFS" +%F`
+	fi
+
+elif [ "$KERNEL" ] ; then
 	DATE=`date -r "$KERNEL" +%F`
+elif [ "$ROOTFS" ] ; then
+	DATE=`date -r "$ROOTFS" +%F`
 else
 	echo "ERROR: No kernel or rootfs found."
 	exit 1
@@ -48,15 +63,24 @@ if [ "$KERNEL" ] ; then
 	chmod a-x "$KERNEL" "$MODULES_FS"
 
 	echo -n "Calculating SHA1 sum of kernel... "
-	sha1sum "$KERNEL" | cut -d' ' -f1 > "updatev2/vmlinuz.bin.sha1"
+	sha1sum "$KERNEL" | cut -d' ' -f1 > "../output/images/vmlinuz.bin.sha1"
 	echo "done"
 
 	echo -n "Calculating SHA1 sum of modules file-system... "
-	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "updatev2/modules.squashfs.sha1"
+	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "../output/images/modules.squashfs.sha1"
 	echo "done"
 
-	KERNEL="$KERNEL updatev2/vmlinuz.bin.sha1"
-        MODULES_FS="$MODULES_FS updatev2/modules.squashfs.sha1"
+	KERNEL="$KERNEL ../output/images/vmlinuz.bin.sha1"
+        MODULES_FS="$MODULES_FS ../output/images/modules.squashfs.sha1"
+fi
+
+if [ "$ROOTFS" ] ; then
+
+	echo -n "Calculating SHA1 sum of rootfs... "
+	sha1sum "$ROOTFS" | cut -d' ' -f1 > "../output/images/rootfs.squashfs.sha1"
+	echo "done"
+
+	ROOTFS="$ROOTFS ../output/images/rootfs.squashfs.sha1"
 fi
 
 if [ "$BOOTLOADERS" ] ; then
@@ -88,6 +112,7 @@ echo "Bootloaders:          $BOOTLOADERS"
 echo "Mininit:              $MININIT"
 echo "Kernel:               $KERNEL"
 echo "Modules file system:  $MODULES_FS"
+echo "Root file system:     $ROOTFS"
 echo "build date:           $DATE"
 echo "build version:        $VERSION"
 echo "=========================="
@@ -96,7 +121,7 @@ echo
 # Write metadata.
 cat > updatev2/default.gcw0.desktop <<EOF
 [Desktop Entry]
-Name=Kernel update $VERSION
+Name=OS update $VERSION
 Comment=POCKETGO2 v2 ROGUE update $DATE
 Exec=update.sh
 Icon=rogue
@@ -107,11 +132,11 @@ Categories=applications;
 EOF
 
 # Create OPK.
-OPK_FILE=updatev2/POCKETGO2v2-Kernel-update-$VERSION-$DATE.opk
+OPK_FILE=updatev2/pocketgo2v2-update-$VERSION-$DATE.opk
 mksquashfs \
 	updatev2/default.gcw0.desktop \
 	updatev2/rogue.png \
-	updatev2/updatev2.sh \
+	updatev2/update.sh \
 	updatev2/trimfat.py \
 	updatev2/flash_partition.sh \
 	updatev2/date.txt \
@@ -121,6 +146,7 @@ mksquashfs \
 	$MININIT \
 	$KERNEL \
 	$MODULES_FS \
+    $ROOTFS \
 	$OPK_FILE \
 	-no-progress -noappend -comp gzip -all-root
 
@@ -129,3 +155,12 @@ echo "=========================="
 echo
 echo "updater OPK:       $OPK_FILE"
 echo
+
+mv $OPK_FILE ../output/
+echo
+echo "=========================="
+echo
+echo "moved OPK to output folder"
+echo
+
+rm updatev2/default.gcw0.desktop updatev2/date.txt updatev2/version.txt updatev2/*.sha1

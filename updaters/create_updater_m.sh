@@ -2,22 +2,22 @@
 set -e
 umask 0022
 
-VERSION="`cat ./version.txt`"
+VERSION="`cat ../version.txt`"
 
-if [ -r "update_m/vmlinuz.bin" ]; then
-KERNEL="update_m/vmlinuz.bin"
+if [ -r "../output/images/vmlinuz.bin" ]; then
+KERNEL="../output/images/vmlinuz.bin"
 else
 KERNEL=""
 fi
 
-if [ -r "update_m/modules.squashfs" ]; then
-MODULES_FS="update_m/modules.squashfs"
+if [ -r "../output/images/modules.squashfs" ]; then
+MODULES_FS="../output/images/modules.squashfs"
 else
 MODULE_FS=""
 fi
 
-if [ -r "update_m/rootfs.squashfs" ]; then
-ROOTFS="update_m/rootfs.squashfs"
+if [ -r "../output/images/rootfs.squashfs" ]; then
+ROOTFS="../output/images/rootfs.squashfs"
 else
 ROOTFS=""
 fi
@@ -63,24 +63,24 @@ if [ "$KERNEL" ] ; then
 	chmod a-x "$KERNEL" "$MODULES_FS"
 
 	echo -n "Calculating SHA1 sum of kernel... "
-	sha1sum "$KERNEL" | cut -d' ' -f1 > "update_m/vmlinuz.bin.sha1"
+	sha1sum "$KERNEL" | cut -d' ' -f1 > "../output/images/vmlinuz.bin.sha1"
 	echo "done"
 
 	echo -n "Calculating SHA1 sum of modules file-system... "
-	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "update_m/modules.squashfs.sha1"
+	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "../output/images/modules.squashfs.sha1"
 	echo "done"
 
-	KERNEL="$KERNEL update_m/vmlinuz.bin.sha1"
-        MODULES_FS="$MODULES_FS update_m/modules.squashfs.sha1"
+	KERNEL="$KERNEL ../output/images/vmlinuz.bin.sha1"
+        MODULES_FS="$MODULES_FS ../output/images/modules.squashfs.sha1"
 fi
 
 if [ "$ROOTFS" ] ; then
 
 	echo -n "Calculating SHA1 sum of rootfs... "
-	sha1sum "$ROOTFS" | cut -d' ' -f1 > "update_m/rootfs.squashfs.sha1"
+	sha1sum "$ROOTFS" | cut -d' ' -f1 > "../output/images/rootfs.squashfs.sha1"
 	echo "done"
 
-	ROOTFS="$ROOTFS update_m/rootfs.squashfs.sha1"
+	ROOTFS="$ROOTFS ../output/images/rootfs.squashfs.sha1"
 fi
 
 if [ "$BOOTLOADERS" ] ; then
@@ -147,7 +147,7 @@ mksquashfs \
 	$MININIT \
 	$KERNEL \
 	$MODULES_FS \
-        $ROOTFS \
+	$ROOTFS \
 	$OPK_FILE \
 	-no-progress -noappend -comp gzip -all-root
 
@@ -156,3 +156,12 @@ echo "=========================="
 echo
 echo "updater OPK:       $OPK_FILE"
 echo
+
+mv $OPK_FILE ../output/
+echo
+echo "=========================="
+echo
+echo "moved OPK to output folder"
+echo
+
+rm update_m/default.gcw0.desktop update_m/date.txt update_m/version.txt update_m/*.sha1

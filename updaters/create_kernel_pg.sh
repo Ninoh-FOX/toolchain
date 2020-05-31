@@ -2,16 +2,16 @@
 set -e
 umask 0022
 
-VERSION="`cat ./version.txt`"
+VERSION="`cat ../version.txt`"
 
-if [ -r "updatepg/vmlinuz.bin" ]; then
-KERNEL="updatepg/vmlinuz.bin"
+if [ -r "../output/images/vmlinuz.bin" ]; then
+KERNEL="../output/images/vmlinuz.bin"
 else
 KERNEL=""
 fi
 
-if [ -r "updatepg/modules.squashfs" ]; then
-MODULES_FS="updatepg/modules.squashfs"
+if [ -r "../output/images/modules.squashfs" ]; then
+MODULES_FS="../output/images/modules.squashfs"
 else
 MODULE_FS=""
 fi
@@ -48,15 +48,15 @@ if [ "$KERNEL" ] ; then
 	chmod a-x "$KERNEL" "$MODULES_FS"
 
 	echo -n "Calculating SHA1 sum of kernel... "
-	sha1sum "$KERNEL" | cut -d' ' -f1 > "updatepg/vmlinuz.bin.sha1"
+	sha1sum "$KERNEL" | cut -d' ' -f1 > "../output/images/vmlinuz.bin.sha1"
 	echo "done"
 
 	echo -n "Calculating SHA1 sum of modules file-system... "
-	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "updatepg/modules.squashfs.sha1"
+	sha1sum "$MODULES_FS" | cut -d' ' -f1 > "../output/images/modules.squashfs.sha1"
 	echo "done"
 
-	KERNEL="$KERNEL updatepg/vmlinuz.bin.sha1"
-        MODULES_FS="$MODULES_FS updatepg/modules.squashfs.sha1"
+	KERNEL="$KERNEL ../output/images/vmlinuz.bin.sha1"
+        MODULES_FS="$MODULES_FS ../output/images/modules.squashfs.sha1"
 fi
 
 if [ "$BOOTLOADERS" ] ; then
@@ -111,7 +111,7 @@ OPK_FILE=updatepg/POCKETGO2-Kernel-update-$VERSION-$DATE.opk
 mksquashfs \
 	updatepg/default.gcw0.desktop \
 	updatepg/rogue.png \
-	updatepg/updatepg.sh \
+	updatepg/update.sh \
 	updatepg/trimfat.py \
 	updatepg/flash_partition.sh \
 	updatepg/date.txt \
@@ -129,3 +129,12 @@ echo "=========================="
 echo
 echo "updater OPK:       $OPK_FILE"
 echo
+
+mv $OPK_FILE ../output/
+echo
+echo "=========================="
+echo
+echo "moved OPK to output folder"
+echo
+
+rm updatepg/default.gcw0.desktop updatepg/date.txt updatepg/version.txt updatepg/*.sha1

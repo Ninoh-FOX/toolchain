@@ -9,9 +9,9 @@ then
 fi
 
 echo "Checking presence of kernel files..."
-if test -f vmlinuz.bin
+if test -f ../../output/images/vmlinuz.bin
 then
-	SIZE=$(stat -Lc %s vmlinuz.bin)
+	SIZE=$(stat -Lc %s ../../output/images/vmlinuz.bin)
 	echo "vmlinuz.bin: $((${SIZE} / 1024)) kB"
 else
 	echo "missing main kernel: vmlinuz.bin"
@@ -29,9 +29,9 @@ else
 fi
 
 echo "Checking presence of root filesystem..."
-if test -f rootfs.squashfs
+if test -f ../../output/images/rootfs.squashfs
 then
-	SIZE=$(stat -Lc %s rootfs.squashfs)
+	SIZE=$(stat -Lc %s ../../output/images/rootfs.squashfs)
 	echo "rootfs.squashfs: $((${SIZE} / 1024)) kB"
 else
 	echo "missing root filesystem: rootfs.squashfs"
@@ -39,9 +39,9 @@ else
 fi
 
 echo "Checking presence of modules filesystem..."
-if test -f modules.squashfs
+if test -f ../../output/images/modules.squashfs
 then
-	SIZE=$(stat -Lc %s modules.squashfs)
+	SIZE=$(stat -Lc %s ../../output/images/modules.squashfs)
 	echo "modules.squashfs: $((${SIZE} / 1024)) kB"
 else
 	echo "missing modules filesystem: modules.squashfs"
@@ -57,14 +57,14 @@ echo
 
 echo "Populating system partition..."
 mmd -i images/system.bin ::dev ::root
-mcopy -i images/system.bin vmlinuz.bin ::vmlinuz.bin
-sha1sum vmlinuz.bin | cut -d' ' -f1 | mcopy -i images/system.bin - ::vmlinuz.bin.sha1
+mcopy -i images/system.bin ../../output/images/vmlinuz.bin ::vmlinuz.bin
+sha1sum ../../output/images/vmlinuz.bin | cut -d' ' -f1 | mcopy -i images/system.bin - ::vmlinuz.bin.sha1
 mcopy -i images/system.bin mininit-syspart ::mininit-syspart
 sha1sum mininit-syspart | cut -d' ' -f1 | mcopy -i images/system.bin - ::mininit-syspart.sha1
-mcopy -i images/system.bin modules.squashfs ::modules.squashfs
-sha1sum modules.squashfs | cut -d' ' -f1 | mcopy -i images/system.bin - ::modules.squashfs.sha1
-mcopy -i images/system.bin rootfs.squashfs ::rootfs.squashfs
-sha1sum rootfs.squashfs | cut -d' ' -f1 | mcopy -i images/system.bin - ::rootfs.squashfs.sha1
+mcopy -i images/system.bin ../../output/images/modules.squashfs ::modules.squashfs
+sha1sum ../../output/images/modules.squashfs | cut -d' ' -f1 | mcopy -i images/system.bin - ::modules.squashfs.sha1
+mcopy -i images/system.bin ../../output/images/rootfs.squashfs ::rootfs.squashfs
+sha1sum ../../output/images/rootfs.squashfs | cut -d' ' -f1 | mcopy -i images/system.bin - ::rootfs.squashfs.sha1
 
 echo "Minimizing image size..."
 ./trimfat.py images/system.bin
