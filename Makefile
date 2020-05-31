@@ -833,10 +833,19 @@ printvars:
 		$(info $V=$($V) ($(value $V)))))
 
 clean:
-	rm -rf $(TARGET_DIR) $(BINARIES_DIR) $(HOST_DIR) \
-		$(BUILD_DIR) $(BASE_DIR)/staging \
-		$(LEGAL_INFO_DIR)
-
+	rm -rf $(TARGET_DIR) $(BINARIES_DIR)
+	rm -rf $(BASE_DIR)/tmp
+	mkdir $(BASE_DIR)/tmp
+	mv $(BUILD_DIR)/host-* $(BASE_DIR)/tmp
+	rm -rf $(BUILD_DIR)
+	mkdir $(BUILD_DIR)
+	mv $(BASE_DIR)/tmp/host-* $(BUILD_DIR)
+	rm -rf $(BASE_DIR)/tmp
+	rm -rf $(DL_DIR)/linux-*
+		
+cleanall: clean
+	rm -rf $(HOST_DIR) $(BUILD_DIR) $(LEGAL_INFO_DIR) $(BASE_DIR)/staging
+		
 distclean: clean
 ifeq ($(DL_DIR),$(TOPDIR)/dl)
 	rm -rf $(DL_DIR)
@@ -848,7 +857,8 @@ endif
 
 help:
 	@echo 'Cleaning:'
-	@echo '  clean                  - delete all files created by build'
+	@echo '  clean                  - delete all files created by target'
+	@echo '  cleanall               - delete all files created by build'
 	@echo '  distclean              - delete all non-source files (including .config)'
 	@echo
 	@echo 'Build:'
