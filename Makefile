@@ -843,7 +843,7 @@ clean:
 	find $(BASE_DIR) -name ".stamp_host_installed" -type f
 	find $(BASE_DIR) -name "*.stamp_host_installed" -type f -delete
 	rm -rf $(BASE_DIR)/tmp
-	rm -rf $(DL_DIR)/linux-*
+	rm -rf $(DL_DIR)/linux-master*
 		
 cleanall: clean
 	rm -rf $(HOST_DIR) $(BUILD_DIR) $(LEGAL_INFO_DIR) $(BASE_DIR)/staging
