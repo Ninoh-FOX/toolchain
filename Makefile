@@ -840,6 +840,8 @@ clean:
 	rm -rf $(BUILD_DIR)
 	mkdir $(BUILD_DIR)
 	mv $(BASE_DIR)/tmp/host-* $(BUILD_DIR)
+	find $(BASE_DIR) -name ".stamp_host_installed" -type f
+	find $(BASE_DIR) -name "*.stamp_host_installed" -type f -delete
 	rm -rf $(BASE_DIR)/tmp
 	rm -rf $(DL_DIR)/linux-*
 		
