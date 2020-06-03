@@ -1,0 +1,27 @@
+From d1473dc12729c34959b5106c72277e4f6afd0d62 Mon Sep 17 00:00:00 2001
+From: Gleb Mazovetskiy <glex.spb@gmail.com>
+Date: Sun, 26 Apr 2020 15:26:05 +0100
+Subject: [PATCH] sdl2-vga
+
+---
+ src/video/fbdev/SDL_fbvideo.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/video/fbdev/SDL_fbvideo.c b/src/video/fbdev/SDL_fbvideo.c
+index 235621bf6..44fc146f1 100644
+--- a/src/video/fbdev/SDL_fbvideo.c
++++ b/src/video/fbdev/SDL_fbvideo.c
+@@ -132,8 +132,8 @@ FB_VideoInit(_THIS)
+     SDL_zero(current_mode);
+ 
+     /* XXX: Hardcoded for now */
+-    current_mode.w = 320;
+-    current_mode.h = 240;
++    current_mode.w = 640;
++    current_mode.h = 480;
+     current_mode.refresh_rate = 60;
+     current_mode.format = SDL_PIXELFORMAT_RGB565;
+ 
+-- 
+2.25.1
+
