@@ -1,10 +1,10 @@
 ################################################################################
 #
-# alsa-utils
+# alsa-utils  1.0.28 >> 1.1.3
 #
 ################################################################################
 
-ALSA_UTILS_VERSION = 1.0.28
+ALSA_UTILS_VERSION = 1.1.3
 ALSA_UTILS_SOURCE = alsa-utils_$(ALSA_UTILS_VERSION).orig.tar.bz2
 ALSA_UTILS_SITE = http://cdn-fastly.deb.debian.org/debian/pool/main/a/alsa-utils/
 ALSA_UTILS_LICENSE = GPLv2
