@@ -11,10 +11,10 @@ SDL2_GFX_LICENSE = Zlib
 SDL2_GFX_LICENSE_FILES = COPYING SDL2_framerate.h
 SDL2_GFX_INSTALL_STAGING = YES
 SDL2_GFX_DEPENDENCIES = sdl2 host-pkgconf
-SDL2_GFX_CONF_OPTS = --disable-sdltest
+SDL2_GFX_CONF_OPTS = --disable-sdltest --disable-mmx
 # configure/Makefile.in not up-to-date, causing aclocal to be used at
 # build time if we don't autoreconf.
-SDL2_GFX_AUTORECONF = YES
+SDL2_GFX_AUTORECONF = yes
 
 # Even though x86_64 processors support MMX, the MMX-specific assembly
 # code in sdl2_gfx is IA32 specific, and does not build for x86_64.

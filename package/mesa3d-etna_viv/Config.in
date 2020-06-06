@@ -2,6 +2,8 @@ config BR2_PACKAGE_MESA3D_ETNA_VIV
 	bool "Mesa 3D Graphics Library for etna_viv"
 	select BR2_PACKAGE_EXPAT
 	select BR2_PACKAGE_LIBDRM
+	select BR2_PACKAGE_LIBDRM_ETNAVIV
+	select BR2_PACKAGE_LIBDRM_HAS_ATOMIC
 	select BR2_PACKAGE_HOST_LIBXML2_PYTHON
 	depends on BR2_PACKAGE_ETNA_VIV
 	help

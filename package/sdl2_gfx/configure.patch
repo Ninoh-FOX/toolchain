@@ -1,0 +1,46 @@
+--- SDL2_gfx-1.0.1/configure.in	2014-06-19 08:11:23.000000000 +0200
++++ SDL2_gfx-1.0.1/configure_mod.in	2020-06-06 01:17:02.351399562 +0200
+@@ -111,16 +111,16 @@
+ }
+ 
+ dnl Check for NASM (for x86 assembly blit routines)
+-AC_ARG_ENABLE(mmx,[  --enable-mmx            use mmx assembly on x86 [default=yes], disable this on non-x86 platforms],, enable_mmx=yes)
+-
+-if test x$enable_mmx = xyes; then
+-  CFLAGS="$CFLAGS -O -DUSE_MMX"
+-  dnl MMX enabled by default in GCC on x86_64, but not i386:
+-  AC_CHECK_SIZEOF([long])
+-  if test "$ac_cv_sizeof_long" = "4"; then
+-          CFLAGS="$CFLAGS -mmmx"
+-  fi
+-fi
++#AC_ARG_ENABLE(mmx,[  --enable-mmx            use mmx assembly on x86 [default=yes], disable this on non-x86 platforms],, enable_mmx=yes)
++#
++#  if test x$enable_mmx = xyes; then
++#  CFLAGS="$CFLAGS -O -DUSE_MMX"
++#  dnl MMX enabled by default in GCC on x86_64, but not i386:
++#  AC_CHECK_SIZEOF([long])
++#  if test "$ac_cv_sizeof_long" = "4"; then
++#          CFLAGS="$CFLAGS -mmmx"
++#  fi
++# fi
+ 
+ dnl Check for SDL
+ SDL_VERSION=2.0.0
+
+--- SDL2_gfx-1.0.1/configure	2014-06-19 08:13:05.000000000 +0200
++++ SDL2_gfx-1.0.1/configure_mod	2020-06-06 01:17:23.547399562 +0200
+@@ -12844,9 +12844,9 @@
+ _ACEOF
+ 
+ 
+-  if test "$ac_cv_sizeof_long" = "4"; then
+-          CFLAGS="$CFLAGS -mmmx"
+-  fi
++#  if test "$ac_cv_sizeof_long" = "4"; then
++#          CFLAGS="$CFLAGS -mmmx"
++#  fi
+ fi
+ 
+ SDL_VERSION=2.0.0
+
