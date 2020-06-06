@@ -14,7 +14,7 @@ SDL2_GFX_DEPENDENCIES = sdl2 host-pkgconf
 SDL2_GFX_CONF_OPTS = --disable-sdltest --disable-mmx
 # configure/Makefile.in not up-to-date, causing aclocal to be used at
 # build time if we don't autoreconf.
-SDL2_GFX_AUTORECONF = yes
+SDL2_GFX_AUTORECONF = YES
 
 # Even though x86_64 processors support MMX, the MMX-specific assembly
 # code in sdl2_gfx is IA32 specific, and does not build for x86_64.
