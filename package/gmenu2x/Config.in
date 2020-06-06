@@ -23,4 +23,18 @@ config BR2_PACKAGE_GMENU2X_STICK
 config BR2_PACKAGE_GMENU2X_BATTERY
 	string "battery"	
 
+config BR2_PACKAGE_GMENU2X_WIDTH
+	string "Screen width"
+	default BR2_TARGET_DEVICE_SCREEN_WIDTH
+	help
+	  GMenu2X will pick the largest supported resolution by default.
+	  Use this and the HEIGHT option to force a different one.
+	  
+config BR2_PACKAGE_GMENU2X_HEIGHT
+	string "Screen height"
+	default BR2_TARGET_DEVICE_SCREEN_HEIGHT
+
+config BR2_PACKAGE_GMENU2X_DEFAULT_FALLBACK_FONTS
+	string "A list of default fallback fonts and their sizes"
+	
 endif
