@@ -4,16 +4,38 @@
 #
 ################################################################################
 
-DINGUX_COMMANDER_VERSION = master
-DINGUX_COMMANDER_SITE = $(call github,gcwnow,DinguxCommander,$(DINGUX_COMMANDER_VERSION))
+DINGUX_COMMANDER_VERSION = 1760de1
+DINGUX_COMMANDER_SITE = $(call github,Ninoh-FOX,od-commander,$(DINGUX_COMMANDER_VERSION))
 DINGUX_COMMANDER_DEPENDENCIES = sdl sdl_image sdl_ttf
 
-DINGUX_COMMANDER_RESDIR = /usr/share/DinguxCommander
-DINGUX_COMMANDER_CONFIG = opendingux-a320
+DINGUX_COMMANDER_RESDIR = usr/share/DinguxCommander
 
-define DINGUX_COMMANDER_BUILD_CMDS
-	$(MAKE) CXX="$(TARGET_CXX)" RESDIR="$(DINGUX_COMMANDER_RESDIR)" SDL_CONFIG="$(STAGING_DIR)/usr/bin/sdl-config" LD="$(TARGET_LD)" CONFIG=$(DINGUX_COMMANDER_CONFIG) -C $(@D)
-endef
+ifeq ($(BR2_PACKAGE_DINGUX_COMMANDER_TARGET_PLATFORM),"rg350")
+DINGUX_COMMANDER_CONF_OPT += \
+	-DTARGET_PLATFORM=rg350 \
+	-DAUTOSCALE=1 \
+	-DSCREEN_WIDTH=320 \
+	-DSCREEN_HEIGHT=240 \
+	-DPPU_X=1 \
+	-DPPU_Y=1 \
+	-DWITH_SYSTEM_SDL_TTF=ON \
+	-DWITH_SYSTEM_SDL_GFX=ON
+else
+ifeq ($(BR2_PACKAGE_DINGUX_COMMANDER_TARGET_PLATFORM),"rg350m")
+DINGUX_COMMANDER_CONF_OPT += \
+	-DTARGET_PLATFORM=rg350 \
+	-DAUTOSCALE=1 \
+	-DSCREEN_WIDTH=640 \
+	-DSCREEN_HEIGHT=480 \
+	-DPPU_X=2 \
+	-DPPU_Y=2 \
+	-DFONTS={\"/usr/share/fonts/dejavu/DejaVuSansCondensed.ttf\",10},{\"/usr/share/fonts/truetype/droid/DroidSansFallback.ttf\",9} \
+	-DWITH_SYSTEM_SDL_TTF=ON \
+	-DWITH_SYSTEM_SDL_GFX=ON
+endif
+endif
+
+
 
 ifeq ($(BR2_PACKAGE_GMENU2X),y)
 DINGUX_COMMANDER_DEPENDENCIES += gmenu2x
@@ -30,10 +52,10 @@ endif
 endif
 
 define DINGUX_COMMANDER_INSTALL_TARGET_CMDS
-	$(INSTALL) -m 0755 -D $(@D)/output/$(DINGUX_COMMANDER_CONFIG)/DinguxCommander $(TARGET_DIR)/usr/bin/DinguxCommander
+	$(INSTALL) -m 0755 -D $(@D)/commander $(TARGET_DIR)/usr/bin/DinguxCommander
 	$(INSTALL) -m 0755 -d $(TARGET_DIR)/$(DINGUX_COMMANDER_RESDIR)/
 	$(INSTALL) -m 0644 -t $(TARGET_DIR)/$(DINGUX_COMMANDER_RESDIR)/ $(@D)/res/*
 	$(DINGUX_COMMANDER_INSTALL_TARGET_GMENU2X)
 endef
 
-$(eval $(generic-package))
+$(eval $(cmake-package))

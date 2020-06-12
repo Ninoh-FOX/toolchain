@@ -1,9 +1,21 @@
 config BR2_PACKAGE_DINGUX_COMMANDER
 	bool "DinguxCommander"
 	select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_SDL2
+	select BR2_PACKAGE_SDL_GFX
+	select BR2_PACKAGE_SDL2_GFX
 	select BR2_PACKAGE_SDL_IMAGE
 	select BR2_PACKAGE_SDL_TTF
+	select BR2_PACKAGE_GOOGLEFONTDIRECTORY
+	select BR2_PACKAGE_DEJAVU
 	help
 	  Two-pane file manager in the style of Norton Commander.
 
 	  http://beyondds.free.fr/index.php?Dingoo-dinguxcommander
+
+if BR2_PACKAGE_DINGUX_COMMANDER
+
+config BR2_PACKAGE_DINGUX_COMMANDER_TARGET_PLATFORM
+	string "Target platform"
+	
+endif
