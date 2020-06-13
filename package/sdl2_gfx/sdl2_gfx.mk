@@ -19,9 +19,9 @@ SDL2_GFX_AUTORECONF = YES
 # Even though x86_64 processors support MMX, the MMX-specific assembly
 # code in sdl2_gfx is IA32 specific, and does not build for x86_64.
 ifeq ($(BR2_i386)$(BR2_X86_CPU_HAS_MMX),yy)
-SDL2_GFX_CONF_OPTS += --enable-mmx
+SDL2_GFX_CONF_OPT += --enable-mmx
 else
-SDL2_GFX_CONF_OPTS += --disable-mmx
+SDL2_GFX_CONF_OPT += --disable-mmx
 endif
 
 $(eval $(autotools-package))

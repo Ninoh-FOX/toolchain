@@ -33,88 +33,88 @@ endif
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_INTEL),y)
-LIBDRM_CONF_OPTS += --enable-intel
+LIBDRM_CONF_OPT += --enable-intel
 LIBDRM_DEPENDENCIES += libpciaccess
 else
-LIBDRM_CONF_OPTS += --disable-intel
+LIBDRM_CONF_OPT += --disable-intel
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_RADEON),y)
-LIBDRM_CONF_OPTS += --enable-radeon
+LIBDRM_CONF_OPT += --enable-radeon
 else
-LIBDRM_CONF_OPTS += --disable-radeon
+LIBDRM_CONF_OPT += --disable-radeon
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_AMDGPU),y)
-LIBDRM_CONF_OPTS += --enable-amdgpu
+LIBDRM_CONF_OPT += --enable-amdgpu
 else
-LIBDRM_CONF_OPTS += --disable-amdgpu
+LIBDRM_CONF_OPT += --disable-amdgpu
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_NOUVEAU),y)
-LIBDRM_CONF_OPTS += --enable-nouveau
+LIBDRM_CONF_OPT += --enable-nouveau
 else
-LIBDRM_CONF_OPTS += --disable-nouveau
+LIBDRM_CONF_OPT += --disable-nouveau
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_VMWGFX),y)
-LIBDRM_CONF_OPTS += --enable-vmwgfx
+LIBDRM_CONF_OPT += --enable-vmwgfx
 else
-LIBDRM_CONF_OPTS += --disable-vmwgfx
+LIBDRM_CONF_OPT += --disable-vmwgfx
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_OMAP),y)
-LIBDRM_CONF_OPTS += --enable-omap-experimental-api
+LIBDRM_CONF_OPT += --enable-omap-experimental-api
 else
-LIBDRM_CONF_OPTS += --disable-omap-experimental-api
+LIBDRM_CONF_OPT += --disable-omap-experimental-api
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_ETNAVIV),y)
-LIBDRM_CONF_OPTS += --enable-etnaviv-experimental-api
+LIBDRM_CONF_OPT += --enable-etnaviv-experimental-api
 else
-LIBDRM_CONF_OPTS += --disable-etnaviv-experimental-api
+LIBDRM_CONF_OPT += --disable-etnaviv-experimental-api
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_EXYNOS),y)
-LIBDRM_CONF_OPTS += --enable-exynos-experimental-api
+LIBDRM_CONF_OPT += --enable-exynos-experimental-api
 else
-LIBDRM_CONF_OPTS += --disable-exynos-experimental-api
+LIBDRM_CONF_OPT += --disable-exynos-experimental-api
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_FREEDRENO),y)
-LIBDRM_CONF_OPTS += --enable-freedreno
+LIBDRM_CONF_OPT += --enable-freedreno
 else
-LIBDRM_CONF_OPTS += --disable-freedreno
+LIBDRM_CONF_OPT += --disable-freedreno
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_TEGRA),y)
-LIBDRM_CONF_OPTS += --enable-tegra-experimental-api
+LIBDRM_CONF_OPT += --enable-tegra-experimental-api
 else
-LIBDRM_CONF_OPTS += --disable-tegra-experimental-api
+LIBDRM_CONF_OPT += --disable-tegra-experimental-api
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_VC4),y)
-LIBDRM_CONF_OPTS += --enable-vc4
+LIBDRM_CONF_OPT += --enable-vc4
 else
-LIBDRM_CONF_OPTS += --disable-vc4
+LIBDRM_CONF_OPT += --disable-vc4
 endif
 
 ifeq ($(BR2_PACKAGE_HAS_UDEV),y)
-LIBDRM_CONF_OPTS += --enable-udev
+LIBDRM_CONF_OPT += --enable-udev
 LIBDRM_DEPENDENCIES += udev
 else
-LIBDRM_CONF_OPTS += --disable-udev
+LIBDRM_CONF_OPT += --disable-udev
 endif
 
 ifeq ($(BR2_PACKAGE_VALGRIND),y)
-LIBDRM_CONF_OPTS += --enable-valgrind
+LIBDRM_CONF_OPT += --enable-valgrind
 LIBDRM_DEPENDENCIES += valgrind
 else
-LIBDRM_CONF_OPTS += --disable-valgrind
+LIBDRM_CONF_OPT += --disable-valgrind
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM_INSTALL_TESTS),y)
-LIBDRM_CONF_OPTS += --enable-install-test-programs
+LIBDRM_CONF_OPT += --enable-install-test-programs
 ifeq ($(BR2_PACKAGE_CUNIT),y)
 LIBDRM_DEPENDENCIES += cunit
 endif

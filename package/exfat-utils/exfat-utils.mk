@@ -9,6 +9,6 @@ EXFAT_UTILS_SITE = https://github.com/relan/exfat/releases/download/v$(EXFAT_UTI
 EXFAT_UTILS_LICENSE = GPL-3.0+
 EXFAT_UTILS_LICENSE_FILES = COPYING
 
-EXFAT_UTILS_CONF_OPTS += --exec-prefix=/
+EXFAT_UTILS_CONF_OPT += --exec-prefix=/
 
 $(eval $(autotools-package))
