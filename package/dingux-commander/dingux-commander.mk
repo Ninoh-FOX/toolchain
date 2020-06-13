@@ -29,7 +29,6 @@ DINGUX_COMMANDER_CONF_OPT += \
 	-DSCREEN_HEIGHT=480 \
 	-DPPU_X=2 \
 	-DPPU_Y=2 \
-	-DFONTS={\"/usr/share/fonts/dejavu/DejaVuSansCondensed.ttf\",10},{\"/usr/share/fonts/truetype/droid/DroidSansFallback.ttf\",9} \
 	-DWITH_SYSTEM_SDL_TTF=ON \
 	-DWITH_SYSTEM_SDL_GFX=ON
 endif
