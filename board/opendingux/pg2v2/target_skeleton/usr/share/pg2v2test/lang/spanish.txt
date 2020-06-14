@@ -1,0 +1,5 @@
+Pulsa L1 + START para salir.
+Pulsa L1 + X para reproducir un sonido.
+v1.2
+Última pulsación:
+Pulsa L2 + R2 para vibrar.

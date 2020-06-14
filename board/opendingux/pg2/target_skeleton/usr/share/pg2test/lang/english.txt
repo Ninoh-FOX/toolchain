@@ -1,0 +1,5 @@
+Press L1 + START to exit.
+Press L1 + X to play a sound.
+v1.2
+Last detected key:
+Press L2 + R2 to rumble.
