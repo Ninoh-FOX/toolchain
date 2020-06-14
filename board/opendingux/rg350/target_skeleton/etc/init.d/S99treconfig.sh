@@ -2,13 +2,11 @@
 
 if [ -z "$1" ] || [ "x$1" = "xstart" ]; then 
 
-	if [ -f /media/data/.reconfig ] && [ -f /media/data/.finish ]
-	then
+	if [ -f /media/data/.reconfig ] && [ -f /media/data/.finish ]; then
 		exit 1
 	fi
 	
-	if [ ! -r /media/data/.reconfig ] && [ -f /media/data/.finish ]
-	then
+	if [ ! -r /media/data/.reconfig ] && [ -f /media/data/.finish ]; then
 		rm -rf /media/data/local/etc/*
 		echo -n 1 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		clear
@@ -23,8 +21,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		reboot
 	fi
 	
-	if [ -f /media/data/.reconfig ] && [ ! -r /media/data/.finish ]
-	then
+	if [ -f /media/data/.reconfig ] && [ ! -r /media/data/.finish ]; then
 	    echo -n 1 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		clear
 		echo "Finishing installation."
@@ -40,8 +37,7 @@ if [ -z "$1" ] || [ "x$1" = "xstart" ]; then
 		reboot
 	fi
 	
-	if [ ! -r /media/data/.reconfig ] && [ ! -r /media/data/.finish ]
-	then
+	if [ ! -r /media/data/.reconfig ] && [ ! -r /media/data/.finish ]; then
 		rm -rf /media/data/local/etc/*
 		echo -n 1 >/sys/devices/virtual/vtconsole/vtcon1/bind
 		clear
