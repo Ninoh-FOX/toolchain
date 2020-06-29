@@ -6,7 +6,7 @@
 
 DINGUX_COMMANDER_VERSION = 1760de1
 DINGUX_COMMANDER_SITE = $(call github,Ninoh-FOX,od-commander,$(DINGUX_COMMANDER_VERSION))
-DINGUX_COMMANDER_DEPENDENCIES = sdl sdl_image sdl_ttf
+DINGUX_COMMANDER_DEPENDENCIES = sdl sdl2 sdl_gfx sdl2_gfx sdl_image sdl_ttf dejavu
 
 DINGUX_COMMANDER_RESDIR = usr/share/DinguxCommander
 
