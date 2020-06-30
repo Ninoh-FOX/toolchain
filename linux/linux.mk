@@ -107,6 +107,8 @@ else ifeq ($(BR2_LINUX_KERNEL_VMLINUZ),y)
 LINUX_IMAGE_NAME = vmlinuz
 else ifeq ($(BR2_LINUX_KERNEL_VMLINUZ_BIN),y)
 LINUX_IMAGE_NAME = vmlinuz.bin
+else ifeq ($(BR2_LINUX_KERNEL_UZIMAGE_BIN),y)
+LINUX_IMAGE_NAME = uzImage.bin
 endif
 LINUX_TARGET_NAME = $(LINUX_IMAGE_NAME)
 endif
