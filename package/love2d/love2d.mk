@@ -3,7 +3,7 @@
 # love2d aeefcc6 >> 6257287 >> 6fa5edf
 #
 #############################################################
-LOVE2D_VERSION = 11.3
+LOVE2D_VERSION = 0.10.0
 LOVE2D_SOURCE = $(LOVE2D_VERSION).tar.gz
 LOVE2D_SITE = https://github.com/love2d/love/archive
 LOVE2D_LICENSE = unknown
