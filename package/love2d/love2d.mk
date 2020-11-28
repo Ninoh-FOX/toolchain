@@ -4,7 +4,8 @@
 #
 #############################################################
 LOVE2D_VERSION = 11.3
-LOVE2D_SITE = https://github.com/love2d/love/releases/$(LOVE2D_VERSION)
+LOVE2D_SOURCE = $(LOVE2D_VERSION).tar.gz
+LOVE2D_SITE = https://github.com/love2d/love/archive
 LOVE2D_SITE_METHOD = hg
 LOVE2D_LICENSE = unknown
 LOVE2D_LICENSE_FILES = license.txt
