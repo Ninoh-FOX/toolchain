@@ -1,0 +1,45 @@
+--- ./src/modules/system/System.cpp	2020-11-28 13:43:15.031850239 +0100
++++ ./src/modules/system/System_mod.cpp	2020-11-28 13:50:01.921468647 +0100
+@@ -29,9 +29,7 @@
+ #elif defined(LOVE_ANDROID)
+ #include "common/android.h"
+ #elif defined(LOVE_LINUX)
+-#include <spawn.h>
+-//#include <stdlib.h>
+-//#include <unistd.h>
++#include <unistd.h>
+ #include <signal.h>
+ #include <sys/wait.h>
+ #elif defined(LOVE_WINDOWS)
+@@ -104,21 +102,20 @@
+ #elif defined(LOVE_LINUX)
+ 
+ 	pid_t pid;
+-	const char *argv[] = {"xdg-open", url.c_str(), nullptr};
++	int status = 0;
+ 
+ 	// Note: at the moment this process inherits our file descriptors.
+ 	// Note: the below const_cast is really ugly as well.
+-	if (posix_spawnp(&pid, "xdg-open", nullptr, nullptr, const_cast<char **>(argv), environ) != 0)
+-		return false;
++	pid = fork();
++	if (!pid) {
++		execlp("xdg-open", "xdg-open", url.c_str(), nullptr);
++	} else {
++		// Wait for xdg-open to complete (or fail.)
++		if (waitpid(pid, &status, 0) == pid)
++			return (status == 0);
++	}
+ 
+-	// Check if xdg-open already completed (or failed.)
+-	int status = 0;
+-	if (waitpid(pid, &status, WNOHANG) > 0)
+-		return (status == 0);
+-	else
+-		// We can't tell what actually happens without waiting for
+-		// the process to finish, which could take forever (literally).
+-		return true;
++	return false;
+ 
+ #elif defined(LOVE_WINDOWS)
+ 
