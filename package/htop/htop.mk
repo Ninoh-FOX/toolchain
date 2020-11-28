@@ -5,12 +5,18 @@
 ################################################################################
 
 HTOP_VERSION = 2.2.0
-HTOP_SITE = https://github.com/hishamhm/htop/releases/$(HTOP_VERSION)
+HTOP_SOURCE = $(HTOP_VERSION).tar.gz
+HTOP_SITE = https://github.com/htop-dev/htop/archive
 HTOP_DEPENDENCIES = ncurses
 # Prevent htop build system from searching the host paths
 HTOP_CONF_ENV = HTOP_NCURSES_CONFIG_SCRIPT=$(STAGING_DIR)/usr/bin/$(NCURSES_CONFIG_SCRIPTS)
 HTOP_LICENSE = GPL-2.0
 HTOP_LICENSE_FILES = COPYING
+
+define HTOP_RUN_AUTOGEN
+	cd $(@D) && PATH=$(BR_PATH) ./autogen.sh
+endef
+HTOP_CONFIGURE_HOOKS += HTOP_RUN_AUTOGEN
 
 ifeq ($(BR2_PACKAGE_NCURSES_WCHAR),y)
 HTOP_CONF_OPT += --enable-unicode
