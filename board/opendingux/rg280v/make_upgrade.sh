@@ -24,7 +24,7 @@ else
 	exit 1
 fi
 
-OPK_NAME=rg350-update-$DATE.opk
+OPK_NAME=RG280V-update-$DATE.opk
 
 # Report metadata.
 echo
