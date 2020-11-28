@@ -1,4 +1,0 @@
-title=ROGUE Updater
-description=Wifi Firmware updates manager
-exec=/usr/share/rogueupdate/rogueupdatemanager
-icon=skin:icons/rogueupdatemanager.png
