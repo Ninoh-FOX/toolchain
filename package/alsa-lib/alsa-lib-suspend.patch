@@ -1,0 +1,10 @@
+--- a/src/pcm/pcm_hw.c	2020-10-19 11:45:13.000000000 +0200
++++ b/src/pcm/pcm_hw.c	2021-01-08 23:36:09.801155204 +0100
+@@ -801,6 +801,7 @@
+ 	int fd = hw->fd, err;
+ 	if (ioctl(fd, SNDRV_PCM_IOCTL_RESUME) < 0) {
+ 		err = -errno;
++		if (err == 0) err = -1;
+ 		SYSMSG("SNDRV_PCM_IOCTL_RESUME failed (%i)", err);
+ 		return err;
+ 	}
