@@ -16,8 +16,7 @@ ALSA_LIB_CONF_OPT = --with-alsa-devdir=$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_DEVD
 		    --with-pcm-plugins="$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_PCM_PLUGINS))" \
 		    --with-ctl-plugins="$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_CTL_PLUGINS))" \
 		    --without-versioned \
-			--disable-topology \
-			--disable-ucm
+			--disable-topology
 
 # Can't build with static & shared at the same time (1.0.25+)
 ifeq ($(BR2_PREFER_STATIC_LIB),y)
@@ -44,6 +43,9 @@ ALSA_LIB_CONF_OPT += --disable-hwdep
 endif
 ifneq ($(BR2_PACKAGE_ALSA_LIB_SEQ),y)
 ALSA_LIB_CONF_OPT += --disable-seq
+endif
+ifneq ($(BR2_PACKAGE_ALSA_LIB_UCM),y)
+ALSA_LIB_CONF_OPT += --disable-ucm
 endif
 ifneq ($(BR2_PACKAGE_ALSA_LIB_ALISP),y)
 ALSA_LIB_CONF_OPT += --disable-alisp
