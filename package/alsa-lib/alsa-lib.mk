@@ -4,22 +4,25 @@
 #
 ################################################################################
 
-ALSA_LIB_VERSION = 1.0.28
-ALSA_LIB_SOURCE = alsa-lib_$(ALSA_LIB_VERSION).orig.tar.bz2
-ALSA_LIB_SITE = http://cdn-fastly.deb.debian.org/debian/pool/main/a/alsa-lib
-ALSA_LIB_LICENSE = LGPLv2.1+
-ALSA_LIB_LICENSE_FILES = COPYING
+ALSA_LIB_VERSION = 1.2.4
+ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
+ALSA_LIB_SITE = https://www.alsa-project.org/files/pub/lib
+ALSA_LIB_LICENSE = LGPL-2.1+ (library), GPL-2.0+ (aserver)
+ALSA_LIB_LICENSE_FILES = COPYING aserver/COPYING
 ALSA_LIB_INSTALL_STAGING = YES
 ALSA_LIB_CFLAGS = $(TARGET_CFLAGS)
 ALSA_LIB_AUTORECONF = YES
 ALSA_LIB_CONF_OPT = --with-alsa-devdir=$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_DEVDIR)) \
 		    --with-pcm-plugins="$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_PCM_PLUGINS))" \
 		    --with-ctl-plugins="$(call qstrip,$(BR2_PACKAGE_ALSA_LIB_CTL_PLUGINS))" \
-		    --without-versioned
+		    --without-versioned \
+			--disable-topology \
+			--disable-ucm
 
 # Can't build with static & shared at the same time (1.0.25+)
 ifeq ($(BR2_PREFER_STATIC_LIB),y)
-ALSA_LIB_CONF_OPT += --enable-shared=no
+ALSA_LIB_CONF_OPT += --enable-shared=no \
+					--without-libdl
 else
 ALSA_LIB_CONF_OPT += --enable-static=no
 endif
