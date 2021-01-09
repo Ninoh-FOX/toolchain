@@ -609,7 +609,7 @@ endif
 		/sbin/ldconfig -r $(TARGET_DIR); \
 	fi
 	( \
-		echo "NAME=PoquetGo2 V2"; \
+		echo "NAME=PocketGo2 V2"; \
 		echo "VERSION=\"ROGUE $(VERSION) by Ninoh-FOX\""; \
 		echo "ID=ROGUE"; \
 		echo "VERSION_ID=$(VERSION)"; \
