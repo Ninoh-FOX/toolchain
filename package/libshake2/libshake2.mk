@@ -1,15 +1,15 @@
 #############################################################
 #
-# LIBSHAKE2
+# LIBSHAKE2 0.3.1 api2
 #
 #############################################################
-LIBSHAKE2_VERSION = master
+LIBSHAKE2_VERSION = 0.3.1
 LIBSHAKE2_SITE = $(call github,zear,libshake,$(LIBSHAKE2_VERSION))
 LIBSHAKE2_LICENSE = MIT
 LIBSHAKE2_LICENSE_FILES = LICENSE.txt
 LIBSHAKE2_INSTALL_STAGING = YES
 
-LIBSHAKE2_MAKE_ENV = PREFIX=/usr BACKEND=LINUX AR="$(TARGET_AR)" CC="$(TARGET_CC)" LD="$(TARGET_CC)" STRIP="$(TARGET_STRIP)"
+LIBSHAKE2_MAKE_ENV = PREFIX=/usr PLATFORM=$(BR2_PACKAGE_LIBSHAKE2_PLATFORM)
 
 define LIBSHAKE2_BUILD_CMDS
 	$(LIBSHAKE2_MAKE_ENV) $(MAKE) -C $(@D)
