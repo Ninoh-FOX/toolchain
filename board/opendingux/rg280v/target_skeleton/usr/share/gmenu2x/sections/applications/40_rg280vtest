@@ -1,0 +1,4 @@
+title=RG280V test
+description=Test your RG-280V
+icon=skin:icons/rg280vtest.png
+exec=/usr/share/rg280vtest/rg280vtest
