@@ -6,7 +6,7 @@ echo "Updating local git repository..."
 git pull
 
 # Use the default config and patch it to point to our install location.
-make gcw0_defconfig
+make rg350_defconfig
 sed -ie 's%^BR2_HOST_DIR=.*$%BR2_HOST_DIR="/opt/gcw0-toolchain"%' .config
 
 # Clear the install location.
