@@ -1,4 +1,4 @@
-title=RG350 test
-description=Test your RG-350
-icon=skin:icons/rg350test.png
-exec=/usr/share/rg350test/rg350test.gcw
+title=RG280M test
+description=Test your RG280M
+icon=skin:icons/rg280mtest.png
+exec=/usr/share/rg280mtest/rg280mtest.gcw
