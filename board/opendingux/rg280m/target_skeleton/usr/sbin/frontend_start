@@ -1,0 +1,76 @@
+#!/bin/sh
+
+export HOME=`cat /etc/passwd |head -1 |cut -d':' -f 6`
+
+# Restore the framebuffer to a working state
+/usr/sbin/unlockvt > /dev/null
+
+# Reset the console
+/usr/bin/reset
+
+# Disactivate the console on framebuffer
+echo 0 > /sys/devices/virtual/vtconsole/vtcon1/bind
+
+# Disable downscaling for future apps
+if [ -f /sys/devices/platform/jz-lcd.0/allow_downscaling ] ; then
+	echo 0 > /sys/devices/platform/jz-lcd.0/allow_downscaling
+fi
+
+# Restore the regular key map
+if [ -f /sys/devices/platform/linkdev/alt_key_map ] ; then
+	echo 0 > /sys/devices/platform/linkdev/alt_key_map
+fi
+
+# Stop the gravity sensor if it's loaded
+/usr/sbin/gsensor --stop
+
+# Source /etc/profile to set the environment variables
+. /etc/profile
+
+if [ -f /usr/local/sbin/frontend_start ]; then
+	exec /usr/local/sbin/frontend_start
+else
+    if [ -f /media/data/.linker ]; then
+		if [ -f /usr/local/home/.gmenu2x/sections/applications/20_clockod ]; then
+		rm -rf /usr/local/home/.gmenu2x/sections/applications/*
+		rm -rf /usr/local/home/.gmenu2x/sections/settings/*
+		exec /usr/bin/gmenu2x
+		else
+		exec /usr/bin/gmenu2x
+		fi
+    else
+		if [ -f /usr/local/home/.gmenu2x/gmenu2x.conf ]; then
+		mkdir /usr/local/home/sections/
+	    cp -r /usr/local/home/.gmenu2x/sections/* /usr/local/home/sections/
+		rm -rf /usr/local/home/.gmenu2x
+		mkdir /usr/local/home/.gmenu2x/
+		cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
+		cp -r /usr/local/home/sections/* /usr/local/home/.gmenu2x/sections/
+		rm -rf /usr/local/home/sections/
+		rm -rf /usr/local/home/.gmenu2x/gmenu2x
+		rm -rf /usr/local/home/.gmenu2x/docs
+		rm -rf /usr/local/home/.gmenu2x/skins
+		rm -rf /usr/local/home/.gmenu2x/translations
+		rm -rf /usr/local/home/.gmenu2x/user_manual
+		rm -rf /usr/local/home/.gmenu2x/sections/applications
+		rm -rf /usr/local/home/.gmenu2x/sections/settings
+		rm -rf /usr/local/home/.gmenu2x/*.txt
+		touch /media/data/.linker
+		exec /usr/bin/gmenu2x
+		else
+		rm -rf /usr/local/home/.gmenu2x
+		mkdir /usr/local/home/.gmenu2x/
+		cp -r /usr/share/gmenu2x/* /usr/local/home/.gmenu2x/
+		rm -rf /usr/local/home/.gmenu2x/gmenu2x
+		rm -rf /usr/local/home/.gmenu2x/docs
+		rm -rf /usr/local/home/.gmenu2x/skins
+		rm -rf /usr/local/home/.gmenu2x/translations
+		rm -rf /usr/local/home/.gmenu2x/user_manual
+		rm -rf /usr/local/home/.gmenu2x/sections/applications
+		rm -rf /usr/local/home/.gmenu2x/sections/settings
+		rm -rf /usr/local/home/.gmenu2x/*.txt
+		touch /media/data/.linker
+		exec /usr/bin/gmenu2x
+		fi
+	fi
+fi

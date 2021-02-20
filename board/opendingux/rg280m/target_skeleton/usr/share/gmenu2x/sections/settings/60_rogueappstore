@@ -1,0 +1,4 @@
+title=ROGUE App Store
+description=App Store
+exec=/usr/share/rogueappstore/rogueappstore
+icon=skin:icons/rogueappstore.png
