@@ -22,14 +22,14 @@ else
 ROOTFS=""
 fi
 
-if [ -r "updateplayv2/mininit-syspart" ]; then
-MININIT="updateplayv2/mininit-syspart"
+if [ -r "update_PlayGov2/mininit-syspart" ]; then
+MININIT="update_PlayGov2/mininit-syspart"
 else
 MININIT=""
 fi
 
-if [ -r "updateplayv2/ubiboot.bin" ]; then
-BOOTLOADERS="updateplayv2/ubiboot.bin"
+if [ -r "update_PlayGov2/ubiboot.bin" ]; then
+BOOTLOADERS="update_PlayGov2/ubiboot.bin"
 else
 BOOTLOADERS=""
 fi
@@ -86,24 +86,24 @@ fi
 if [ "$BOOTLOADERS" ] ; then
 
 	echo -n "Calculating SHA1 sum of bootloaders... "
-        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "updateplayv2/ubiboot.bin.sha1"
+        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "update_PlayGov2/ubiboot.bin.sha1"
         echo "done"
 
-        BOOTLOADERS="$BOOTLOADERS updateplayv2/ubiboot.bin.sha1"
+        BOOTLOADERS="$BOOTLOADERS update_PlayGov2/ubiboot.bin.sha1"
 fi
 
 if [ "$MININIT" ] ; then
 
 	echo -n "Calculating SHA1 sum of mininit-syspart... "
-	sha1sum "$MININIT" | cut -d' ' -f1 > "updateplayv2/mininit-syspart.sha1"
+	sha1sum "$MININIT" | cut -d' ' -f1 > "update_PlayGov2/mininit-syspart.sha1"
 	echo "done"
 
-	MININIT="$MININIT updateplayv2/mininit-syspart.sha1"
+	MININIT="$MININIT update_PlayGov2/mininit-syspart.sha1"
 fi
 
-echo "$DATE" > updateplayv2/date.txt
+echo "$DATE" > update_PlayGov2/date.txt
 
-echo "$VERSION" > updateplayv2/version.txt
+echo "$VERSION" > update_PlayGov2/version.txt
 
 # Report metadata.
 echo
@@ -119,7 +119,7 @@ echo "=========================="
 echo
 
 # Write metadata.
-cat > updateplayv2/default.gcw0.desktop <<EOF
+cat > update_PlayGov2/default.gcw0.desktop <<EOF
 [Desktop Entry]
 Name=OS update $VERSION
 Comment=PLAYGO v2 ROGUE update $DATE
@@ -132,16 +132,16 @@ Categories=applications;
 EOF
 
 # Create OPK.
-OPK_FILE=updateplayv2/playgov2-update-$VERSION-$DATE.opk
+OPK_FILE=update_PlayGov2/playgov2-update-$VERSION-$DATE.opk
 mksquashfs \
-	updateplayv2/default.gcw0.desktop \
-	updateplayv2/rogue.png \
-	updateplayv2/update.sh \
-	updateplayv2/trimfat.py \
-	updateplayv2/flash_partition.sh \
-	updateplayv2/date.txt \
-    updateplayv2/version.txt \
-    updateplayv2/fsck.fat \
+	update_PlayGov2/default.gcw0.desktop \
+	update_PlayGov2/rogue.png \
+	update_PlayGov2/update.sh \
+	update_PlayGov2/trimfat.py \
+	update_PlayGov2/flash_partition.sh \
+	update_PlayGov2/date.txt \
+    update_PlayGov2/version.txt \
+    update_PlayGov2/fsck.fat \
 	$BOOTLOADERS \
 	$MININIT \
 	$KERNEL \
@@ -163,4 +163,4 @@ echo
 echo "moved OPK to output folder"
 echo
 
-rm updateplayv2/default.gcw0.desktop updateplayv2/date.txt updateplayv2/version.txt updateplayv2/*.sha1
+rm update_PlayGov2/default.gcw0.desktop update_PlayGov2/date.txt update_PlayGov2/version.txt update_PlayGov2/*.sha1
