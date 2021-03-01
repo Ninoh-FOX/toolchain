@@ -15,6 +15,8 @@ OPKG_INSTALL_STAGING = YES
 OPKG_CONF_OPT = --disable-curl
 OPKG_AUTORECONF = YES
 
+OPKG_DEPENDENCIES += libcurl
+
 # Ensure directory for lockfile exists
 define OPKG_CREATE_LOCKDIR
 	mkdir -p $(TARGET_DIR)/usr/lib/opkg

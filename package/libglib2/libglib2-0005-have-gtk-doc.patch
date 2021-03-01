@@ -1,0 +1,11 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -2581,6 +2581,8 @@
+ dnl **************************
+ # gtkdocize greps for ^GTK_DOC_CHECK and parses it, so you need to have
+ # it on it's own line.
++AM_CONDITIONAL([HAVE_GTK_DOC],[true])
++
+ m4_ifdef([GTK_DOC_CHECK], [
+ GTK_DOC_CHECK([1.20], [--flavour no-tmpl])
+ ],[

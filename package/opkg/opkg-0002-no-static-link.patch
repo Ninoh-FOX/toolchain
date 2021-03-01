@@ -1,0 +1,10 @@
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -18,6 +18,6 @@
+ 
+ libopkg_test_LDADD = $(top_builddir)/libopkg/libopkg.la
+ libopkg_test_SOURCE = libopkg_test.c
+-libopkg_test_LDFLAGS = -static
++libopkg_test_LDFLAGS =
+ 
+ 
