@@ -1,0 +1,11 @@
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,6 @@
+ ifeq ($(PLATFORM), gcw0)
+-  CC         := /opt/gcw0-toolchain/usr/bin/mipsel-linux-gcc
+-  STRIP      := /opt/gcw0-toolchain/usr/bin/mipsel-linux-strip
++  CC         := /opt/gcw0-toolchain/usr/bin/mipsel-gcw0-linux-uclibc-gcc
++  STRIP      := /opt/gcw0-toolchain/usr/bin/mipsel-gcw0-linux-uclibc-strip
+   BACKEND    := LINUX
+ endif
+ 

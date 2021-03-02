@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2014.08-g848aa5328-dirty Configuration
+# Buildroot 2014.08-gdf9b1a765-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_NEEDS_HOST_JAVAC=y
@@ -800,6 +800,7 @@ BR2_PACKAGE_LUAJIT=y
 # BR2_PACKAGE_WSAPI is not set
 # BR2_PACKAGE_XAVANTE is not set
 # BR2_PACKAGE_MONO is not set
+# BR2_PACKAGE_NODEJS is not set
 # BR2_PACKAGE_PERL is not set
 # BR2_PACKAGE_PHP is not set
 BR2_PACKAGE_PYTHON=y
