@@ -1,0 +1,9 @@
+#!/bin/sh
+CONFS=/etc/vsftpd.conf
+if grep -q 'root::' /usr/local/etc/shadow ; then
+	CONFS="$CONFS /etc/vsftpd.anon.conf"
+fi
+if [ -f /usr/local/etc/vsftpd.conf ]; then
+	CONFS="$CONFS /usr/local/etc/vsftpd.conf"
+fi
+exec /usr/sbin/vsftpd $CONFS

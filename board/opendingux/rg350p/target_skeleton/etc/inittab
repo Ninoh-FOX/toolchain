@@ -1,0 +1,42 @@
+# /etc/inittab
+#
+# Copyright (C) 2001 Erik Andersen <andersen@codepoet.org>
+#
+# Note: BusyBox init doesn't support runlevels.  The runlevels field is
+# completely ignored by BusyBox init. If you want runlevels, use
+# sysvinit.
+#
+# Format for each entry: <id>:<runlevels>:<action>:<process>
+#
+# id        == tty to run on, or empty for /dev/console
+# runlevels == ignored
+# action    == one of sysinit, respawn, askfirst, wait, and once
+# process   == program to run
+
+# Startup the system
+::sysinit:/bin/mount -o size=64k,mode=0755 -t devtmpfs udev /dev
+::sysinit:/bin/mkdir -p /dev/pts /dev/shm /dev/mtp
+
+::sysinit:/bin/mount -a
+::sysinit:/bin/mkdir /var/cache /var/lib /var/lock /var/log /var/run /var/spool /var/tmp
+::sysinit:/bin/echo -n 1 > /proc/sys/vm/overcommit_memory
+
+::sysinit:/bin/hostname -F /etc/hostname
+
+# now run any rc scripts
+::sysinit:/etc/init.d/rcS start
+
+# startup has finished; stop logging to console
+::sysinit:/bin/dmesg -D
+
+# Launch the main application
+tty1::respawn:/usr/sbin/frontend_start
+ttyS2::respawn:/sbin/getty -n -l /usr/sbin/rootlogin -L ttyS2 57600 vt100
+
+# Stuff to do for the 3-finger salute
+::ctrlaltdel:/sbin/reboot
+
+# Stuff to do before rebooting
+null::shutdown:/etc/init.d/rcS stop
+null::shutdown:/sbin/swapoff -a
+null::shutdown:/bin/umount -a -r

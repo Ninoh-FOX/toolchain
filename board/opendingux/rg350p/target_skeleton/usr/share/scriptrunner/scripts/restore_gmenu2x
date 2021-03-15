@@ -1,0 +1,9 @@
+#!/bin/sh
+# title=Restore gmenu2x sections
+# desc=Create default sections in gmenu2x and restore missings apps included in firmware.
+
+echo "Restoring default sections."
+cp -r /usr/share/gmenu2x/sections/* /usr/local/home/.gmenu2x/sections
+echo "Sections and apps restored."
+echo "END"
+
