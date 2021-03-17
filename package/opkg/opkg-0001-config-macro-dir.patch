@@ -1,0 +1,10 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -3,7 +3,6 @@
+ AC_CONFIG_SRCDIR([libopkg/pkg.c])
+
+ AC_CONFIG_AUX_DIR([conf])
+-AC_CONFIG_MACRO_DIR([m4])
+ AC_CONFIG_MACRO_DIR([shave])
+
+ AM_INIT_AUTOMAKE
