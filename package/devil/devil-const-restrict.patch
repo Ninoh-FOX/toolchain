@@ -1,0 +1,11 @@
+--- a/include/IL/il.h
++++ b/include/IL/il.h
+@@ -63,7 +63,7 @@
+ 	#endif
+ #endif
+
+-#ifdef RESTRICT_KEYWORD
++#if defined(RESTRICT_KEYWORD) && !defined(__cplusplus)
+ #define RESTRICT restrict
+ #define CONST_RESTRICT const restrict
+ #else
