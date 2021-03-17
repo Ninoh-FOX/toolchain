@@ -1,40 +1,5 @@
 --- a/ltmain.sh	2014-07-30 22:21:24.664684143 +0200
 +++ b/ltmain.sh	2014-07-30 22:23:02.440687625 +0200
-@@ -1417,8 +1417,8 @@
- 	# was found and let the user know that the "--tag" command
- 	# line option must be used.
- 	if test -z "$tagname"; then
--	  func_echo "unable to infer tagged configuration"
--	  func_fatal_error "specify a tag with \`--tag'"
-+	  func_echo "defaulting to \`CC'"
-+	  func_echo "if this is not correct, specify a tag with \`--tag'"
- #	else
- #	  func_verbose "using $tagname tagged configuration"
- 	fi
-@@ -2963,8 +2963,11 @@
- 	  # At present, this check doesn't affect windows .dll's that
- 	  # are installed into $libdir/../bin (currently, that works fine)
- 	  # but it's something to keep an eye on.
--	  test "$inst_prefix_dir" = "$destdir" && \
--	    func_fatal_error "error: cannot install \`$file' to a directory not ending in $libdir"
-+	  #
-+	  # This breaks install into our staging area.  -PB
-+	  #
-+	  # test "$inst_prefix_dir" = "$destdir" && \
-+	  #   func_fatal_error "error: cannot install \`$file' to a directory not ending in $libdir"
- 
- 	  if test -n "$inst_prefix_dir"; then
- 	    # Stick the inst_prefix_dir data into the link command.
-@@ -5176,7 +5179,8 @@
- 	;;
-       -all-static | -static | -static-libtool-libs)
- 	case $arg in
--	-all-static)
-+	# Make -static behave like -all-static
-+	-all-static | -static)
- 	  if test "$build_libtool_libs" = yes && test -z "$link_static_flag"; then
- 	    func_warning "complete static linking is impossible in this configuration"
- 	  fi
 @@ -5185,12 +5189,6 @@
  	  fi
  	  prefer_static_libs=yes
