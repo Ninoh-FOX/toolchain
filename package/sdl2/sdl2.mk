@@ -67,9 +67,9 @@ endif
 
 ifeq ($(BR2_PACKAGE_SDL2_KMSDRM),y)
 SDL2_DEPENDENCIES += libdrm
-SDL2_CONF_OPTS += --enable-video-kmsdrm
+SDL2_CONF_OPT += --enable-video-kmsdrm
 else
-SDL2_CONF_OPTS += --disable-video-kmsdrm
+SDL2_CONF_OPT += --disable-video-kmsdrm
 endif
 
 # OpenDingux hack: We've got tslib to make porting easier, but we've got no
