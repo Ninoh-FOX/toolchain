@@ -22,17 +22,17 @@ ALSA_UTILS_CONF_OPT = \
 	--with-curses=ncurses
 
 ifeq ($(BR2_PACKAGE_ALSA_UTILS_ALSALOOP),y)
-ALSA_UTILS_CONF_OPTS += --enable-alsaloop
+ALSA_UTILS_CONF_OPT += --enable-alsaloop
 else
-ALSA_UTILS_CONF_OPTS += --disable-alsaloop
+ALSA_UTILS_CONF_OPT += --disable-alsaloop
 endif
 
 ifeq ($(BR2_PACKAGE_ALSA_UTILS_BAT),y)
-ALSA_UTILS_CONF_OPTS += --enable-bat
+ALSA_UTILS_CONF_OPT += --enable-bat
 # Analysis support requires fftw single precision
 ALSA_UTILS_DEPENDENCIES += $(if $(BR2_PACKAGE_FFTW_SINGLE),fftw-single)
 else
-ALSA_UTILS_CONF_OPTS += --disable-bat
+ALSA_UTILS_CONF_OPT += --disable-bat
 endif
 
 ifneq ($(BR2_PACKAGE_ALSA_UTILS_ALSAMIXER),y)
@@ -77,7 +77,7 @@ endef
 
 ifeq ($(BR2_PACKAGE_ALSA_UTILS_ALSACTL)$(BR2_INIT_SYSTEMD),yy)
 ALSA_UTILS_DEPENDENCIES += systemd
-ALSA_UTILS_CONF_OPTS += --with-systemdsystemunitdir=/usr/lib/systemd/system
+ALSA_UTILS_CONF_OPT += --with-systemdsystemunitdir=/usr/lib/systemd/system
 define ALSA_UTILS_INSTALL_INIT_SYSTEMD
 	$(INSTALL) -D -m 0644 $(@D)/alsactl/alsa-restore.service \
 		$(TARGET_DIR)/usr/lib/systemd/system/alsa-restore.service

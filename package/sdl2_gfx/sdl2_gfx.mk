@@ -11,7 +11,7 @@ SDL2_GFX_LICENSE = Zlib
 SDL2_GFX_LICENSE_FILES = COPYING SDL2_framerate.h
 SDL2_GFX_INSTALL_STAGING = YES
 SDL2_GFX_DEPENDENCIES = sdl2 host-pkgconf
-SDL2_GFX_CONF_OPTS = --disable-sdltest --disable-mmx
+SDL2_GFX_CONF_OPT = --disable-sdltest --disable-mmx
 # configure/Makefile.in not up-to-date, causing aclocal to be used at
 # build time if we don't autoreconf.
 SDL2_GFX_AUTORECONF = YES

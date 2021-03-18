@@ -19,7 +19,7 @@ LIBDRM_DEPENDENCIES = \
 	host-pkgconf \
 	host-xutil_util-macros
 
-LIBDRM_CONF_OPTS = \
+LIBDRM_CONF_OPT = \
 	--disable-cairo-tests \
 	--disable-manpages
 

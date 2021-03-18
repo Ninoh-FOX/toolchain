@@ -142,7 +142,7 @@ define MPLAYER_CONFIGURE_CMDS
 		--extra-ldflags="$(MPLAYER_LDFLAGS)" \
 		--yasm='' \
 		--enable-fbdev \
-		$(MPLAYER_CONF_OPTS) \
+		$(MPLAYER_CONF_OPT) \
 		--enable-cross-compile \
 		--disable-ivtv \
 		--enable-dynamic-plugins \
