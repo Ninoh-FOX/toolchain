@@ -73,6 +73,13 @@ else
 SDL2_CONF_OPT += --disable-dbus
 endif
 
+ifeq ($(BR2_PACKAGE_SDL2_KMSDRM),y)
+SDL2_DEPENDENCIES += libdrm
+SDL2_CONF_OPTS += --enable-video-kmsdrm
+else
+SDL2_CONF_OPTS += --disable-video-kmsdrm
+endif
+
 # OpenDingux hack: We've got tslib to make porting easier, but we've got no
 #                  touch screen, so having SDL try to use tslib is pointless.
 # ifeq ($(BR2_PACKAGE_TSLIB),y)
