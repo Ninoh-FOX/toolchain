@@ -12,14 +12,6 @@ SDL2_INSTALL_STAGING = YES
 
 LIBGLES_DEPENDENCIES = mesa3d-etna_viv
 
-define SDL2_VGA_PATCH
-	$(APPLY_PATCHES) $(@D) $(SDL2_PKGDIR) 0001-sdl2-vga.patch.conditional
-endef
-
-ifeq ($(BR2_TARGET_DEVICE),"rg350m")
-SDL2_POST_PATCH_HOOKS += SDL2_VGA_PATCH
-endif
-
 ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
 SDL2_DEPENDENCIES += $(LIBGLES_DEPENDENCIES)
 SDL2_CONF_OPT += --enable-video-opengles
