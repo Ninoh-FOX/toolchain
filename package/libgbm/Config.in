@@ -2,8 +2,6 @@ menuconfig BR2_PACKAGE_LIBGBM
 	bool "libgbm"
 	depends on BR2_TOOLCHAIN_HAS_THREADS # libpthread-stubs
 	select BR2_PACKAGE_LIBPTHREAD_STUBS
-	depends on BR2_PACKAGE_HAS_UDEV # libudev is configure dependency
-	select BR2_PACKAGE_HAS_UDEV
 	select BR2_PACKAGE_LIBDRM
 	select BR2_PACKAGE_LIBDRM_ETNAVIV
 	select BR2_PACKAGE_LIBDRM_HAS_ATOMIC
