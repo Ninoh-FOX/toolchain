@@ -24,6 +24,6 @@ HOST_LIBGBM_DEPENDENCIES += host-automake host-autoconf host-libtool
 LIBGBM_CONF_ENV := \
 	LIBTOOL_FOR_BUILD="$(HOST_DIR)/usr/bin/libtool" \
 
-LIBDRM_CONF_ENV = ac_cv_prog_cc_c99='-std=gnu99'
+LIBGBM_CONF_ENV = ac_cv_prog_cc_c99='-std=gnu99'
 
 $(eval $(autotools-package))
