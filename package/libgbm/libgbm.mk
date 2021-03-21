@@ -5,7 +5,7 @@
 ################################################################################
 
 LIBGBM_VERSION = master
-LIBGBM_SOURCE = libdrm-$(LIBGBM_VERSION).tar.gz
+LIBGBM_SOURCE = libgbm-$(LIBGBM_VERSION).tar.gz
 LIBGBM_SITE = https://git.ti.com/cgit/glsdk/libgbm/snapshot
 LIBGBM_LICENSE = Texas instruments
 LIBGBM_INSTALL_STAGING = YES
