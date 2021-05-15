@@ -1,0 +1,195 @@
+--- a/configure	2014-03-16 03:30:52.000000000 +0100
++++ b/configure	2021-05-16 01:13:24.045642820 +0200
+@@ -835,6 +835,7 @@
+ enable_video_cocoa
+ enable_video_directfb
+ enable_directfb_shared
++enable_video_fbdev
+ enable_fusionsound
+ enable_fusionsound_shared
+ enable_video_dummy
+@@ -1564,6 +1565,7 @@
+   --enable-video-directfb use DirectFB video driver [[default=no]]
+   --enable-directfb-shared
+                           dynamically load directfb support [[default=yes]]
++  --enable-video-fbdev    Enable the framebuffer video backend [[default=yes]]
+   --enable-fusionsound    use FusionSound audio driver [[default=no]]
+   --enable-fusionsound-shared
+                           dynamically load fusionsound audio support
+@@ -18688,9 +18690,9 @@
+ if test "${enable_video_wayland+set}" = set; then :
+   enableval=$enable_video_wayland;
+ else
+-  enable_video_wayland=no
++  enable_video_wayland=yes
+ fi
+- #yes)
++
+ 
+     # Check whether --enable-video-wayland-qt-touch was given.
+ if test "${enable_video_wayland_qt_touch+set}" = set; then :
+@@ -18842,9 +18844,9 @@
+ if test "${enable_video_mir+set}" = set; then :
+   enableval=$enable_video_mir;
+ else
+-  enable_video_mir=no
++  enable_video_mir=yes
+ fi
+- #yes)
++
+ 
+     if test x$enable_video = xyes -a x$enable_video_mir = xyes; then
+         # Extract the first word of "pkg-config", so it can be a program name with args.
+@@ -20726,11 +20728,32 @@
+             fi
+             { $as_echo "$as_me:${as_lineno-$LINENO}: result: $directfb_shared" >&5
+ $as_echo "$directfb_shared" >&6; }
++            SDL_CFLAGS="$SDL_CFLAGS $DIRECTFB_CFLAGS"
+             have_video=yes
+         fi
+     fi
+ }
+ 
++CheckFBDEV()
++{
++	if test x$ARCH = xlinux -a x$enable_video = xyes; then
++		# Check whether --enable-video-fbdev was given.
++if test "${enable_video_fbdev+set}" = set; then :
++  enableval=$enable_video_fbdev;
++else
++  enable_video_fbdev=yes
++fi
++
++		if test x$enable_video_fbdev = xyes; then
++			have_video=yes
++			SUMMARY_video="${SUMMARY_video} fbdev"
++
++$as_echo "#define SDL_VIDEO_DRIVER_FBDEV 1" >>confdefs.h
++
++		fi
++	fi
++}
++
+ CheckFusionSound()
+ {
+     # Check whether --enable-fusionsound was given.
+@@ -21403,6 +21426,10 @@
+ fi
+ 
+     case "$host" in
++	 *-*-androideabi*)
++            pthread_cflags="-D_REENTRANT -D_THREAD_SAFE"
++            pthread_lib=""
++	    ;;
+         *-*-linux*|*-*-uclinux*)
+             pthread_cflags="-D_REENTRANT"
+             pthread_lib="-lpthread"
+@@ -22547,6 +22574,20 @@
+                     $as_echo "#define SDL_VIDEO_DRIVER_RPI 1" >>confdefs.h
+                 fi
+                 ;;
++            *-*-androideabi*)
++                # Android
++                ARCH=android
++                ANDROID_CFLAGS="-DGL_GLEXT_PROTOTYPES"
++                CFLAGS="$CFLAGS $ANDROID_CFLAGS"
++                SDL_CFLAGS="$SDL_CFLAGS $ANDROID_CFLAGS"
++                EXTRA_CFLAGS="$EXTRA_CFLAGS $ANDROID_CFLAGS"
++                EXTRA_LDFLAGS="$EXTRA_LDFLAGS -ldl -lGLESv1_CM -lGLESv2 -llog -landroid"
++
++                if test x$enable_video = xyes; then
++                    SOURCES="$SOURCES $srcdir/src/core/android/*.c $srcdir/src/video/android/*.c"
++                    $as_echo "#define SDL_VIDEO_DRIVER_ANDROID 1" >>confdefs.h
++                fi
++                ;;
+             *-*-linux*)         ARCH=linux ;;
+             *-*-uclinux*)       ARCH=linux ;;
+             *-*-kfreebsd*-gnu)  ARCH=kfreebsd-gnu ;;
+@@ -22580,6 +22621,7 @@
+         CheckWayland
+         CheckMir
+         CheckDirectFB
++        CheckFBDEV
+         CheckFusionSound
+         CheckOpenGLX11
+         CheckOpenGLESX11
+@@ -22617,6 +22659,13 @@
+                 SOURCES="$SOURCES $srcdir/src/audio/paudio/*.c"
+                 have_audio=yes
+             ;;
++            android)
++
++$as_echo "#define SDL_AUDIO_DRIVER_ANDROID 1" >>confdefs.h
++
++                SOURCES="$SOURCES $srcdir/src/audio/android/*.c"
++                have_audio=yes
++            ;;
+           esac
+         fi
+         # Set up files for the joystick library
+@@ -22629,6 +22678,13 @@
+                 SOURCES="$SOURCES $srcdir/src/joystick/linux/*.c"
+                 have_joystick=yes
+             ;;
++            android)
++
++$as_echo "#define SDL_JOYSTICK_ANDROID 1" >>confdefs.h
++
++                SOURCES="$SOURCES $srcdir/src/joystick/android/*.c"
++                have_joystick=yes
++            ;;
+           esac
+         fi
+         # Set up files for the haptic library
+@@ -22655,6 +22711,13 @@
+                    SOURCES="$SOURCES $srcdir/src/power/linux/*.c"
+                    have_power=yes
+                ;;
++               android)
++
++$as_echo "#define SDL_POWER_ANDROID 1" >>confdefs.h
++
++                   SOURCES="$SOURCES $srcdir/src/power/android/*.c"
++                   have_power=yes
++               ;;
+              esac
+         fi
+         # Set up files for the filesystem library
+@@ -22681,6 +22744,11 @@
+         if test x$use_input_events = xyes; then
+             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev.c"
+         fi
++		# Set up files for the fbdev video driver
++		if test x$enable_video_fbdev = xyes; then
++			SOURCES="$SOURCES $srcdir/src/video/fbdev/*.c"
++			$as_echo "#define SDL_VIDEO_DRIVER_FB 1" >>confdefs.h
++		fi
+         ;;
+     *-*-cygwin* | *-*-mingw32*)
+         ARCH=win32
+@@ -23153,7 +23221,7 @@
+     OBJECTS=`echo "$OBJECTS" | sed 's,[^ ]*/\([^ ]*\)\.'$EXT',$(objects)/\1.lo,g'`
+     DEPENDS=`echo "$DEPENDS" | sed "s,^\\([^ ]*\\)/\\([^ ]*\\)\\.$EXT\\$,\\\\
+ \\$(objects)/\\2.lo: \\1/\\2.$EXT\\\\
+-	\\$(LIBTOOL) --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
++	\\$(LIBTOOL) --tag=CC --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
+ done
+ 
+ VERSION_OBJECTS=`echo $VERSION_SOURCES`
+@@ -23168,14 +23236,14 @@
+ SDLMAIN_OBJECTS=`echo "$SDLMAIN_OBJECTS" | sed 's,[^ ]*/\([^ ]*\)\.c,$(objects)/\1.o,g'`
+ SDLMAIN_DEPENDS=`echo "$SDLMAIN_DEPENDS" | sed "s,\\([^ ]*\\)/\\([^ ]*\\)\\.c,\\\\
+ \\$(objects)/\\2.o: \\1/\\2.c\\\\
+-	\\$(LIBTOOL) --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
++	\\$(LIBTOOL) --tag=CC --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
+ 
+ SDLTEST_OBJECTS=`echo $SDLTEST_SOURCES`
+ SDLTEST_DEPENDS=`echo $SDLTEST_SOURCES`
+ SDLTEST_OBJECTS=`echo "$SDLTEST_OBJECTS" | sed 's,[^ ]*/\([^ ]*\)\.c,$(objects)/\1.o,g'`
+ SDLTEST_DEPENDS=`echo "$SDLTEST_DEPENDS" | sed "s,\\([^ ]*\\)/\\([^ ]*\\)\\.c,\\\\
+ \\$(objects)/\\2.o: \\1/\\2.c\\\\
+-	\\$(LIBTOOL) --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
++	\\$(LIBTOOL) --tag=CC --mode=compile \\$(CC) \\$(CFLAGS) \\$(EXTRA_CFLAGS) $DEPENDENCY_TRACKING_OPTIONS -c \\$< -o \\$@,g"`
+ 
+ # Set runtime shared library paths as needed
+ 
