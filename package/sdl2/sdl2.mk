@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-SDL2_VERSION = master
-SDL2_SITE = $(call github,pcercuei,SDL2,$(SDL2_VERSION))
+SDL2_VERSION = release-2.0.3
+SDL2_SITE = $(call github,pcercuei,SDL,$(SDL2_VERSION))
 SDL2_LICENSE = zlib
 SDL2_LICENSE_FILES = COPYING.txt
 SDL2_INSTALL_STAGING = YES
