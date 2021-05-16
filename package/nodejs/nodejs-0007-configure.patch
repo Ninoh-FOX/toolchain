@@ -1,0 +1,11 @@
+--- configure	2014-07-31 19:24:06.000000000 +0200
++++ configure_mod	2021-05-16 02:14:14.194496938 +0200
+@@ -485,7 +485,7 @@
+   o['variables']['clang'] = 1 if is_clang else 0
+ 
+   if not is_clang and cc_version != 0:
+-    o['variables']['gcc_version'] = 10 * cc_version[0] + cc_version[1]
++    o['variables']['gcc_version'] = ''
+ 
+   # clang has always supported -fvisibility=hidden, right?
+   if not is_clang and cc_version < (4,0,0):
