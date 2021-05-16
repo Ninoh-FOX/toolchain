@@ -1,37 +1,36 @@
-From ec72e543fece666ce97b9f37f08518f40e2a2aea Mon Sep 17 00:00:00 2001
-From: Paul Cercueil <paul@crapouillou.net>
-Date: Wed, 13 Aug 2014 04:01:35 +0200
-Subject: [PATCH 3/3] evdev: Also switch the VT to graphics mode
-
-This avoids the console cursor from blinking when SDL2 apps are running.
----
- src/core/linux/SDL_evdev.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/src/core/linux/SDL_evdev.c b/src/core/linux/SDL_evdev.c
-index 19333f257..60b0fc93d 100644
---- a/src/core/linux/SDL_evdev.c
-+++ b/src/core/linux/SDL_evdev.c
-@@ -395,6 +395,9 @@ static int SDL_EVDEV_mute_keyboard(int tty, int *kb_mode)
-     if (ioctl(tty, KDSKBMUTE, 1) && ioctl(tty, KDSKBMODE, K_OFF)) {
-         return SDL_SetError("EVDEV: Failed muting keyboard");
+--- a/src/core/linux/SDL_evdev.c	2016-10-20 05:50:33.000000000 +0200
++++ b/src/core/linux/SDL_evdev.c	2021-05-16 09:03:27.582541612 +0200
+@@ -158,14 +158,12 @@
+     if (ioctl(tty_fd, KDGKBMODE, old_kb_mode) < 0) {
+         return SDL_SetError("Failed to get keyboard mode during muting");
      }
-+    if ( ioctl(tty, KDSETMODE, KD_GRAPHICS) < 0 ) {
+-    
+-    /* FIXME: atm this absolutely ruins the vt, and KDSKBMUTE isn't implemented
+-       in the kernel */
+-    /*
+     if (ioctl(tty_fd, KDSKBMODE, K_OFF) < 0) {
+         return SDL_SetError("Failed to set keyboard mode during muting");
+     }
+-    */
++	if ( ioctl(tty_fd, KDSETMODE, KD_GRAPHICS) < 0 ) {
 +        return SDL_SetError("EVDEV: Failed to enable graphics mode");
 +    }
      
      return 0;  
  }
-@@ -402,6 +405,10 @@ static int SDL_EVDEV_mute_keyboard(int tty, int *kb_mode)
+@@ -173,12 +171,12 @@
  /* Restore the keyboard mode for given tty */
- static void SDL_EVDEV_unmute_keyboard(int tty, int kb_mode)
+ static void SDL_EVDEV_unmute_keyboard(int tty_fd, int kb_mode)
  {
-+    if ( ioctl(tty, KDSETMODE, KD_TEXT) ) {
+-    /* read above */
+-    /*
+     if (ioctl(tty_fd, KDSKBMODE, kb_mode) < 0) {
+         SDL_Log("Failed to unmute keyboard");
+     }
+-    */
++	if ( ioctl(tty_fd, KDSETMODE, KD_TEXT) ) {
 +        SDL_Log("EVDEV: Failed to restore text mode");
 +    }
-+
-     if (ioctl(tty, KDSKBMUTE, 0) && ioctl(tty, KDSKBMODE, kb_mode)) {
-         SDL_Log("EVDEV: Failed restoring keyboard mode");
-     }
--- 
-2.25.1
+ }
+ 
+ static int SDL_EVDEV_get_active_tty()
