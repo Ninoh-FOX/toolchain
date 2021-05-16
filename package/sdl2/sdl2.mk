@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-SDL2_VERSION = release-2.0.4
+SDL2_VERSION = release-2.0.5
 SDL2_SITE = $(call github,pcercuei,SDL,$(SDL2_VERSION))
 SDL2_LICENSE = zlib
 SDL2_LICENSE_FILES = COPYING.txt
