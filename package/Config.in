@@ -376,6 +376,7 @@ endif
 	source "package/pwswd/Config.in"
 	source "package/libshake/Config.in"
 	source "package/libshake2/Config.in"
+	source "package/libhugetlbfs/Config.in"
 	source "package/read-edid/Config.in"
 	source "package/rng-tools/Config.in"
 	source "package/rpi-userland/Config.in"
