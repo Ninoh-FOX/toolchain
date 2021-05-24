@@ -1,0 +1,9 @@
+config BR2_PACKAGE_LIGHTREC
+	bool "lightrec"
+	depends on BR2_sparc || BR2_i386 || BR2_x86_64 || BR2_mips || BR2_mipsel || BR2_arm || BR2_powerpc
+	help
+	  Lightrec is a MIPS-to-everything dynamic recompiler for PlayStation emulators, using GNU Lightning as the code emitter.
+          As such, in theory it should be able to run on every CPU that Lightning can generate code for; including, 
+          but not limited to, x86, x86_64, ARM, Aarch64, MIPS, PowerPC and Risc-V.
+
+	  https://github.com/pcercuei/lightrec
