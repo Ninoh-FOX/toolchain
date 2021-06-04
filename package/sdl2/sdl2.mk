@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-SDL2_VERSION = release-2.0.5
+SDL2_VERSION = release-2.0.6
 SDL2_SITE = $(call github,pcercuei,SDL,$(SDL2_VERSION))
 SDL2_LICENSE = zlib
 SDL2_LICENSE_FILES = COPYING.txt
@@ -23,7 +23,7 @@ ifeq ($(BR2_PACKAGE_HAS_LIBEGL),y)
 SDL2_DEPENDENCIES += $(LIBEGL_DEPENDENCIES)
 endif
 
-SDL2_CONF_OPT += --enable-video-fbdev
+SDL2_CONF_OPT += --enable-video-fbdev --disable-video-vulkan
 
 # Note: SDL2 looks for X11 headers in host dirs, so if you want to build SDL2
 #       with X11 support, better make it safe for cross compilation first.

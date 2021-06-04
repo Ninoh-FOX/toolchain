@@ -20,9 +20,9 @@ Subject: [PATCH 2/3] Added first implementation of the FBDEV video driver
 
 diff --git a/configure.in b/configure.in
 index 97b57f316..6c4eff06e 100644
---- a/configure.in
-+++ b/configure.in
-@@ -1788,6 +1788,21 @@ AC_MSG_WARN("directfb $directfb_lib")
+--- a/configure.in	2017-09-22 20:25:52.000000000 +0200
++++ b/configure.in	2021-06-04 20:12:24.991434209 +0200
+@@ -2129,6 +2129,21 @@
      fi
  }
  
@@ -41,29 +41,39 @@ index 97b57f316..6c4eff06e 100644
 +	fi
 +}
 +
- dnl Find FusionSound
- CheckFusionSound()
+ dnl Find KMSDRM
+ CheckKMSDRM()
  {
-@@ -2692,6 +2707,7 @@ case "$host" in
-         CheckWayland
-         CheckMir
+@@ -2142,7 +2157,7 @@
+         libgbm_avail=no
+ 
+         LIBDRM_REQUIRED_VERSION=2.4.46
+-        LIBGBM_REQUIRED_VERSION=9.0.0
++        LIBGBM_REQUIRED_VERSION=2.0.0
+ 
+         AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+         if test x$PKG_CONFIG != xno; then
+@@ -3297,6 +3312,7 @@
+         CheckRPI
+         CheckX11
          CheckDirectFB
-+        CheckFBDEV
-         CheckFusionSound
++		CheckFBDEV
+         CheckKMSDRM
          CheckOpenGLX11
          CheckOpenGLESX11
-@@ -2792,6 +2808,11 @@ case "$host" in
+@@ -3425,6 +3441,11 @@
          if test x$use_input_events = xyes; then
-             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev.c"
+             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev*.c"
          fi       
 +		# Set up files for the fbdev video driver
 +		if test x$enable_video_fbdev = xyes; then
 +			SOURCES="$SOURCES $srcdir/src/video/fbdev/*.c"
 +			$as_echo "#define SDL_VIDEO_DRIVER_FB 1" >>confdefs.h
 +		fi
+         # Set up other core UNIX files
+         SOURCES="$SOURCES $srcdir/src/core/unix/*.c"
          ;;
-     *-*-cygwin* | *-*-mingw32*)
-         ARCH=win32
+
 diff --git a/include/SDL_config.h.in b/include/SDL_config.h.in
 index a15232990..ad8759c64 100644
 --- a/include/SDL_config.h.in
@@ -78,18 +88,16 @@ index a15232990..ad8759c64 100644
  #undef SDL_VIDEO_DRIVER_WAYLAND
 diff --git a/src/video/SDL_sysvideo.h b/src/video/SDL_sysvideo.h
 index 32b5d77a2..fde14e91d 100644
---- a/src/video/SDL_sysvideo.h
-+++ b/src/video/SDL_sysvideo.h
-@@ -375,6 +375,9 @@ extern VideoBootStrap PSP_bootstrap;
- #if SDL_VIDEO_DRIVER_RPI
+--- a/src/video/SDL_sysvideo.h	2021-06-04 19:34:49.400473356 +0200
++++ b/src/video/SDL_sysvideo.h	2021-06-04 19:40:11.223308595 +0200
+@@ -411,6 +411,7 @@
+ extern VideoBootStrap Android_bootstrap;
+ extern VideoBootStrap PSP_bootstrap;
  extern VideoBootStrap RPI_bootstrap;
- #endif
-+#if SDL_VIDEO_DRIVER_FBDEV
 +extern VideoBootStrap FBDEV_bootstrap;
-+#endif
- #if SDL_VIDEO_DRIVER_DUMMY
+ extern VideoBootStrap KMSDRM_bootstrap;
  extern VideoBootStrap DUMMY_bootstrap;
- #endif
+ extern VideoBootStrap Wayland_bootstrap;
 diff --git a/src/video/SDL_video.c b/src/video/SDL_video.c
 index 37acc87c5..7e150e2f9 100644
 --- a/src/video/SDL_video.c
@@ -109,7 +117,7 @@ new file mode 100644
 index 000000000..00142b709
 --- /dev/null
 +++ b/src/video/fbdev/SDL_fbopengles.c
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,43 @@
 +/*
 +  Simple DirectMedia Layer
 +  Copyright (C) 1997-2014 Sam Lantinga <slouken@libsdl.org>
@@ -140,8 +148,9 @@ index 000000000..00142b709
 +/* EGL implementation of SDL OpenGL support */
 +
 +int
-+FB_GLES_LoadLibrary(_THIS, const char *path) {
-+    return SDL_EGL_LoadLibrary(_this, path, EGL_DEFAULT_DISPLAY);
++FB_GLES_LoadLibrary(_THIS, const char *path)
++{
++    return SDL_EGL_LoadLibrary(_this, path, EGL_DEFAULT_DISPLAY, 0);
 +}
 +
 +SDL_EGL_CreateContext_impl(FB)
@@ -198,7 +207,7 @@ index 000000000..157f8c206
 +
 +extern int FB_GLES_LoadLibrary(_THIS, const char *path);
 +extern SDL_GLContext FB_GLES_CreateContext(_THIS, SDL_Window * window);
-+extern void FB_GLES_SwapWindow(_THIS, SDL_Window * window);
++extern int FB_GLES_SwapWindow(_THIS, SDL_Window * window);
 +extern int FB_GLES_MakeCurrent(_THIS, SDL_Window * window, SDL_GLContext context);
 +
 +#endif /* SDL_VIDEO_DRIVER_FBDEV && SDL_VIDEO_OPENGL_EGL */
@@ -297,8 +306,8 @@ index 000000000..5a78b4129
 +    device->VideoQuit = FB_VideoQuit;
 +    device->GetDisplayModes = FB_GetDisplayModes;
 +    device->SetDisplayMode = FB_SetDisplayMode;
-+    device->CreateWindow = FB_CreateWindow;
-+    device->CreateWindowFrom = FB_CreateWindowFrom;
++    device->CreateSDLWindow = FB_CreateWindow;
++    device->CreateSDLWindowFrom = FB_CreateWindowFrom;
 +    device->SetWindowTitle = FB_SetWindowTitle;
 +    device->SetWindowIcon = FB_SetWindowIcon;
 +    device->SetWindowPosition = FB_SetWindowPosition;
@@ -521,7 +530,7 @@ new file mode 100644
 index 000000000..ee67ea685
 --- /dev/null
 +++ b/src/video/fbdev/SDL_fbvideo.h
-@@ -0,0 +1,82 @@
+@@ -0,0 +1,84 @@
 +/*
 +  Simple DirectMedia Layer
 +  Copyright (C) 1997-2014 Sam Lantinga <slouken@libsdl.org>
@@ -548,6 +557,8 @@ index 000000000..ee67ea685
 +
 +#include "../../SDL_internal.h"
 +#include "../SDL_sysvideo.h"
++
++#include "SDL_egl.h"
 +
 +#include "GLES/gl.h"
 +#include "EGL/egl.h"
@@ -598,7 +609,7 @@ index 000000000..ee67ea685
 +int FB_GLES_MakeCurrent(_THIS, SDL_Window * window, SDL_GLContext context);
 +int FB_GLES_SetSwapInterval(_THIS, int interval);
 +int FB_GLES_GetSwapInterval(_THIS);
-+void FB_GLES_SwapWindow(_THIS, SDL_Window * window);
++int FB_GLES_SwapWindow(_THIS, SDL_Window * window);
 +void FB_GLES_DeleteContext(_THIS, SDL_GLContext context);
 +
 +#endif /* __SDL_FBVIDEO_H__ */

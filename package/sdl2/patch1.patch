@@ -1,65 +1,74 @@
---- a/configure	2016-01-02 20:17:06.000000000 +0100
-+++ b/configure	2021-05-16 02:00:23.401964469 +0200
-@@ -837,6 +837,7 @@
+--- a/configure	2017-09-22 20:25:52.000000000 +0200
++++ b/configure	2021-06-04 20:08:37.616000961 +0200
+@@ -848,6 +848,7 @@
  enable_video_cocoa
  enable_video_directfb
  enable_directfb_shared
 +enable_video_fbdev
- enable_fusionsound
- enable_fusionsound_shared
+ enable_video_kmsdrm
+ enable_kmsdrm_shared
  enable_video_dummy
-@@ -1571,6 +1572,7 @@
+@@ -1597,6 +1598,7 @@
    --enable-video-directfb use DirectFB video driver [[default=no]]
    --enable-directfb-shared
                            dynamically load directfb support [[default=yes]]
 +  --enable-video-fbdev    Enable the framebuffer video backend [[default=yes]]
-   --enable-fusionsound    use FusionSound audio driver [[default=no]]
-   --enable-fusionsound-shared
-                           dynamically load fusionsound audio support
-@@ -20906,6 +20908,26 @@
+   --enable-video-kmsdrm   use KMSDRM video driver [[default=no]]
+   --enable-kmsdrm-shared  dynamically load kmsdrm support [[default=yes]]
+   --enable-video-dummy    use dummy video driver [[default=yes]]
+@@ -21384,6 +21386,26 @@
      fi
  }
  
 +CheckFBDEV()
 +{
-+	if test x$ARCH = xlinux -a x$enable_video = xyes; then
-+		# Check whether --enable-video-fbdev was given.
++if test x$ARCH = xlinux -a x$enable_video = xyes; then
++	# Check whether --enable-video-fbdev was given.
 +if test "${enable_video_fbdev+set}" = set; then :
 +  enableval=$enable_video_fbdev;
 +else
 +  enable_video_fbdev=yes
 +fi
 +
-+		if test x$enable_video_fbdev = xyes; then
-+			have_video=yes
-+			SUMMARY_video="${SUMMARY_video} fbdev"
++	if test x$enable_video_fbdev = xyes; then
++		have_video=yes
++		SUMMARY_video="${SUMMARY_video} fbdev"
 +
-+$as_echo "#define SDL_VIDEO_DRIVER_FBDEV 1" >>confdefs.h
++	$as_echo "#define SDL_VIDEO_DRIVER_FBDEV 1" >>confdefs.h
 +
 +		fi
 +	fi
 +}
 +
- CheckFusionSound()
+ CheckKMSDRM()
  {
-     # Check whether --enable-fusionsound was given.
-@@ -22975,6 +22997,7 @@
-         CheckSNDIO
+     # Check whether --enable-video-kmsdrm was given.
+@@ -21400,7 +21422,7 @@
+         libgbm_avail=no
+ 
+         LIBDRM_REQUIRED_VERSION=2.4.46
+-        LIBGBM_REQUIRED_VERSION=9.0.0
++        LIBGBM_REQUIRED_VERSION=2.0.0
+ 
+         # Extract the first word of "pkg-config", so it can be a program name with args.
+ set dummy pkg-config; ac_word=$2
+@@ -23766,6 +23788,7 @@
+         CheckRPI
          CheckX11
          CheckDirectFB
 +		CheckFBDEV
-         CheckFusionSound
+         CheckKMSDRM
          CheckOpenGLX11
          CheckOpenGLESX11
-@@ -23117,6 +23140,11 @@
+@@ -23918,6 +23941,11 @@
          if test x$use_input_events = xyes; then
-             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev.c"
+             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev*.c"
          fi
 +		# Set up files for the fbdev video driver
 +		if test x$enable_video_fbdev = xyes; then
 +			SOURCES="$SOURCES $srcdir/src/video/fbdev/*.c"
 +			$as_echo "#define SDL_VIDEO_DRIVER_FB 1" >>confdefs.h
 +		fi
+         # Set up other core UNIX files
+         SOURCES="$SOURCES $srcdir/src/core/unix/*.c"
          ;;
-     *-*-cygwin* | *-*-mingw32*)
-         ARCH=win32
