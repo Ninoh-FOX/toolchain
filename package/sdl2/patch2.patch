@@ -4,7 +4,6 @@ Date: Thu, 1 May 2014 18:51:45 +0200
 Subject: [PATCH 2/3] Added first implementation of the FBDEV video driver
 
 ---
- configure.in                     |  21 +++
  include/SDL_config.h.in          |   1 +
  src/video/SDL_sysvideo.h         |   3 +
  src/video/SDL_video.c            |   3 +
@@ -17,62 +16,6 @@ Subject: [PATCH 2/3] Added first implementation of the FBDEV video driver
  create mode 100644 src/video/fbdev/SDL_fbopengles.h
  create mode 100644 src/video/fbdev/SDL_fbvideo.c
  create mode 100644 src/video/fbdev/SDL_fbvideo.h
-
-diff --git a/configure.in b/configure.in
-index 97b57f316..6c4eff06e 100644
---- a/configure.in	2017-09-22 20:25:52.000000000 +0200
-+++ b/configure.in	2021-06-04 20:12:24.991434209 +0200
-@@ -2129,6 +2129,21 @@
-     fi
- }
- 
-+CheckFBDEV()
-+{
-+	if test x$ARCH = xlinux -a x$enable_video = xyes; then
-+		AC_ARG_ENABLE(video-fbdev,
-+					  AC_HELP_STRING([--enable-video-fbdev],
-+									 [Enable the framebuffer video backend [[default=yes]]]
-+									 ),, enable_video_fbdev=yes)
-+		if test x$enable_video_fbdev = xyes; then
-+			have_video=yes
-+			SUMMARY_video="${SUMMARY_video} fbdev"
-+			AC_DEFINE(SDL_VIDEO_DRIVER_FBDEV, 1, [ ])
-+		fi
-+	fi
-+}
-+
- dnl Find KMSDRM
- CheckKMSDRM()
- {
-@@ -2142,7 +2157,7 @@
-         libgbm_avail=no
- 
-         LIBDRM_REQUIRED_VERSION=2.4.46
--        LIBGBM_REQUIRED_VERSION=9.0.0
-+        LIBGBM_REQUIRED_VERSION=2.0.0
- 
-         AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-         if test x$PKG_CONFIG != xno; then
-@@ -3297,6 +3312,7 @@
-         CheckRPI
-         CheckX11
-         CheckDirectFB
-+		CheckFBDEV
-         CheckKMSDRM
-         CheckOpenGLX11
-         CheckOpenGLESX11
-@@ -3425,6 +3441,11 @@
-         if test x$use_input_events = xyes; then
-             SOURCES="$SOURCES $srcdir/src/core/linux/SDL_evdev*.c"
-         fi       
-+		# Set up files for the fbdev video driver
-+		if test x$enable_video_fbdev = xyes; then
-+			SOURCES="$SOURCES $srcdir/src/video/fbdev/*.c"
-+			$as_echo "#define SDL_VIDEO_DRIVER_FB 1" >>confdefs.h
-+		fi
-         # Set up other core UNIX files
-         SOURCES="$SOURCES $srcdir/src/core/unix/*.c"
-         ;;
 
 diff --git a/include/SDL_config.h.in b/include/SDL_config.h.in
 index a15232990..ad8759c64 100644
