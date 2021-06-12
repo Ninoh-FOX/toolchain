@@ -4,9 +4,10 @@
 #
 ################################################################################
 
-POPT_VERSION = 1.16
+POPT_VERSION = 1.18
 # rpm5.org down
-POPT_SITE = http://anduin.linuxfromscratch.org/sources/BLFS/svn/p
+POPT_SOURCE = popt-$(POPT_VERSION).tar.gz
+POPT_SITE = http://ftp.rpm.org/popt/releases/popt-1.x
 POPT_INSTALL_STAGING = YES
 POPT_LICENSE = MIT
 POPT_LICENSE_FILES = COPYING

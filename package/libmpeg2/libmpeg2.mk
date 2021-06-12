@@ -16,6 +16,9 @@ ifeq ($(BR2_PACKAGE_SDL),y)
 LIBMPEG2_CONF_ENV += ac_cv_prog_SDLCONFIG=$(STAGING_DIR)/usr/bin/sdl-config
 LIBMPEG2_CONF_OPT += --enable-sdl
 LIBMPEG2_DEPENDENCIES += sdl
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+LIBMPEG2_DEPENDENCIES += sdl_compat
+endif
 else
 LIBMPEG2_CONF_OPT += --disable-sdl
 endif

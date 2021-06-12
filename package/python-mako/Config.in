@@ -1,0 +1,19 @@
+config BR2_PACKAGE_PYTHON_MAKO
+	bool "python-mako"
+	help
+	  Mako is a template library written in Python. It provides a
+	  familiar, non-XML syntax which compiles into Python modules
+	  for maximum performance.
+
+	  https://pypi.python.org/pypi/Mako
+	  
+config BR2_PACKAGE_HOST_PYTHON_MAKO
+	bool "host-python-mako"
+	select BR2_PACKAGE_HOST_PYTHON_MARKUPSAFE
+	help
+	  Mako is a template library written in Python. It provides a
+	  familiar, non-XML syntax which compiles into Python modules
+	  for maximum performance.
+
+	  https://pypi.python.org/pypi/Mako
+

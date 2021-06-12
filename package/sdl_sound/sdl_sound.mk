@@ -29,6 +29,10 @@ ifeq ($(BR2_PACKAGE_SPEEX),y)
 SDL_SOUND_DEPENDENCIES += speex
 endif
 
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+SDL_SOUND_DEPENDENCIES += sdl_compat
+endif
+
 SDL_SOUND_CONF_OPT = \
 	--with-sdl-prefix=$(STAGING_DIR)/usr \
 	--with-sdl-exec-prefix=$(STAGING_DIR)/usr \

@@ -15,27 +15,37 @@ Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
 
 Index: b/configure.ac
 ===================================================================
---- a/configure.ac
-+++ b/configure.ac
-@@ -81,7 +81,7 @@
- AC_CHECK_FUNC(setreuid, [], [
-     AC_CHECK_LIB(ucb, setreuid, [if echo $LIBS | grep -- -lucb >/dev/null ;then :; else LIBS="$LIBS -lc -lucb" USEUCB=y;fi])
+--- a/configure.ac	2020-06-23 13:15:12.000000000 +0200
++++ b/configure.ac	2021-06-12 09:48:48.775522684 +0200
+@@ -50,7 +50,7 @@
  ])
--AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom)
-+AC_CHECK_FUNCS(getuid geteuid iconv mtrace __secure_getenv setregid stpcpy strerror vasprintf srandom glob_pattern_p)
  
+ AC_SEARCH_LIBS(setreuid, [ucb])
+-AC_CHECK_FUNCS(getuid geteuid iconv mtrace secure_getenv __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom)
++AC_CHECK_FUNCS(getuid geteuid iconv mtrace secure_getenv __secure_getenv setreuid setuid stpcpy strerror vasprintf srandom glob_pattern_p)
+ 
+ AM_GNU_GETTEXT_VERSION([0.18.2])
  AM_GNU_GETTEXT([external])
- AM_ICONV_LINK
+
 Index: b/poptconfig.c
 ===================================================================
---- a/poptconfig.c
-+++ b/poptconfig.c
-@@ -42,7 +42,7 @@
- /*@=declundef =exportheader =incondefs =protoparammatch =redecl =type @*/
- #endif	/* __LCLINT__ */
+--- a/src/poptconfig.c	2020-04-16 12:32:54.000000000 +0200
++++ a/src/poptconfig.c	2021-06-12 09:50:29.169848125 +0200
+@@ -21,7 +21,7 @@
+ #if defined(HAVE_GLOB_H)
+ #include <glob.h>
  
 -#if !defined(__GLIBC__)
 +#if !defined(HAVE_GLOB_PATTERN_P)
  /* Return nonzero if PATTERN contains any metacharacters.
     Metacharacters can be quoted with backslashes if QUOTE is nonzero.  */
  static int
+@@ -50,7 +50,7 @@
+     }
+     return 0;
+ }
+-#endif	/* !defined(__GLIBC__) */
++#endif	/* !defined(HAVE_GLOB_PATTERN_P) */
+ 
+ static int poptGlobFlags = 0;
+ 

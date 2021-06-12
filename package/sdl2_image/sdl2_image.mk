@@ -31,8 +31,13 @@ SDL2_IMAGE_CONF_OPT = --with-sdl-prefix=$(STAGING_DIR)/usr \
 
 SDL2_IMAGE_DEPENDENCIES = sdl2 \
 	$(if $(BR2_PACKAGE_SDL2_IMAGE_JPEG),jpeg) \
-	$(if $(BR2_PACKAGE_SDL2_IMAGE_PNG),libpng) \
 	$(if $(BR2_PACKAGE_SDL2_IMAGE_TIFF),tiff) \
 	$(if $(BR2_PACKAGE_SDL2_IMAGE_WEBP),webp)
+	
+ifeq ($(BR2_PACKAGE_LIBPNG16),y)
+SDL2_IMAGE_DEPENDENCIES += $(if $(BR2_PACKAGE_SDL2_IMAGE_PNG),libpng16)
+else
+SDL2_IMAGE_DEPENDENCIES += $(if $(BR2_PACKAGE_SDL2_IMAGE_PNG),libpng)
+endif
 
 $(eval $(autotools-package))

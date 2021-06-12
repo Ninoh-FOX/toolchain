@@ -59,6 +59,10 @@ MPG123_CONF_OPT += --with-default-audio=sdl
 MPG123_DEPENDENCIES += sdl
 endif
 
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+MPG123_DEPENDENCIES += sdl_compat
+endif
+
 ifeq ($(BR2_PACKAGE_ALSA_LIB),y)
 MPG123_AUDIO += alsa
 MPG123_CONF_OPT += --with-default-audio=alsa

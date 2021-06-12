@@ -1,0 +1,15 @@
+config BR2_PACKAGE_PYTHON_MARKUPSAFE
+	bool "python-markupsafe"
+	help
+	  MarkupSafe implements a XML/HTML/XHTML Markup safe string
+	  for Python.
+
+	  https://github.com/mitsuhiko/markupsafe
+
+config BR2_PACKAGE_HOST_PYTHON_MARKUPSAFE
+	bool "host-python-markupsafe"
+	help
+	  MarkupSafe implements a XML/HTML/XHTML Markup safe string
+	  for Python.
+
+	  https://github.com/mitsuhiko/markupsafe

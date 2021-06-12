@@ -18,4 +18,8 @@ SDL_NET_INSTALL_STAGING = YES
 
 SDL_NET_DEPENDENCIES = sdl
 
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+SDL_NET_DEPENDENCIES += sdl_compat
+endif
+
 $(eval $(autotools-package))

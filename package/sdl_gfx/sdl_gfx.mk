@@ -25,4 +25,8 @@ else
 SDL_GFX_CONF_OPT += --disable-mmx
 endif
 
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+SDL_GFX_DEPENDENCIES += sdl_compat
+endif
+
 $(eval $(autotools-package))

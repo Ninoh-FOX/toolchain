@@ -22,6 +22,8 @@ LIBDRM_DEPENDENCIES = \
 LIBDRM_CONF_OPT = \
 	--disable-cairo-tests \
 	--disable-manpages
+	
+LIBDRM_CONF_OPT += --disable-pie --disable-staticpic
 
 LIBDRM_CONF_ENV = ac_cv_prog_cc_c99='-std=gnu99'
 

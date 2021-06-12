@@ -13,6 +13,10 @@ LOVE2D_AUTORECONF = YES
 LOVE2D_DEPENDENCIES = libgles luainterpreter sdl2 \
 					  devil libmodplug libvorbis
 
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+LOVE2D_DEPENDENCIES += sdl_compat
+endif
+
 ifeq ($(BR2_PACKAGE_MPG123),y)
 LOVE2D_DEPENDENCIES += mpg123
 else

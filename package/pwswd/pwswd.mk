@@ -7,7 +7,7 @@
 PWSWD_VERSION = master
 PWSWD_SITE = $(call github,ninoh-fox,PWSWD,$(PWSWD_VERSION))
 
-PWSWD_DEPENDENCIES = alsa-lib libpng libini
+PWSWD_DEPENDENCIES = alsa-lib libini libpng
 
 PWSWD_MAKE_ENV = CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)" \
 				 CROSS_COMPILE="$(TARGET_CROSS)" PREFIX=/usr \

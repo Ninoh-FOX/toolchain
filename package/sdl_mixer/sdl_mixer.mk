@@ -18,6 +18,10 @@ SDL_MIXER_CONF_OPT = \
 	--disable-music-mod \
 	--disable-music-mp3 \
 	--disable-music-flac # configure script fails when cross compiling
+	
+ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
+SDL_MIXER_DEPENDENCIES += sdl_compat
+endif
 
 ifeq ($(BR2_PACKAGE_TIMIDITY_INSTRUMENTS),y)
 SDL_MIXER_CONF_OPT += \

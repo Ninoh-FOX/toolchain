@@ -69,7 +69,7 @@ SDL2_CONF_OPT += --disable-dbus
 endif
 
 ifeq ($(BR2_PACKAGE_SDL2_KMSDRM),y)
-SDL2_DEPENDENCIES += libdrm
+SDL2_DEPENDENCIES += libdrm libgbm
 SDL2_CONF_OPT += --enable-video-kmsdrm
 else
 SDL2_CONF_OPT += --disable-video-kmsdrm

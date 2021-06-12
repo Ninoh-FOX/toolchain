@@ -16,6 +16,8 @@ MESA3D_ETNA_VIV_CONF_ENV := \
 	LIBTOOL_FOR_BUILD="$(HOST_DIR)/usr/bin/libtool" \
 	PYTHON2="$(HOST_DIR)/usr/bin/python2" \
 	ETNA_LIBS="$(STAGING_DIR)/usr/lib/libetnaviv.a"
+	
+MESA3D_ETNA_VIV_CONF_ENV += ac_cv_prog_cc_c99='-std=gnu99'
 
 MESA3D_ETNA_VIV_CONF_OPT = \
 	--disable-glx \
@@ -54,6 +56,7 @@ MESA3D_ETNA_VIV_DEPENDENCIES = \
 	etna_viv \
 	expat \
 	libdrm \
+	libgbm \
 	host-gawk \
 	host-flex \
 	host-bison \
