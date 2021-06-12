@@ -32,14 +32,8 @@ SDL_IMAGE_CONF_OPT = --with-sdl-prefix=$(STAGING_DIR)/usr \
 SDL_IMAGE_DEPENDENCIES = sdl \
 	$(if $(BR2_PACKAGE_SDL_IMAGE_JPEG),jpeg) \
 	$(if $(BR2_PACKAGE_SDL_IMAGE_TIFF),tiff) \
+	$(if $(BR2_PACKAGE_SDL_IMAGE_PNG),libpng) \
 	$(if $(BR2_PACKAGE_SDL_IMAGE_WEBP),webp)
-
-# Build at least PNG support
-ifeq ($(BR2_PACKAGE_LIBPNG16),y)
-SDL_IMAGE_DEPENDENCIES += $(if $(BR2_PACKAGE_SDL_IMAGE_PNG),libpng16)
-else
-SDL_IMAGE_DEPENDENCIES += $(if $(BR2_PACKAGE_SDL_IMAGE_PNG),libpng)
-endif
 
 ifeq ($(BR2_PACKAGE_SDL_COMPAT),y)
 SDL_IMAGE_DEPENDENCIES += sdl_compat
