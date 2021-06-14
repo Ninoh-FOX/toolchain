@@ -1,0 +1,10 @@
+--- a/configure.in	2021-04-10 12:59:45.000000000 +0200
++++ b/configure.in.mod	2021-06-14 10:48:13.679925261 +0200
+@@ -1409,6 +1409,7 @@
+ 				$PKG_CONFIG --atleast-version $LIBUDEV_REQUIRED_VERSION libudev; then
+                 LIBDRM_CFLAGS=`$PKG_CONFIG --cflags libdrm libudev`
+                 LIBDRM_LIBS=`$PKG_CONFIG --libs libdrm libudev`
++				EXTRA_CFLAGS="$EXTRA_CFLAGS -std=gnu99"
+                 video_kmsdrm=yes
+             fi
+         fi

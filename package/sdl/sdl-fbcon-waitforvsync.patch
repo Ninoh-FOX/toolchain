@@ -1,5 +1,5 @@
---- SDL-1.2.15.org/src/video/fbcon/SDL_fbvideo.c	2012-01-19 07:30:06.000000000 +0100
-+++ SDL-1.2.15/src/video/fbcon/SDL_fbvideo.c	2012-02-04 23:34:04.000000000 +0100
+--- a/src/video/fbcon/SDL_fbvideo.c	2021-06-14 08:23:18.885299232 +0200
++++ b/src/video/fbcon/SDL_fbvideo.c	2021-06-14 08:27:44.203482452 +0200
 @@ -34,6 +34,7 @@
  #include <asm/page.h>		/* For definition of PAGE_SIZE */
  #endif
@@ -8,15 +8,14 @@
  #include <linux/vt.h>
  
  #include "SDL_video.h"
-@@ -1409,8 +1410,9 @@
+@@ -1461,6 +1462,10 @@
  
  static void FB_WaitVBL(_THIS)
  {
--#ifdef FBIOWAITRETRACE /* Heheh, this didn't make it into the main kernel */
--	ioctl(console_fd, FBIOWAITRETRACE, 0);
 +#ifdef FBIO_WAITFORVSYNC
 +	unsigned int screen = 0;
 +	ioctl(console_fd, FBIO_WAITFORVSYNC, &screen);
- #endif
- 	return;
++#endif
  }
+ 
+ static void FB_WaitIdle(_THIS)
