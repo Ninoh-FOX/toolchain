@@ -1,0 +1,44 @@
+--- a/src/video/fbcon/SDL_fbvideo.c	2021-06-14 22:29:13.111158719 +0200
++++ b/src/video/fbcon/SDL_fbvideo.c	2021-06-14 22:29:28.731285596 +0200
+@@ -1056,7 +1056,10 @@
+ 	}
+ 
+ 	if ( (vinfo.xres != width) || (vinfo.yres != height) ||
+-	     (vinfo.bits_per_pixel != bpp) || (flags & SDL_DOUBLEBUF) ) {
++	     (vinfo.bits_per_pixel != bpp) ||
++		 (flags & SDL_DOUBLEBUF) ||
++	     ((flags & SDL_SWIZZLEBGR) != 0 && (vinfo.blue.offset <= vinfo.green.offset)) ||
++	     ((flags & SDL_SWIZZLEBGR) == 0 && (vinfo.blue.offset >= vinfo.green.offset)) ) {
+ 		vinfo.activate = FB_ACTIVATE_NOW;
+ 		vinfo.accel_flags = 0;
+ 		vinfo.bits_per_pixel = bpp;
+@@ -1076,6 +1079,29 @@
+ 		vinfo.green.length = vinfo.green.offset = 0;
+ 		vinfo.blue.length = vinfo.blue.offset = 0;
+ 		vinfo.transp.length = vinfo.transp.offset = 0;
++		
++		/*
++		 * Some framebuffer drivers support BGR->RGB swizzling, like
++		 * jz4770_fb. This is useful for some emulators.
++		 */
++		if (flags & SDL_SWIZZLEBGR) {
++			switch (bpp) {
++				case 15:
++					vinfo.blue.offset = 10;
++					vinfo.green.offset = 5;
++					break;
++				case 16:
++					vinfo.blue.offset = 11;
++					vinfo.green.offset = 5;
++					break;
++				case 24:
++				case 32:
++					vinfo.blue.offset = 16;
++					vinfo.green.offset = 8;
++					break;
++			}
++		}
++		
+ 		if ( ! choose_fbmodes_mode(&vinfo) ) {
+ 			choose_vesa_mode(&vinfo);
+ 		}
