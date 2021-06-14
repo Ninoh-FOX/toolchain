@@ -41,7 +41,7 @@ SDL_CONF_OPT += --enable-video-directfb=no
 endif
 
 ifeq ($(BR2_PACKAGE_LIBDRM),y)
-SDL_DEPENDENCIES += libdrm
+SDL_DEPENDENCIES += libdrm libgbm
 SDL_CONF_OPT += --enable-video-kmsdrm=yes
 else
 SDL_CONF_OPT += --enable-video-kmsdrm=no
