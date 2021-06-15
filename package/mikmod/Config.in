@@ -1,0 +1,8 @@
+config BR2_PACKAGE_MIKMOD
+	bool "mikmod"
+	help
+	  libmikmod is a library supporting many formats, including s3m, it, xm,
+	  and several others. Mikmod is a module player based on libmikmod.
+
+	  http://mikmod.sourceforge.net/
+	  https://sourceforge.net/projects/mikmod/
