@@ -1,0 +1,64 @@
+--- a/src/joystick/linux/SDL_sysjoystick.c	2020-07-14 00:12:51.000000000 +0200
++++ b/src/joystick/linux/SDL_sysjoystick.c	2021-06-21 22:41:21.679515000 +0200
+@@ -41,7 +41,7 @@
+ 
+ /* Special joystick configurations */
+ static struct {
+-	const char *name;
++	const char *name, *ptr;
+ 	int naxes;
+ 	int nhats;
+ 	int nballs;
+@@ -730,10 +730,7 @@
+ 					(absinfo.maximum + absinfo.minimum) / 2 - absinfo.flat;
+ 				    joystick->hwdata->abs_correct[i].coef[1] =
+ 					(absinfo.maximum + absinfo.minimum) / 2 + absinfo.flat;
+-				    if (absinfo.maximum > absinfo.minimum)
+-				        t = ((absinfo.maximum - absinfo.minimum) / 2 - 2 * absinfo.flat);
+-				    else
+-				        t = ((absinfo.maximum - absinfo.minimum) / 2 + 2 * absinfo.flat);
++				    t = ((absinfo.maximum - absinfo.minimum) / 2 - 2 * absinfo.flat);
+ 				    if ( t != 0 ) {
+ 					joystick->hwdata->abs_correct[i].coef[2] = (1 << 29) / t;
+ 				    } else {
+@@ -831,9 +828,6 @@
+ 		return(-1);
+ 	}
+ 	SDL_memset(joystick->hwdata, 0, sizeof(*joystick->hwdata));
+-#if SDL_INPUT_LINUXEV
+-	SDL_memset(joystick->hwdata->abs_map, ABS_MAX, sizeof(*joystick->hwdata->abs_map)*ABS_MAX);
+-#endif
+ 	joystick->hwdata->fd = fd;
+ 
+ 	/* Set the joystick to non-blocking read mode */
+@@ -1114,9 +1108,6 @@
+ 				}
+ 				break;
+ 			    case EV_ABS:
+-				if (code >= ABS_MISC) {
+-					break;
+-				}
+ 				switch (code) {
+ 				    case ABS_HAT0X:
+ 				    case ABS_HAT0Y:
+@@ -1131,17 +1122,15 @@
+ 							events[i].value);
+ 					break;
+ 				    default:
+-					if (joystick->hwdata->abs_map[code] != ABS_MAX ) {
+-					  events[i].value = EV_AxisCorrect(joystick, code, events[i].value);
++					events[i].value = EV_AxisCorrect(joystick, code, events[i].value);
+ #ifndef NO_LOGICAL_JOYSTICKS
+-					  if (!LogicalJoystickAxis(joystick,
++					if (!LogicalJoystickAxis(joystick,
+ 				           joystick->hwdata->abs_map[code],
+ 					   events[i].value))
+ #endif
+-					  SDL_PrivateJoystickAxis(joystick,
++					SDL_PrivateJoystickAxis(joystick,
+ 				           joystick->hwdata->abs_map[code],
+ 					   events[i].value);
+-					}
+ 					break;
+ 				}
+ 				break;
