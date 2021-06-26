@@ -1,0 +1,11 @@
+--- a/alsactl/alsactl.c	2021-06-26 11:23:28.422985582 +0200
++++ b/alsactl/alsactl.c	2021-06-26 11:24:29.245116667 +0200
+@@ -32,6 +32,8 @@
+ #include <alsa/asoundlib.h>
+ #include "alsactl.h"
+ 
++#define SCHED_IDLE		5
++
+ #ifndef SYS_ASOUNDRC
+ #define SYS_ASOUNDRC "/var/lib/alsa/asound.state"
+ #endif
