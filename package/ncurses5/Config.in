@@ -1,0 +1,46 @@
+config BR2_PACKAGE_NCURSES5
+	bool "ncurses5"
+	help
+	  The Ncurses (new curses) library is a free software emulation of
+	  curses in System V Release 4.0, and more.
+
+	  This package installs only a few vital termcap entries
+
+	  http://www.gnu.org/software/ncurses/
+
+if BR2_PACKAGE_NCURSES5
+
+config BR2_PACKAGE_NCURSES5_WCHAR
+	bool "enable wide char support"
+	depends on BR2_USE_WCHAR
+	help
+	  Enable wide char & UTF-8 support in ncurses libraries
+
+config BR2_PACKAGE_NCURSES5_TARGET_PANEL
+	bool "ncurses libpanel in target"
+	help
+	  Includes ncurses dynamic libpanel in target
+
+config BR2_PACKAGE_NCURSES5_TARGET_FORM
+	bool "ncurses libform in target"
+	help
+	  Includes ncurses dynamic libform in target
+
+config BR2_PACKAGE_NCURSES5_TARGET_MENU
+	bool "ncurses libmenu in target"
+	help
+	  Includes ncurses dynamic libmenu in target
+	  
+config BR2_PACKAGE_NCURSES5_ADDITIONAL_TERMINFO
+	string "additional terminfo files to install"
+	help
+	  Whitespace separated list of terminfo files to install on the
+	  target. A small number of vital terminfo files are always
+	  installed. This list is in addition to the vital ones.
+
+config BR2_PACKAGE_NCURSES5_TARGET_PROGS
+	bool "ncurses programs"
+	help
+	  Include ncurses programs in traget (clear, reset, tput, ...)
+
+endif
