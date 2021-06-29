@@ -1,10 +1,10 @@
 ################################################################################
 #
-# libgbm 10.3.0
+# libgbm 19.0.1
 #
 ################################################################################
 
-LIBGBM_VERSION = bc04aefc
+LIBGBM_VERSION = 538889de
 LIBGBM_SOURCE = libgbm-$(LIBGBM_VERSION).tar.gz
 LIBGBM_SITE = $(call github,thayama,libgbm,$(LIBGBM_VERSION))
 LIBGBM_INSTALL_STAGING = YES

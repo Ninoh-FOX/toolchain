@@ -1,17 +1,15 @@
---- a/backend_kms.c	2021-06-29 19:35:59.311989339 +0200
-+++ b/backend_kms.c	2021-06-29 19:31:17.658161381 +0200
-@@ -156,10 +156,10 @@
- 	bo->size = bo->base.stride * bo->base.height;
- 	bo->allocated = true;
+--- a/backend_kms.c	2020-04-09 08:57:32.000000000 +0200
++++ b/backend_kms.c	2021-06-29 20:21:30.471947376 +0200
+@@ -58,6 +58,12 @@
+ #define DRM_FORMAT_MOD_INVALID	((1ULL<<56) - 1)
+ #endif
  
--	if (drmPrimeHandleToFD(dev->base.base.fd, bo->base.handle.u32, DRM_CLOEXEC, &bo->fd)) {
--		GBM_DEBUG("%s: %s: drmPrimeHandleToFD() failed. %s\n", __FILE__, __func__, strerror(errno));
--		goto error;
--	}
-+//	if (drmPrimeHandleToFD(dev->base.base.fd, bo->base.handle.u32, DRM_CLOEXEC, &bo->fd)) {
-+//		GBM_DEBUG("%s: %s: drmPrimeHandleToFD() failed. %s\n", __FILE__, __func__, strerror(errno));
-+//		goto error;
-+//	}
- 
- 	// Map to the user space for bo_write
- 	if (usage & GBM_BO_USE_WRITE) {
++#ifdef O_CLOEXEC
++#define DRM_CLOEXEC O_CLOEXEC
++#else
++#define DRM_CLOEXEC 0
++#endif
++
+ /*
+  * Destroy gbm backend
+  */
