@@ -1,13 +1,12 @@
 ################################################################################
 #
-# libgbm 2.0.0
+# libgbm 10.3.0
 #
 ################################################################################
 
-LIBGBM_VERSION = master
+LIBGBM_VERSION = bc04aefc
 LIBGBM_SOURCE = libgbm-$(LIBGBM_VERSION).tar.gz
-LIBGBM_SITE = https://git.ti.com/cgit/glsdk/libgbm/snapshot
-LIBGBM_LICENSE = Texas instruments
+LIBGBM_SITE = $(call github,thayama,libgbm,$(LIBGBM_VERSION))
 LIBGBM_INSTALL_STAGING = YES
 
 LIBGBM_AUTORECONF = YES
@@ -15,6 +14,7 @@ LIBGBM_AUTORECONF = YES
 LIBGBM_DEPENDENCIES = \
 	libpthread-stubs \
 	libdrm \
+	wayland-kms \
 	libtool \
 	host-pkgconf \
 	host-xutil_util-macros

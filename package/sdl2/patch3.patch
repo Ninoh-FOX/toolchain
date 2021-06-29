@@ -1,0 +1,13 @@
+--- a/src/video/kmsdrm/SDL_kmsdrmmouse.c	2021-06-29 19:56:24.686501181 +0200
++++ b/src/video/kmsdrm/SDL_kmsdrmmouse.c	2021-06-29 19:56:37.734464011 +0200
+@@ -30,6 +30,10 @@
+ #include "../../events/SDL_mouse_c.h"
+ #include "../../events/default_cursor.h"
+ 
++#ifndef GBM_BO_USE_CURSOR
++#define GBM_BO_USE_CURSOR GBM_BO_USE_CURSOR_64X64
++#endif
++
+ static SDL_Cursor *KMSDRM_CreateDefaultCursor(void);
+ static SDL_Cursor *KMSDRM_CreateCursor(SDL_Surface * surface, int hot_x, int hot_y);
+ static int KMSDRM_ShowCursor(SDL_Cursor * cursor);
