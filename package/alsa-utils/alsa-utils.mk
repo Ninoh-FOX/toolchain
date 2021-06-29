@@ -11,17 +11,15 @@ ALSA_UTILS_LICENSE = GPLv2
 ALSA_UTILS_LICENSE_FILES = COPYING
 ALSA_UTILS_INSTALL_STAGING = YES
 ALSA_UTILS_DEPENDENCIES = host-gettext host-pkgconf alsa-lib \
-	$(if $(BR2_PACKAGE_NCURSES),ncurses) \
-	$(if $(BR2_PACKAGE_NCURSESW),ncursesw)
+	$(if $(BR2_PACKAGE_NCURSES),ncurses)
 
 ALSA_UTILS_CONF_ENV = \
-	ac_cv_prog_ncurses5_config=$(STAGING_DIR)/bin/ncurses6-config
+	ac_cv_prog_ncurses5_config=$(STAGING_DIR)/usr/bin/ncurses6-config
 
 ALSA_UTILS_CONF_OPT = \
 	--disable-xmlto \
 	--disable-rst2man \
-	--with-curses=ncurses \
-	--with-cursesw=ncursesw
+	--with-curses=ncurses
 
 ifeq ($(BR2_PACKAGE_ALSA_UTILS_ALSALOOP),y)
 ALSA_UTILS_CONF_OPT += --enable-alsaloop

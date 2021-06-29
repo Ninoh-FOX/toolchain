@@ -4,14 +4,15 @@
 #
 ################################################################################
 
-NANO_VERSION_MAJOR = 2.3
-NANO_VERSION = $(NANO_VERSION_MAJOR).5
+NANO_VERSION_MAJOR = 5
+NANO_VERSION = $(NANO_VERSION_MAJOR).8
 NANO_SITE = http://www.nano-editor.org/dist/v$(NANO_VERSION_MAJOR)
 NANO_LICENSE = GPLv3+
 NANO_LICENSE_FILES = COPYING
 NANO_MAKE_ENV = CURSES_LIB="-lncurses"
 NANO_CONF_OPT = --without-slang
-NANO_CONF_ENV = ac_cv_prog_NCURSESW_CONFIG=false
+NANO_CONF_ENV = ac_cv_prog_NCURSESW_CONFIG=$(STAGING_DIR)/usr/bin/ncursesw6-config \
+	ac_cv_prog_NCURSES_CONFIG=$(STAGING_DIR)/usr/bin/ncurses6-config
 NANO_DEPENDENCIES = ncurses
 
 ifeq ($(BR2_PACKAGE_FILE),y)
