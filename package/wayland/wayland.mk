@@ -25,7 +25,27 @@ define WAYLAND_SCANNER_PC
 	    -e 's:^wayland_scanner=.*:wayland_scanner=$(HOST_DIR)/usr/bin/wayland-scanner:' \
 	    $(STAGING_DIR)/usr/lib/pkgconfig/wayland-scanner.pc
 endef
-WAYLAND_POST_INSTALL_STAGING_HOOKS += WAYLAND_SCANNER_PC
+
+define WAYLAND_SERVER_PC
+	$(INSTALL) -m 0644 -D $(HOST_DIR)/usr/lib/pkgconfig/wayland-server.pc \
+	              $(STAGING_DIR)/usr/lib/pkgconfig/wayland-server.pc
+	$(SED) 's:^prefix=.*:prefix=/usr:' \
+	    -e 's:^wayland_server=.*:wayland_server=$(HOST_DIR)/usr/bin/wayland-server:' \
+	    $(STAGING_DIR)/usr/lib/pkgconfig/wayland-server.pc
+endef
+
+define WAYLAND_CLIENT_PC
+	$(INSTALL) -m 0644 -D $(HOST_DIR)/usr/lib/pkgconfig/wayland-client.pc \
+	              $(STAGING_DIR)/usr/lib/pkgconfig/wayland-client.pc
+	$(SED) 's:^prefix=.*:prefix=/usr:' \
+	    -e 's:^wayland_client=.*:wayland_client=$(HOST_DIR)/usr/bin/wayland-client:' \
+	    $(STAGING_DIR)/usr/lib/pkgconfig/wayland-client.pc
+endef
+
+WAYLAND_POST_INSTALL_STAGING_HOOKS += \
+	WAYLAND_SCANNER_PC \
+	WAYLAND_SERVER_PC \
+	WAYLAND_CLIENT_PC
 
 # Remove the DTD from the target, it's not needed at runtime
 define WAYLAND_TARGET_CLEANUP

@@ -13,7 +13,15 @@ WAYLAND_KMS_LICENSE_FILES = COPYING
 WAYLAND_KMS_AUTORECONF = YES
 
 WAYLAND_KMS_INSTALL_STAGING = YES
-WAYLAND_KMS_DEPENDENCIES = libffi host-pkgconf host-wayland expat
-
+WAYLAND_KMS_DEPENDENCIES = \
+	wayland \
+	libdrm \
+	host-pkgconf \
+	host-wayland \
+	host-gawk \
+	host-flex \
+	host-bison \
+	host-python \
+	host-libxml2
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
