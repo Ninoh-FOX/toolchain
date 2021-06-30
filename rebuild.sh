@@ -35,7 +35,7 @@ rm -f dl/sdl2-*.tar.gz
 
 # Perform the build.
 echo "Starting build..."
-make
+make -j5
 
 # Create packages.
 echo "Creating packages..."

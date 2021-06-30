@@ -14,7 +14,7 @@ ifeq ($(BR2_PACKAGE_MESA3D),y)
 LIBGLES_DEPENDENCIES = mesa3d
 endif
 
-ifeq (S(BR2_PACKAGE_MESA3D_ETNA_VIV),y)
+ifeq ($(BR2_PACKAGE_MESA3D_ETNA_VIV),y)
 LIBGLES_DEPENDENCIES = mesa3d-etna_viv
 endif
 
