@@ -16,6 +16,9 @@ WAYLAND_KMS_INSTALL_STAGING = YES
 WAYLAND_KMS_DEPENDENCIES = \
 	wayland \
 	libdrm \
+	mesa3d-etna_viv \
+	etna_viv \
+	expat \
 	host-pkgconf \
 	host-wayland \
 	host-gawk \
