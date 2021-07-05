@@ -39,7 +39,7 @@ HOST_PYTHON3_CONF_ENV += \
 
 PYTHON3_DEPENDENCIES  = host-python3 libffi
 
-HOST_PYTHON3_DEPENDENCIES = host-expat host-zlib
+HOST_PYTHON3_DEPENDENCIES = host-expat host-zlib host-openssl
 
 PYTHON3_INSTALL_STAGING = YES
 
