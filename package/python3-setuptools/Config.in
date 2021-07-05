@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON3_SETUPTOOLS
+	bool "python3-setuptools"
+	depends on BR2_PACKAGE_PYTHON3
+	select BR2_PACKAGE_PYTHON_ZLIB
+	help
+	  Download, build, install, upgrade, and uninstall Python packages.
+
+	  http://pypi.python.org/pypi/setuptools

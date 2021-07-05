@@ -37,7 +37,20 @@ config BR2_PACKAGE_PROVIDES_LIBGL
 config BR2_PACKAGE_MESA3D_DRIVER
 	bool
 
+# Quote from mesa3d meson.build: "kmsro driver requires one or more
+# renderonly drivers (vc4, etnaviv, freedreno)".
+config BR2_PACKAGE_MESA3D_GALLIUM_KMSRO
+	bool
+
 comment "Gallium drivers"
+
+config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_ETNAVIV
+	bool "Gallium Etnaviv driver"
+	select BR2_PACKAGE_MESA3D_GALLIUM_DRIVER
+	select BR2_PACKAGE_LIBDRM_ETNAVIV
+	select BR2_PACKAGE_MESA3D_GALLIUM_KMSRO
+	help
+	  Mesa driver for Vivante GPUs.
 
 config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_NOUVEAU
 	bool "Gallium nouveau driver"
@@ -61,6 +74,16 @@ config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SWRAST
 	help
 	  This is a software opengl implementation using the Gallium3D
 	  infrastructure.
+	  
+config BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_KMSRO
+	bool "Gallium KMSRO driver"
+	depends on BR2_PACKAGE_MESA3D_GALLIUM_KMSRO
+	help
+	  Support various sorts of KMS displays with the
+	  renderonly layer used to attach a GPU.
+
+comment "Gallium KMSRO needs one or more renderonly drivers"
+	depends on !BR2_PACKAGE_MESA3D_GALLIUM_KMSRO
 
 comment "DRI drivers needs X.Org and a toolchain w/ dynamic library"
 	depends on BR2_PREFER_STATIC_LIB || !BR2_PACKAGE_XORG7

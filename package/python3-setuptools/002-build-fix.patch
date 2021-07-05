@@ -1,0 +1,27 @@
+--- a/setup.py	2021-07-05 18:35:13.464497759 +0200
++++ b/setup.py	2021-07-05 18:34:09.511378366 +0200
+@@ -10,18 +10,6 @@
+ 
+ here = os.path.dirname(__file__)
+ 
+-
+-def require_metadata():
+-    "Prevent improper installs without necessary metadata. See #659"
+-    egg_info_dir = os.path.join(here, 'setuptools.egg-info')
+-    if not os.path.exists(egg_info_dir):
+-        msg = (
+-            "Cannot build setuptools without metadata. "
+-            "Run `bootstrap.py`."
+-        )
+-        raise RuntimeError(msg)
+-
+-
+ def read_commands():
+     command_ns = {}
+     cmd_module_path = 'setuptools/command/__init__.py'
+@@ -151,5 +139,4 @@
+ if __name__ == '__main__':
+     # allow setup.py to run from another directory
+     here and os.chdir(here)
+-    require_metadata()
+     dist = setuptools.setup(**setup_params)

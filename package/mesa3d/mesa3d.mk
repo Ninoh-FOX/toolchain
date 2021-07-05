@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-MESA3D_VERSION = 11.0.9
+MESA3D_VERSION = 17.0.1
 MESA3D_SOURCE = mesa-$(MESA3D_VERSION).tar.gz
-MESA3D_SITE = https://archive.mesa3d.org/older-versions/11.x/$(MESA3D_VERSION)
+MESA3D_SITE = https://archive.mesa3d.org/older-versions/17.x/
 MESA3D_LICENSE = MIT, SGI, Khronos
 MESA3D_LICENSE_FILES = docs/license.html
 MESA3D_AUTORECONF = YES
@@ -17,11 +17,13 @@ MESA3D_PROVIDES =
 
 MESA3D_DEPENDENCIES = \
 	expat \
+	host-meson \
+	host-ninja \
 	host-bison \
 	host-flex \
 	host-gettext \
 	host-libxml2 \
-	host-python \
+	host-python-mako \
 	host-xutil_makedepend \
 	libdrm
 
@@ -56,11 +58,13 @@ endif
 # Drivers
 
 #Gallium Drivers
+MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_ETNAVIV)  += etnaviv
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_NOUVEAU)  += nouveau
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SVGA)     += svga
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SWRAST)   += swrast
 # DRI Drivers
 MESA3D_DRI_DRIVERS-$(BR2_PACKAGE_MESA3D_DRI_DRIVER_SWRAST) += swrast
+MESA3D_DRI_DRIVERS-$(BR2_PACKAGE_MESA3D_DRI_DRIVER_KMSRO) += kmsro
 MESA3D_DRI_DRIVERS-$(BR2_PACKAGE_MESA3D_DRI_DRIVER_I965)   += i965
 MESA3D_DRI_DRIVERS-$(BR2_PACKAGE_MESA3D_DRI_DRIVER_RADEON) += radeon
 
