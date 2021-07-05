@@ -2,7 +2,7 @@ Index: b/Makefile.pre.in
 ===================================================================
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1232,24 +1232,32 @@
+@@ -1328,33 +1328,45 @@
  		$(INSTALL_DATA) $(srcdir)/Modules/xxmodule.c \
  			$(DESTDIR)$(LIBDEST)/distutils/tests ; \
  	fi
@@ -13,7 +13,7 @@ Index: b/Makefile.pre.in
  		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
  		$(DESTDIR)$(LIBDEST)
 +endif
-+ifeq (@PYO_BUILD@,yes)
++ifeq (@PYC_BUILD@,yes)
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -Wi -O $(DESTDIR)$(LIBDEST)/compileall.py \
  		-d $(LIBDEST) -f $(STDLIB_CACHE_FLAGS) \
@@ -21,20 +21,34 @@ Index: b/Makefile.pre.in
  		$(DESTDIR)$(LIBDEST)
 +endif
 +ifeq (@PYC_BUILD@,yes)
- 	-PYTHONPATH=$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
+ 	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+ 		$(PYTHON_FOR_BUILD) -Wi -OO $(DESTDIR)$(LIBDEST)/compileall.py \
+ 		-d $(LIBDEST) -f $(STDLIB_CACHE_FLAGS) \
+ 		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
+ 		$(DESTDIR)$(LIBDEST)
++endif
++ifeq (@PYC_BUILD@,yes)
+ 	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -Wi $(DESTDIR)$(LIBDEST)/compileall.py \
  		-d $(LIBDEST)/site-packages -f $(STDLIB_CACHE_FLAGS) \
  		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
 +endif
-+ifeq (@PYO_BUILD@,yes)
++ifeq (@PYC_BUILD@,yes)
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -Wi -O $(DESTDIR)$(LIBDEST)/compileall.py \
+ 		-d $(LIBDEST)/site-packages -f $(STDLIB_CACHE_FLAGS) \
+ 		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
++endif
++ifeq (@PYC_BUILD@,yes)
+ 	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+ 		$(PYTHON_FOR_BUILD) -Wi -OO $(DESTDIR)$(LIBDEST)/compileall.py \
  		-d $(LIBDEST)/site-packages -f $(STDLIB_CACHE_FLAGS) \
  		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
 +endif
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -m lib2to3.pgen2.driver $(DESTDIR)$(LIBDEST)/lib2to3/Grammar.txt
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+
 Index: b/configure.ac
 ===================================================================
 --- a/configure.ac

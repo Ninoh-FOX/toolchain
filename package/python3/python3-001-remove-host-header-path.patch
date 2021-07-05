@@ -24,13 +24,16 @@ Index: b/setup.py
 ===================================================================
 --- a/setup.py
 +++ b/setup.py
-@@ -487,7 +487,8 @@
+@@ -532,9 +532,9 @@
+                     for directory in reversed(options.dirs):
                          add_dir_to_list(dir_list, directory)
  
-         if os.path.normpath(sys.base_prefix) != '/usr' \
--                and not sysconfig.get_config_var('PYTHONFRAMEWORK'):
-+                and not sysconfig.get_config_var('PYTHONFRAMEWORK') \
-+                and not cross_compiling:
+-        if (not cross_compiling and
+-                os.path.normpath(sys.base_prefix) != '/usr' and
+-                not sysconfig.get_config_var('PYTHONFRAMEWORK')):
++        if os.path.normpath(sys.base_prefix) != '/usr' \
++		and not sysconfig.get_config_var('PYTHONFRAMEWORK') \
++		and not cross_compiling:
              # OSX note: Don't add LIBDIR and INCLUDEDIR to building a framework
              # (PYTHONFRAMEWORK is set) to avoid # linking problems when
              # building a framework with different architectures than
