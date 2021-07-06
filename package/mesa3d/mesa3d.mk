@@ -143,4 +143,4 @@ else
 MESA3D_CONF_OPT += --disable-gles1 --disable-gles2
 endif
 
-$(eval $(autotools-package))
+$(eval $(meson-package))
