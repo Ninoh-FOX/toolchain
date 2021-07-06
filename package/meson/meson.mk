@@ -51,4 +51,11 @@ else
 HOST_MESON_TARGET_CPU_FAMILY = $(ARCH)
 endif
 
+# Avoid interpreter shebang longer than 128 chars
+define HOST_MESON_SET_INTERPRETER
+	$(INSTALL) -D -m 0644 $(@D)/data/shell-completions/bash/meson $(HOST_DIR)/usr/bin/meson
+endef
+
+HOST_MESON_POST_INSTALL_HOOKS += HOST_MESON_SET_INTERPRETER
+
 $(eval $(host-python-package))

@@ -4,14 +4,27 @@
 #
 ################################################################################
 
-MESA3D_VERSION = 17.0.1
+MESA3D_VERSION = 19.0.1
 MESA3D_SOURCE = mesa-$(MESA3D_VERSION).tar.gz
-MESA3D_SITE = https://archive.mesa3d.org/older-versions/17.x/
+MESA3D_SITE = https://archive.mesa3d.org/
 MESA3D_LICENSE = MIT, SGI, Khronos
 MESA3D_LICENSE_FILES = docs/license.html
 MESA3D_AUTORECONF = YES
 
+define MESA3D_RUN_AUTOGEN
+	cd $(@D) && PATH=$(BR_PATH) ./autogen.sh
+endef
+MESA3D_CONFIGURE_HOOKS += MESA3D_RUN_AUTOGEN
+
 MESA3D_INSTALL_STAGING = YES
+
+#for rogue
+MESA3D_CONF_OPT = \
+	--enable-autotools \
+	--disable-dri3 \
+	--disable-driglx-direct \
+	--disable-xlib-lease \
+	--with-platforms=drm
 
 MESA3D_PROVIDES =
 
@@ -59,6 +72,7 @@ endif
 
 #Gallium Drivers
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_ETNAVIV)  += etnaviv
+MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_KMSRO) += kmsro
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_NOUVEAU)  += nouveau
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SVGA)     += svga
 MESA3D_GALLIUM_DRIVERS-$(BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SWRAST)   += swrast
@@ -116,7 +130,7 @@ endif
 MESA3D_CONF_OPT += \
 	--enable-gbm \
 	--enable-egl \
-	--with-egl-platforms=$(subst $(space),$(comma),$(MESA3D_EGL_PLATFORMS))
+	--with-platforms=$(subst $(space),$(comma),$(MESA3D_EGL_PLATFORMS))
 else
 MESA3D_CONF_OPT += \
 	--disable-egl

@@ -1,0 +1,448 @@
+--- a/include/c99_math.h	2019-03-27 18:04:23.000000000 +0100
++++ b/include/c99_math.h	2021-07-05 22:44:41.892233000 +0200
+@@ -190,7 +190,7 @@
+  * undefines those functions, which in glibc 2.23, are defined as macros rather
+  * than functions as in glibc 2.22.
+  */
+-#if __cplusplus >= 201103L && (__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 23))
++#if __cplusplus >= 201103L && (__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 23) || defined(__UCLIBC__))
+ #include <cmath>
+ 
+ using std::fpclassify;
+
+--- a/configure.ac	2019-03-27 18:04:23.000000000 +0100
++++ b/configure.ac	2021-07-05 22:35:05.034543039 +0200
+@@ -1872,7 +1872,6 @@
+         ;;
+ 
+     x11)
+-        PKG_CHECK_MODULES([XCB_DRI2], [x11-xcb xcb xcb-dri2 >= $XCBDRI2_REQUIRED xcb-xfixes])
+         DEFINES="$DEFINES -DHAVE_X11_PLATFORM"
+         ;;
+ 
+@@ -2861,10 +2860,6 @@
+ 
+ dnl We need to validate some needed dependencies for renderonly drivers.
+ 
+-if test "x$HAVE_GALLIUM_VC4" != xyes -a "x$HAVE_GALLIUM_KMSRO" = xyes  ; then
+-    AC_MSG_ERROR([Building with kmsro requires vc4])
+-fi
+-
+ if test "x$HAVE_GALLIUM_NOUVEAU" != xyes -a "x$HAVE_GALLIUM_TEGRA" = xyes; then
+     AC_MSG_ERROR([Building with tegra requires nouveau])
+ fi
+
+--- a/src/compiler/nir/nir_constant_expressions.c	2019-03-27 18:05:19.000000000 +0100
++++ b/src/compiler/nir/nir_constant_expressions.c	2021-07-05 22:36:05.203642158 +0200
+@@ -8492,365 +8492,27 @@
+ evaluate_fmax(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+                  MAYBE_UNUSED nir_const_value *_src)
+-{
+-   nir_const_value _dst_val = { {0, } };
+-
+-      switch (bit_size) {
+-      case 16: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float src0 =
+-                  _mesa_half_to_float(_src[0].u16[_i]);
+-               const float src1 =
+-                  _mesa_half_to_float(_src[1].u16[_i]);
+-
+-            float16_t dst = fmaxf(src0, src1);
+-
+-            _dst_val.u16[_i] = _mesa_float_to_half(dst);
+-      }
+-
+-         break;
+-      }
+-      case 32: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float32_t src0 =
+-                  _src[0].f32[_i];
+-               const float32_t src1 =
+-                  _src[1].f32[_i];
+-
+-            float32_t dst = fmaxf(src0, src1);
+-
+-            _dst_val.f32[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-      case 64: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float64_t src0 =
+-                  _src[0].f64[_i];
+-               const float64_t src1 =
+-                  _src[1].f64[_i];
+-
+-            float64_t dst = fmaxf(src0, src1);
+-
+-            _dst_val.f64[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-
+-      default:
+-         unreachable("unknown bit width");
+-      }
+-
+-   return _dst_val;
+-}
++{}
+ static nir_const_value
+ evaluate_fmax3(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+                  MAYBE_UNUSED nir_const_value *_src)
+-{
+-   nir_const_value _dst_val = { {0, } };
+-
+-      switch (bit_size) {
+-      case 16: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float src0 =
+-                  _mesa_half_to_float(_src[0].u16[_i]);
+-               const float src1 =
+-                  _mesa_half_to_float(_src[1].u16[_i]);
+-               const float src2 =
+-                  _mesa_half_to_float(_src[2].u16[_i]);
+-
+-            float16_t dst = fmaxf(src0, fmaxf(src1, src2));
+-
+-            _dst_val.u16[_i] = _mesa_float_to_half(dst);
+-      }
+-
+-         break;
+-      }
+-      case 32: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float32_t src0 =
+-                  _src[0].f32[_i];
+-               const float32_t src1 =
+-                  _src[1].f32[_i];
+-               const float32_t src2 =
+-                  _src[2].f32[_i];
+-
+-            float32_t dst = fmaxf(src0, fmaxf(src1, src2));
+-
+-            _dst_val.f32[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-      case 64: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float64_t src0 =
+-                  _src[0].f64[_i];
+-               const float64_t src1 =
+-                  _src[1].f64[_i];
+-               const float64_t src2 =
+-                  _src[2].f64[_i];
+-
+-            float64_t dst = fmaxf(src0, fmaxf(src1, src2));
+-
+-            _dst_val.f64[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-
+-      default:
+-         unreachable("unknown bit width");
+-      }
+-
+-   return _dst_val;
+-}
++{}
+ static nir_const_value
+ evaluate_fmed3(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+                  MAYBE_UNUSED nir_const_value *_src)
+-{
+-   nir_const_value _dst_val = { {0, } };
+-
+-      switch (bit_size) {
+-      case 16: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float src0 =
+-                  _mesa_half_to_float(_src[0].u16[_i]);
+-               const float src1 =
+-                  _mesa_half_to_float(_src[1].u16[_i]);
+-               const float src2 =
+-                  _mesa_half_to_float(_src[2].u16[_i]);
+-
+-            float16_t dst = fmaxf(fminf(fmaxf(src0, src1), src2), fminf(src0, src1));
+-
+-            _dst_val.u16[_i] = _mesa_float_to_half(dst);
+-      }
+-
+-         break;
+-      }
+-      case 32: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float32_t src0 =
+-                  _src[0].f32[_i];
+-               const float32_t src1 =
+-                  _src[1].f32[_i];
+-               const float32_t src2 =
+-                  _src[2].f32[_i];
+-
+-            float32_t dst = fmaxf(fminf(fmaxf(src0, src1), src2), fminf(src0, src1));
+-
+-            _dst_val.f32[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-      case 64: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float64_t src0 =
+-                  _src[0].f64[_i];
+-               const float64_t src1 =
+-                  _src[1].f64[_i];
+-               const float64_t src2 =
+-                  _src[2].f64[_i];
+-
+-            float64_t dst = fmaxf(fminf(fmaxf(src0, src1), src2), fminf(src0, src1));
+-
+-            _dst_val.f64[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-
+-      default:
+-         unreachable("unknown bit width");
+-      }
+-
+-   return _dst_val;
+-}
++{}
+ static nir_const_value
+ evaluate_fmin(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+                  MAYBE_UNUSED nir_const_value *_src)
+-{
+-   nir_const_value _dst_val = { {0, } };
+-
+-      switch (bit_size) {
+-      case 16: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float src0 =
+-                  _mesa_half_to_float(_src[0].u16[_i]);
+-               const float src1 =
+-                  _mesa_half_to_float(_src[1].u16[_i]);
+-
+-            float16_t dst = fminf(src0, src1);
+-
+-            _dst_val.u16[_i] = _mesa_float_to_half(dst);
+-      }
+-
+-         break;
+-      }
+-      case 32: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float32_t src0 =
+-                  _src[0].f32[_i];
+-               const float32_t src1 =
+-                  _src[1].f32[_i];
+-
+-            float32_t dst = fminf(src0, src1);
+-
+-            _dst_val.f32[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-      case 64: {
+-         
+-   
+-
+-                  
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float64_t src0 =
+-                  _src[0].f64[_i];
+-               const float64_t src1 =
+-                  _src[1].f64[_i];
+-
+-            float64_t dst = fminf(src0, src1);
+-
+-            _dst_val.f64[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-
+-      default:
+-         unreachable("unknown bit width");
+-      }
+-
+-   return _dst_val;
+-}
++{}
+ static nir_const_value
+ evaluate_fmin3(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+                  MAYBE_UNUSED nir_const_value *_src)
+-{
+-   nir_const_value _dst_val = { {0, } };
+-
+-      switch (bit_size) {
+-      case 16: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float src0 =
+-                  _mesa_half_to_float(_src[0].u16[_i]);
+-               const float src1 =
+-                  _mesa_half_to_float(_src[1].u16[_i]);
+-               const float src2 =
+-                  _mesa_half_to_float(_src[2].u16[_i]);
+-
+-            float16_t dst = fminf(src0, fminf(src1, src2));
+-
+-            _dst_val.u16[_i] = _mesa_float_to_half(dst);
+-      }
+-
+-         break;
+-      }
+-      case 32: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float32_t src0 =
+-                  _src[0].f32[_i];
+-               const float32_t src1 =
+-                  _src[1].f32[_i];
+-               const float32_t src2 =
+-                  _src[2].f32[_i];
+-
+-            float32_t dst = fminf(src0, fminf(src1, src2));
+-
+-            _dst_val.f32[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-      case 64: {
+-         
+-   
+-
+-                           
+-      for (unsigned _i = 0; _i < num_components; _i++) {
+-               const float64_t src0 =
+-                  _src[0].f64[_i];
+-               const float64_t src1 =
+-                  _src[1].f64[_i];
+-               const float64_t src2 =
+-                  _src[2].f64[_i];
+-
+-            float64_t dst = fminf(src0, fminf(src1, src2));
+-
+-            _dst_val.f64[_i] = dst;
+-      }
+-
+-         break;
+-      }
+-
+-      default:
+-         unreachable("unknown bit width");
+-      }
+-
+-   return _dst_val;
+-}
++{}
+ static nir_const_value
+ evaluate_fmod(MAYBE_UNUSED unsigned num_components,
+                   unsigned bit_size,
+
+--- a/src/util/os_time.c	2019-03-27 18:04:24.000000000 +0100
++++ b/src/util/os_time.c	2021-07-05 22:36:52.312483757 +0200
+@@ -95,13 +95,7 @@
+ void
+ os_time_sleep(int64_t usecs)
+ {
+-#if defined(PIPE_OS_LINUX)
+-   struct timespec time;
+-   time.tv_sec = usecs / 1000000;
+-   time.tv_nsec = (usecs % 1000000) * 1000;
+-   while (clock_nanosleep(CLOCK_MONOTONIC, 0, &time, &time) == EINTR);
+-
+-#elif defined(PIPE_OS_UNIX)
++#if defined(PIPE_OS_UNIX)
+    usleep(usecs);
+ 
+ #elif defined(PIPE_SUBSYSTEM_WINDOWS_USER)
+
+--- a/src/util/rand_xor.c	2019-03-27 18:04:24.000000000 +0100
++++ b/src/util/rand_xor.c	2021-07-05 22:49:36.208732000 +0200
+@@ -26,6 +26,7 @@
+ #include <sys/file.h>
+ #include <unistd.h>
+ #include <fcntl.h>
++#include <stddef.h>
+ #else
+ #include <time.h>
+ #endif
+
+--- a/src/util/u_process.c	2019-03-27 18:04:24.000000000 +0100
++++ b/src/util/u_process.c	2021-07-05 22:36:39.520256770 +0200
+@@ -139,6 +139,8 @@
+ #    endif
+ #endif
+ 
++#define GET_PROGRAM_NAME() "__UCLIBC__"
++
+ const char *
+ util_get_process_name(void)
+ {
