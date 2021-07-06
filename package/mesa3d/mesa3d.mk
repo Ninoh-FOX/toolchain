@@ -36,7 +36,7 @@ MESA3D_DEPENDENCIES = \
 	host-flex \
 	host-gettext \
 	host-libxml2 \
-	host-python-mako \
+	host-python3-mako \
 	host-xutil_makedepend \
 	libdrm
 
@@ -143,4 +143,4 @@ else
 MESA3D_CONF_OPT += --disable-gles1 --disable-gles2
 endif
 
-$(eval $(meson-package))
+$(eval $(autotools-package))
