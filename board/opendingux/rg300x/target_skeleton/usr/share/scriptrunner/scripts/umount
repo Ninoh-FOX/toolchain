@@ -1,0 +1,9 @@
+#!/bin/sh
+# title=Umount SD card
+# desc=Umount extern SD card, so you can remove it safety.
+
+echo "Umounting SD card."
+umount -f /media/sdcard
+echo "SD card umounted, you can remove it."
+echo "END"
+

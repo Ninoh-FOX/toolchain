@@ -1,0 +1,8 @@
+title=Unarchiver
+description=Unarchiver (zip/gz/tar/tar.gz/rar/7z)
+icon=skin:icons/unarchiverod.png
+exec=/usr/share/unarchiverod/unarchiver.sh
+selectorfilter=zip,gz,gtar,tgz,tar.gz,tar,rar,7z
+selectordir=/media
+consoleapp=true
+manual=/usr/share/unarchiverod/manual.txt

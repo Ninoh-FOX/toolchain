@@ -1,0 +1,4 @@
+title=ROGUE Connect
+description=Manage wireless networks
+exec=/usr/bin/gcwconnect
+icon=skin:icons/wireless.png

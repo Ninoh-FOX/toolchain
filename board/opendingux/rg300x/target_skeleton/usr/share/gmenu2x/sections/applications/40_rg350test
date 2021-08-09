@@ -1,0 +1,4 @@
+title=RG350 test
+description=Test your RG-350
+icon=skin:icons/rg350test.png
+exec=/usr/share/rg350test/rg350test.gcw

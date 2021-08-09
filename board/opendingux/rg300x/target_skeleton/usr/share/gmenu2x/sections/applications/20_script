@@ -1,0 +1,4 @@
+title=Scriptrunner
+description=Run scripts and tools
+exec=/usr/share/scriptrunner/scriptrunner
+icon=skin:icons/scriptrunner.png
