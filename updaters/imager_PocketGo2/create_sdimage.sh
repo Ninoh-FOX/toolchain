@@ -160,6 +160,8 @@ echo "---creating SDIMAGE-----------------------"
 echo ""
 echo ""
 
+cp ../../output/images/ubiboot/ubiboot-v20_mddr_512mb.bin ubiboot.bin
+
 source ./partition_layout.sh
 
 ( cp images/mbr.bin images/sd_image.bin &&

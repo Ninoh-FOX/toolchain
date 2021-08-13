@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp ../../output/images/ubiboot/ubiboot-rg350.bin ubiboot.bin
+
 source ./partition_layout.sh
 
 ( cp images/mbr.bin images/sd_image.bin &&

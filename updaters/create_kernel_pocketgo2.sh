@@ -22,8 +22,8 @@ else
 MININIT=""
 fi
 
-if [ -r "update_PocketGo2/ubiboot-v20_mddr_512mb.bin" ]; then
-BOOTLOADERS="update_PocketGo2/ubiboot-v20_mddr_512mb.bin"
+if [ -r "../output/images/ubiboot/ubiboot-v20_mddr_512mb.bin" ]; then
+BOOTLOADERS="../output/images/ubiboot/ubiboot-v20_mddr_512mb.bin"
 else
 BOOTLOADERS=""
 fi
@@ -62,10 +62,10 @@ fi
 if [ "$BOOTLOADERS" ] ; then
 
 	echo -n "Calculating SHA1 sum of bootloaders... "
-        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "update_PocketGo2/ubiboot-v20_mddr_512mb.bin.sha1"
+        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "../output/images/ubiboot/ubiboot-v20_mddr_512mb.bin.sha1"
         echo "done"
 
-        BOOTLOADERS="$BOOTLOADERS update_PocketGo2/ubiboot-v20_mddr_512mb.bin.sha1"
+        BOOTLOADERS="$BOOTLOADERS ../output/images/ubiboot/ubiboot-v20_mddr_512mb.bin.sha1"
 fi
 
 if [ "$MININIT" ] ; then

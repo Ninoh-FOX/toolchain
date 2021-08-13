@@ -22,8 +22,8 @@ else
 MININIT=""
 fi
 
-if [ -r "update_rg350m/ubiboot-rg350.bin" ]; then
-BOOTLOADERS="update_rg350m/ubiboot-rg350.bin"
+if [ -r "../output/images/ubiboot/ubiboot-rg350.bin" ]; then
+BOOTLOADERS="../output/images/ubiboot/ubiboot-rg350.bin"
 else
 BOOTLOADERS=""
 fi
@@ -62,10 +62,10 @@ fi
 if [ "$BOOTLOADERS" ] ; then
 
 	echo -n "Calculating SHA1 sum of bootloaders... "
-        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "update_rg350m/ubiboot-rg350.bin.sha1"
+        sha1sum "$BOOTLOADERS" | cut -d' ' -f1 > "../output/images/ubiboot/ubiboot-rg350.bin.sha1"
         echo "done"
 
-        BOOTLOADERS="$BOOTLOADERS update_rg350m/ubiboot-rg350.bin.sha1"
+        BOOTLOADERS="$BOOTLOADERS ../output/images/ubiboot/ubiboot-rg350.bin.sha1"
 fi
 
 if [ "$MININIT" ] ; then
