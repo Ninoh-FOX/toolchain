@@ -1,0 +1,5 @@
+Now you can compiled with overclock or stock clock in the same toolchain, only edid this option in the config file
+
+BR2_TARGET_UBIBOOT_CPU="overclock" for overclock
+
+BR2_TARGET_UBIBOOT_CPU="stockclock" for stockclock

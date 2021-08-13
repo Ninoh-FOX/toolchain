@@ -1,0 +1,23 @@
+--- ubiboot-master/src/config-gcw0.h	2020-05-15 14:26:15.507241697 +0200
++++ ubiboot-master/src/config-gcw0mod.h	2020-05-15 14:42:30.606968060 +0200
+@@ -4,7 +4,7 @@
+ #error Include "config.h" instead
+ #endif
+ 
+-#define CFG_CPU_SPEED		1020000000
++#define CFG_CPU_SPEED		996000000
+ #define CFG_EXTAL			12000000
+ 
+ #define MBR_PRELOAD_ADDR	0x80000000
+
+--- ubiboot-master/src/board-gcw0.c	2020-05-15 14:26:21.883344635 +0200
++++ ubiboot-master/src/board-gcw0mod.c	2020-05-15 14:26:00.186994352 +0200
+@@ -25,7 +25,7 @@
+ 
+ 
+ #define FVCO_MIN  300*1000*1000	/* 300 MHz */
+-#define FVCO_MAX  1000*1000*1000	/* 1 GHz */
++#define FVCO_MAX  1000*1000*1000	/* 1 GHz stock*/
+ 
+ /* The frequency after the input divider must be between 10 and 50 MHz.
+ The highest divider yields the best resolution. */

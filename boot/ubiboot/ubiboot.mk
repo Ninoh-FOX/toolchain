@@ -13,6 +13,24 @@ UBIBOOT_LICENSE_FILES = README
 
 UBIBOOT_INSTALL_IMAGES = YES
 
+#
+# Apply patches
+#
+
+ifeq ($(BR2_TARGET_UBIBOOT_CPU),"overclock")
+define CPU_CLOCK_PATCH
+	support/scripts/apply-patches.sh $(@D) boot/ubiboot/ overclock.patch.conditional
+endef
+else ifeq ($(BR2_TARGET_UBIBOOT_CPU),"stockclock")
+define CPU_CLOCK_PATCH
+	support/scripts/apply-patches.sh $(@D) boot/ubiboot/ stockclock.patch.conditional
+endef
+endif
+
+UBIBOOT_POST_PATCH_HOOKS = CPU_CLOCK_PATCH
+
+# end Apply patches
+
 define UBIBOOT_BUILD_CMDS
 	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)" -C $(@D) CONFIG=$(UBIBOOT_BOARD_NAME)
 endef

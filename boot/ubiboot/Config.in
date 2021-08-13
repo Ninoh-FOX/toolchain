@@ -12,4 +12,9 @@ config BR2_TARGET_UBIBOOT_BOARDNAME
 	  One of UBIBoot supported boards to be built.
 	  This will be suffixed with _config to meet UbiBoot
 	  standard naming.
+	  
+config BR2_TARGET_UBIBOOT_CPU
+	string "UBIBoot cpu clock"
+	help
+	  enable stock or overclock cpu
 endif
