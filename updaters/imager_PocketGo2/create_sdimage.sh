@@ -171,7 +171,7 @@ source ./partition_layout.sh
 ) || rm -f images/sd_image.bin
 
 
-rm -f images/mbr.bin images/system.bin images/data.bin
+rm -f images/mbr.bin images/system.bin images/data.bin ubiboot.bin
 echo ""
 echo ""
 echo "All done!!"
