@@ -1,0 +1,4 @@
+exec=/usr/share/pg2v2test/pg2v2test.gcw
+title=PocketGo2 v2 test
+description=Test your PocketGo2 v2
+icon=skin:icons/pg2test.png
