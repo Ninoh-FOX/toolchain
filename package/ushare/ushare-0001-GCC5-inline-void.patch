@@ -1,0 +1,21 @@
+--- ushare-1.1a/src/ushare.h	2020-01-02 05:07:07.079987946 -0800
++++ ushare-1.1a/src/ushare.h	2020-01-02 05:06:38.091322829 -0800
+@@ -127,6 +127,6 @@
+   struct service_t *service;
+ };
+ 
+-inline void display_headers (void);
++void display_headers (void);
+ 
+ #endif /* _USHARE_H_ */
+--- ushare-1.1a/src/trace.h	2020-01-02 05:09:22.563094052 -0800
++++ ushare-1.1a/src/trace.h	2020-01-02 05:10:12.716242992 -0800
+@@ -29,7 +29,7 @@
+ 
+ void print_log (log_level level, const char *format, ...)
+   __attribute__ ((format (printf, 2, 3)));
+-inline void start_log (void);
++void start_log (void);
+ 
+ /* log_info
+  * Normal print, to replace printf
